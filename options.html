@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>l'équipe.fr - Options</title>
+<link rel="shortcut icon" type="image/x-icon" href="equipe.png" /> 
+<style>
+	body {
+		background-color: #F0F0F0;
+	}
+
+	.settings {
+		background-color: white;
+		border-color: #D6D6D6;
+		border-style: solid;
+		border-width: 1px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 490px;
+		padding: 5px;
+	}
+
+	fieldset {
+		-webkit-border-radius: 8px;
+	}
+	
+	label.flux_label {
+		display: block;
+		margin: 5px;
+		padding: 2px 15px 2px 5px;
+		-webkit-border-radius: 8px;
+	}
+	
+	.rss {
+		background-image: url("pic_rss.gif");
+		background-position: 90% center;
+		background-repeat: no-repeat;
+	}
+	
+	.tous {
+		background-color: #D60000;
+	}
+	
+	.foot {
+		background-color: #639210;
+	}
+</style>
+<script>
+function save_flux(e) {
+	var checkbox = e.target;
+	var data = localStorage[checkbox.name];
+	if (checkbox.checked) {
+		localStorage[checkbox.name] = checkbox.value;
+	}
+	else {
+		localStorage.removeItem(checkbox.name);
+	}
+}
+
+function restore_options() {
+  var input = document.getElementsByTagName("input");
+  for (var i = 0; i < input.length; i++) {
+    var checkbox = input[i];
+    if (checkbox.type == "checkbox") {
+		var name = checkbox.name;
+		if (localStorage[name]) {
+			checkbox.checked = true;
+		}
+		else {
+			checkbox.checked = false;
+		}
+		checkbox.onclick = save_flux;
+	}
+  }
+  var rafraichissement = localStorage["__rafraichissement"];
+  if (!rafraichissement) {
+	rafraichissement = 10;
+  }
+  var select = document.getElementById("rafraichissement");
+  for (var i = 0; i < select.options.length; i++) {
+	var option = select.options[i];
+	if (option.value == rafraichissement) {
+		option.selected = true;
+	}
+  }
+  select.onchange = function(e) {
+	var option = e.target[e.target.selectedIndex];
+	localStorage["__rafraichissement"] = option.value;
+  }
+}
+
+function save() {
+
+}
+</script>
+</head>
+<body onload="restore_options();">
+<div class="settings">
+<img src="logo.gif"/>
+<fieldset>
+	<legend>Flux</legend>
+	<label class="flux_label rss tous"><input type="checkbox" name="tous" value="http://www.lequipe.fr/Xml/actu_rss.xml"/>Flux Rss Général - tous sports</label>
+	<label class="flux_label rss foot"><input type="checkbox" name="foot" value="http://www.lequipe.fr/Xml/Football/Titres/actu_rss.xml"/>Flux Rss Football</label>
+</fieldset>
+<label>Taux de raffraichissement (en secondes) : 
+<select name="rafraichissement" id="rafraichissement">
+<option value="5">5 secondes</option>
+<option value="10">10 secondes</option>
+<option value="30">30 secondes</option>
+<option value="60">1 minute</option>
+<option value="300">5 minutes</option>
+<option value="600">10 minutes</option>
+<option value="1800">30 minutes</option>
+<option value="3600">1 heure</option>
+</select></label>
+<button id="save-button" style="font-weight:bold" onclick="save()"
+    >Save</button>
+</div>
+</body>
+</html>
