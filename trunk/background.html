@@ -1,0 +1,75 @@
+<html>
+<head>
+<script type="text/javascript">
+var db;
+var log = document.getElementById('db-log');
+db = openDatabase("Equipe.fr", "1.0", "Items database", 200000);
+
+function onError(tx, error) {
+  console.log(error.message);
+}
+
+// select all records and display them
+function showRecords() {
+  document.getElementById('db_results').innerHTML = '';
+  db.transaction(function(tx) {
+    tx.executeSql("SELECT * FROM Items", [], function(tx, result) {
+      for (var i = 0, item = null; i < result.rows.length; i++) {
+        item = result.rows.item(i);
+        document.getElementById('db_results').innerHTML += 
+            '<li><span contenteditable="true" onkeyup="updateRecord('+item['id']+', this)">'+
+            item['text'] + '</span> <a href="#" onclick="deleteRecord('+item['id']+')">[Delete]</a></li>';
+      }
+    });
+  });
+}
+
+function createTable() {
+  db.transaction(function(tx) {
+    tx.executeSql("CREATE TABLE Items (id VARCHAR(255) UNIQUE, title VARCHAR(255), url VARCHAR(255), type VARCHAR(50), text TEXT, read BOOLEAN)", [],
+        function(tx) {  console.log("table Items created") },
+        onError);
+  });
+}
+
+// add record with random values
+function newRecord(id, title, url, type, text, read) {
+  db.transaction(function(tx) {
+    tx.executeSql("INSERT INTO Items (id, title, url, type, text, read) VALUES (?, ?, ?, ?, ?, ?)", [id, title, url, type, text, read],
+        function(tx, result) {
+     		console.log("Inserted");
+        }, 
+        onError);
+  });
+}
+
+function readRecord(id, read) {
+  db.transaction(function(tx) {
+    tx.executeSql("UPDATE Items SET read = ? WHERE id = ?", [read, id], null, onError);
+  });
+}
+
+function deleteRecord() {
+  db.transaction(function(tx) {
+    tx.executeSql("DELETE FROM Items WHERE read = trie", [],
+        function(tx, result) { showRecords() }, 
+        onError);
+  });
+}
+
+// delete table from db
+function dropTable() {
+  db.transaction(function(tx) {
+    tx.executeSql("DROP TABLE Items", [],
+        function(tx) { showRecords() }, 
+        onError);
+  });
+}
+
+function init() {
+	createTable();
+}
+</script>
+</head>
+<body onload="init();"></body>
+</html>
