@@ -8,6 +8,7 @@
     "popup": "popup.html"
   },
   "options_page": "options.html",
+  "background_page": "background.html",
   "permissions": [
     "notifications",
     "http://*.equipe.fr/*"
