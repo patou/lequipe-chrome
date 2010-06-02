@@ -57,6 +57,12 @@ function deleteRecord() {
   });
 }
 
+function countUnread(fct) {
+	db.transaction(function(tx) {
+		tx.executeSql("SELECT * FROM Items Where read = ?", [false], fct, onError);
+	}
+}
+
 // delete table from db
 function dropTable() {
   db.transaction(function(tx) {
