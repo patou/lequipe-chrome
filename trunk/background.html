@@ -92,6 +92,7 @@ function parseAllFeeds() {
 	  parse(feedName, localStorage.getItem(feedName));
 	}
   }
+  countUnread(function(n){chrome.browserAction.setBadgeText({text :n.toString()});})
 }
 
 function parse(name, url) {
