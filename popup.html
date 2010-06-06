@@ -256,10 +256,10 @@
             				      for (var i = 0, item = null; i < result.rows.length; i++) {
             				        item = result.rows.item(i);
 									
-									html += '<a href="'+item['url']+'" target="_blank"><b>'+item['id']+' - '+item['id']+' :</b> '+item['title']+' </a>';
+									html = '<a href="'+item['url']+'" target="_blank"><b>'+item['id']+' - '+item['id']+' :</b> '+item['title']+' </a>';
 									html += ' <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px"></div>';
                             
-            						$('DIV_CONTENT').append( '');
+            						$('DIV_CONTENT').prepend(html);
             				        
             				      }
             				    });
