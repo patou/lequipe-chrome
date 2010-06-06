@@ -37,11 +37,14 @@ function createTable() {
 }
 
 // add record with random values
-function newRecord(id, title, url, type, text, read) {
+function newRecord(id, title, url, type, text, read, fct) {
   db.transaction(function(tx) {
     tx.executeSql("INSERT INTO Items (id, title, url, type, text, read) VALUES (?, ?, ?, ?, ?, ?)", [id, title, url, type, text, read],
         function(tx, result) {
      		console.log("Inserted");
+     		if (fct && typeof fct == "function") {
+				fct({id: id, title: title, type: type, text: text});
+			}
         }, 
         onError);
   });
@@ -53,7 +56,7 @@ function readRecord(id, read) {
   });
 }
 
-function deleteRecord() {
+function deleteRecordRead() {
   db.transaction(function(tx) {
     tx.executeSql("DELETE FROM Items WHERE read = true", [],
         function(tx, result) {console.log("successfull delete unread items") }, 
@@ -61,11 +64,18 @@ function deleteRecord() {
   });
 }
 
+function deleteRecord() {
+	  db.transaction(function(tx) {
+	    tx.executeSql("DELETE FROM Items;", [],
+	        function(tx, result) {console.log("successfull delete items") }, 
+	        onError);
+	  });
+}
+
 function countUnread(fct) {
 	db.transaction(function(tx) {
 		tx.executeSql("SELECT count(*) as c FROM Items Where read != ?", [true], function(tx, result) { 
 			var item = result.rows.item(0);
-			console.log(result); 
 			console.log(item['c']);
 			if (fct && typeof fct == "function") {
 				fct(item['c']);
@@ -83,14 +93,38 @@ function dropTable() {
   });
 }
 
+function getUpdateInterval() {
+	if (localStorage["__rafraichissement"]) {
+		return localStorage["__rafraichissement"] * 1000;
+	}
+	return 30000;
+}
+
+function getFeedsList() {
+	if (localStorage.length == 0) {
+		localStorage["tous"] = "http://www-ref.lequipe.fr/Xml/actu_rss.xml";
+	}
+	var feeds = [];
+	for(var i = 0; i < localStorage.length; i++) {
+		feedName = localStorage.key(i);
+		if(feedName.charAt(0) != '_') {
+		  feeds[i] = {key: feedName, value: localStorage.getItem(feedName)};
+		}
+	 }
+	 return feeds;
+}
+
 // Parseurs
 function parseAllFeeds() {
-  var feedName; 
-  for(var i = 0; i < localStorage.length; i++) {
-	feedName = localStorage.key(i);
-	if(feedName.charAt(0) != '_') {
-	  parse(feedName, localStorage.getItem(feedName));
-	}
+  var feedName;
+  var feeds = getFeedsList(); 
+  for(var i = 0; i < feeds.length; i++) {
+	  if (typeof feeds[i] == "object") {
+		feedName = feeds[i].key;
+		if(feedName.charAt(0) != '_') {
+		  parse(feedName, feeds[i].value);
+		}
+	  }
   }
   countUnread(function(n){chrome.browserAction.setBadgeText({text :n.toString()});})
 }
@@ -151,15 +185,34 @@ function xmlParser(doc) {
   return itemList;
 }
 
+function notify(item) {
+
+	if (localStorage["__notification"]) {
+		console.log(item);
+    	var notification = webkitNotifications.createNotification(
+  			  "logo_lequipe.png",  // icon url - can be relative
+  			  item.title,  // notification title
+  			  item.text  // notification body text
+  		);
+    	notification.show();
+	}
+}
+
 function insertItemList(name, itemList) {
   for (var i = 0, j = itemList.length; i < j; i++) {
-    newRecord(itemList[i].link, itemList[i].title, itemList[i].link, name, itemList[i].description, false);
+    newRecord(itemList[i].link, itemList[i].title, itemList[i].link, name, itemList[i].description, false, i < 3 ? notify : undefined);
   }
 }
+
+var intervalID = 0;
 
 function init() {
 	createTable();
 	parseAllFeeds();
+	if (intervalID != 0) {
+		clearInterval(intervalID);
+	}
+	intervalID = setInterval(parseAllFeeds, getUpdateInterval());
 }
 </script>
 </head>
