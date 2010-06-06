@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>l'�quipe.fr - Options</title>
-<link rel="shortcut icon" type="image/x-icon" href="equipe.png" /> 
+<title>l'équipe.fr - Options</title>
+<link rel="shortcut icon" type="image/x-icon" href="equipe.png" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style>
 	body {
 		background-color: #F0F0F0;
@@ -36,13 +37,14 @@
 		background-repeat: no-repeat;
 	}
 	
-	.tous {
-		background-color: #D60000;
+	.section {
+		border-top: 1px dashed #666;
+		pading: 0px;
+		margin: 0px;
+		padding-top: 6px;
+		margin-top: 12px;	
 	}
-	
-	.foot {
-		background-color: #639210;
-	}
+}
 </style>
 <script>
 function save_flux(e) {
@@ -71,6 +73,7 @@ function restore_options() {
 		checkbox.onclick = save_flux;
 	}
   }
+  //Rafraichissement
   var rafraichissement = localStorage["__rafraichissement"];
   if (!rafraichissement) {
 	rafraichissement = 10;
@@ -87,19 +90,18 @@ function restore_options() {
 	localStorage["__rafraichissement"] = option.value;
   }
 }
-
-function save() {
-
-}
 </script>
 </head>
 <body onload="restore_options();">
 <div class="settings">
-<img src="logo.gif"/>
+<img src="logo_lequipe.png"/>
 <fieldset>
 	<legend>Flux</legend>
-	<label class="flux_label rss tous"><input type="checkbox" name="tous" value="http://www.lequipe.fr/Xml/actu_rss.xml"/>Flux Rss G�n�ral - tous sports</label>
-	<label class="flux_label rss foot"><input type="checkbox" name="foot" value="http://www.lequipe.fr/Xml/Football/Titres/actu_rss.xml"/>Flux Rss Football</label>
+	<label class="flux_label rss" style="background-color: #D60000;"><input type="checkbox" name="tous" value="http://www-ref.lequipe.fr/Xml/actu_rss.xml"/>Flux Rss Général - tous sports</label>
+	<label class="flux_label rss" style="background-color: #EBEBEB;"><input type="checkbox" name="video" value="http://www-ref.lequipe.fr/Xml/videos_rss.xml"/>Flux des vidéos de l'Equipe.fr</label>
+	<div class="section">
+	<label class="flux_label rss" style="background-color: #639210;"><input type="checkbox" name="foot" value="http://www-ref.lequipe.fr/Xml/Football/Titres/actu_rss.xml"/>Flux Rss Football</label>
+	</div>
 </fieldset>
 <label>Taux de raffraichissement (en secondes) : 
 <select name="rafraichissement" id="rafraichissement">
@@ -111,9 +113,9 @@ function save() {
 <option value="600">10 minutes</option>
 <option value="1800">30 minutes</option>
 <option value="3600">1 heure</option>
-</select></label>
-<button id="save-button" style="font-weight:bold" onclick="save()"
-    >Save</button>
+</select></label><br />
+<label><input type="checkbox" name="__notification" value="true" /> Me notifier à chaque nouvelle information <br />(popup de notification en bas à droite de l'écran)
+</label>
 </div>
 </body>
 </html>
