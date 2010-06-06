@@ -4,6 +4,9 @@
 <script type="text/javascript">
 var db;
 var log = document.getElementById('db-log');
+// The XMLHttpRequest object that tries to load and parse the feed.
+var req = false;
+  
 db = openDatabase("Equipe.fr", "1.0", "Items database", 200000);
 
 function onError(tx, error) {
@@ -76,9 +79,7 @@ function dropTable() {
 // Parseurs
 function parse() {
   var feedUrl = 'http://www.lequipe.fr/Xml/actu_rss.xml';
-
-  // The XMLHttpRequest object that tries to load and parse the feed.
-  var req = false;
+  
   try {
 	req = new XMLHttpRequest();
   } catch(e) {
@@ -96,6 +97,7 @@ function parse() {
 
 // Handles feed parsing errors.
 function handleFeedParsingFailed(error) {
+//TODO
   //var feed = document.getElementById("channel");
  //feed.className = "error";
   //feed.innerText = "Error: " + error;
@@ -118,6 +120,7 @@ function handleResponse() {
 }
 
 function xmlParser(doc) {
+  var i = 0;
   var itemList = [];
   $(doc).find("item").each(function() {
     var item = $(this);
@@ -127,8 +130,10 @@ function xmlParser(doc) {
 	  description: item.find("description").text(),
 	  pubDate: item.find("pubDate").text()
 	};
-  newRecord(itemToAdd.link, itemToAdd.title, itemToAdd.link, "rss", itemToAdd.description, true);
-  itemList.append(item);
+	console.log(itemToAdd.title);
+    newRecord(itemToAdd.link, itemToAdd.title, itemToAdd.link, "rss", itemToAdd.description, true);
+    itemList[i] = itemToAdd;
+    i++;
   });
   return itemList;
 }
