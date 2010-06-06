@@ -55,15 +55,22 @@ function readRecord(id, read) {
 
 function deleteRecord() {
   db.transaction(function(tx) {
-    tx.executeSql("DELETE FROM Items WHERE read = trie", [],
-        function(tx, result) { showRecords() }, 
+    tx.executeSql("DELETE FROM Items WHERE read = true", [],
+        function(tx, result) {console.log("successfull delete unread items") }, 
         onError);
   });
 }
 
 function countUnread(fct) {
 	db.transaction(function(tx) {
-		tx.executeSql("SELECT * FROM Items Where read = ?", [false], fct, onError);
+		tx.executeSql("SELECT count(*) as c FROM Items Where read != ?", [true], function(tx, result) { 
+			var item = result.rows.item(0);
+			console.log(result); 
+			console.log(item['c']);
+			if (fct && typeof fct == "function") {
+				fct(item['c']);
+			}
+		}, onError);
 	});
 }
 
