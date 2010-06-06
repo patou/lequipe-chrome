@@ -6,7 +6,7 @@ var db;
 var log = document.getElementById('db-log');
 // The XMLHttpRequest object that tries to load and parse the feed.
 var req = false;
-  
+
 db = openDatabase("Equipe.fr", "1.0", "Items database", 200000);
 
 function onError(tx, error) {
@@ -71,24 +71,32 @@ function countUnread(fct) {
 function dropTable() {
   db.transaction(function(tx) {
     tx.executeSql("DROP TABLE Items", [],
-        function(tx) { showRecords() }, 
+        function(tx) { }, 
         onError);
   });
 }
 
 // Parseurs
-function parse() {
-  var feedUrl = 'http://www.lequipe.fr/Xml/actu_rss.xml';
-  
+function parseAllFeeds() {
+  var feedName; 
+  for(var i = 0; i < localStorage.length; i++) {
+	feedName = localStorage.key(i);
+	if(feedName.charAt(0) != '_') {
+	  parse(feedName, localStorage.getItem(feedName));
+	}
+  }
+}
+
+function parse(name, url) {
   try {
 	req = new XMLHttpRequest();
   } catch(e) {
     req = false;
   }
   if(req) {
-    req.onload = handleResponse;
+    req.onload = function () {handleResponse(name)};
     req.onerror = handleError;
-    req.open("GET", feedUrl, true);
+    req.open("GET", url, true);
     req.send("");
   } else {
 	console.log("XMLHttpRequest failed");
@@ -97,7 +105,6 @@ function parse() {
 
 // Handles feed parsing errors.
 function handleFeedParsingFailed(error) {
-//TODO
   //var feed = document.getElementById("channel");
  //feed.className = "error";
   //feed.innerText = "Error: " + error;
@@ -109,13 +116,13 @@ function handleError() {
 }
 
 // Handles parsing the feed data we got back from XMLHttpRequest.
-function handleResponse() {
+function handleResponse(name) {
   var doc = req.responseXML;
   if (!doc) {
     handleFeedParsingFailed("Not a valid feed.");
     return;
   }
-  xmlParser(doc);
+  insertItemList(name, xmlParser(doc));
   
 }
 
@@ -130,17 +137,21 @@ function xmlParser(doc) {
 	  description: item.find("description").text(),
 	  pubDate: item.find("pubDate").text()
 	};
-	console.log(itemToAdd.title);
-    newRecord(itemToAdd.link, itemToAdd.title, itemToAdd.link, "rss", itemToAdd.description, true);
     itemList[i] = itemToAdd;
     i++;
   });
   return itemList;
 }
 
+function insertItemList(name, itemList) {
+  for (var i = 0, j = itemList.length; i < j; i++) {
+    newRecord(itemList[i].link, itemList[i].title, itemList[i].link, name, itemList[i].description, false);
+  }
+}
+
 function init() {
 	createTable();
-	parse();
+	parseAllFeeds();
 }
 </script>
 </head>
