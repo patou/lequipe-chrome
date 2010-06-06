@@ -58,6 +58,7 @@ function save_flux(e) {
 	else {
 		localStorage.removeItem(checkbox.name);
 	}
+	chrome.getBackgroundPage().init();
 }
 
 function restore_options() {
@@ -90,7 +91,12 @@ function restore_options() {
   select.onchange = function(e) {
 	var option = e.target[e.target.selectedIndex];
 	localStorage["__rafraichissement"] = option.value;
+	chrome.getBackgroundPage().init();
   }
+}
+
+function deleteDb() {
+	chrome.getBackgroundPage().deleteRecord();
 }
 </script>
 </head>
@@ -192,8 +198,6 @@ function restore_options() {
 <label>Taux de raffraichissement (en secondes) : <select
 	name="rafraichissement" id="rafraichissement"
 >
-	<option value="5">5 secondes</option>
-	<option value="10">10 secondes</option>
 	<option value="30">30 secondes</option>
 	<option value="60">1 minute</option>
 	<option value="300">5 minutes</option>
@@ -203,6 +207,8 @@ function restore_options() {
 </select></label><br />
 <label><input type="checkbox" name="__notification" value="true" />
 Me notifier à chaque nouvelle information <br />
-(popup de notification en bas à droite de l'écran) </label></div>
+(popup de notification en bas à droite de l'écran) </label>
+<input type="button" value="Nettoyer la base de donnée" onclick="deleteDb();" />
+</div>
 </body>
 </html>
