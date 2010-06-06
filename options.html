@@ -5,45 +5,47 @@
 <link rel="shortcut icon" type="image/x-icon" href="equipe.png" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style>
-	body {
-		background-color: #F0F0F0;
-	}
+body {
+	background-color: #F0F0F0;
+	font-family: Arial;
+}
 
-	.settings {
-		background-color: white;
-		border-color: #D6D6D6;
-		border-style: solid;
-		border-width: 1px;
-		margin-left: auto;
-		margin-right: auto;
-		width: 490px;
-		padding: 5px;
-	}
+.settings {
+	background-color: white;
+	border-color: #D6D6D6;
+	border-style: solid;
+	border-width: 1px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 490px;
+	padding: 5px;
+}
 
-	fieldset {
-		-webkit-border-radius: 8px;
-	}
-	
-	label.flux_label {
-		display: block;
-		margin: 5px;
-		padding: 2px 15px 2px 5px;
-		-webkit-border-radius: 8px;
-	}
-	
-	.rss {
-		background-image: url("pic_rss.gif");
-		background-position: 90% center;
-		background-repeat: no-repeat;
-	}
-	
-	.section {
-		border-top: 1px dashed #666;
-		pading: 0px;
-		margin: 0px;
-		padding-top: 6px;
-		margin-top: 12px;	
-	}
+fieldset {
+	-webkit-border-radius: 8px;
+}
+
+label.flux_label {
+	display: block;
+	margin: 5px;
+	padding: 2px 15px 2px 5px;
+	-webkit-border-radius: 8px;
+	color: #FFF;
+}
+
+.rss {
+	background-image: url("pic_rss.gif");
+	background-position: 90% center;
+	background-repeat: no-repeat;
+}
+
+.section {
+	border-top: 1px dashed #666;
+	pading: 0px;
+	margin: 0px;
+	padding-top: 6px;
+	margin-top: 12px;
+}
 }
 </style>
 <script>
@@ -93,29 +95,114 @@ function restore_options() {
 </script>
 </head>
 <body onload="restore_options();">
-<div class="settings">
-<img src="logo_lequipe.png"/>
-<fieldset>
-	<legend>Flux</legend>
-	<label class="flux_label rss" style="background-color: #D60000;"><input type="checkbox" name="tous" value="http://www-ref.lequipe.fr/Xml/actu_rss.xml"/>Flux Rss Général - tous sports</label>
-	<label class="flux_label rss" style="background-color: #EBEBEB;"><input type="checkbox" name="video" value="http://www-ref.lequipe.fr/Xml/videos_rss.xml"/>Flux des vidéos de l'Equipe.fr</label>
-	<div class="section">
-	<label class="flux_label rss" style="background-color: #639210;"><input type="checkbox" name="foot" value="http://www-ref.lequipe.fr/Xml/Football/Titres/actu_rss.xml"/>Flux Rss Football</label>
-	</div>
+<div class="settings"><img src="logo_lequipe.png" />
+<fieldset><legend>Flux</legend> <label class="flux_label rss"
+	style="background-color: #D60000;"
+><input type="checkbox" name="tous"
+	value="http://www-ref.lequipe.fr/Xml/actu_rss.xml"
+/>Flux Rss <b>Général</b> - tous sports</label> <label class="flux_label rss"
+	style="background-color: #EBEBEB; color: #000;"
+><input type="checkbox" name="video"
+	value="http://www-ref.lequipe.fr/Xml/videos_rss.xml"
+/>Flux des <b>vidéos</b> de l'Equipe.fr</label>
+<div class="section"><label class="flux_label rss"
+	style="background-color: #639210;"
+><input type="checkbox" name="foot"
+	value="http://www-ref.lequipe.fr/Xml/Football/Titres/actu_rss.xml"
+/>Flux Rss <b>Football</b></label> <label class="flux_label rss"
+	style="background-color: #7AB114;"
+><input type="checkbox" name="foot_trf"
+	value="http://www-ref.lequipe.fr/Xml/Football/Titres/actu_TRF_rss.xml"
+/>Flux Rss Football - <b>Transferts</b></label></div>
+<div class="section"><label class="flux_label rss"
+	style="background-color: #5a7984;"
+><input type="checkbox" name="auto_moto"
+	value="http://www-ref.lequipe.fr/Xml/Formule1/Titres/actu_rss.xml"
+/>Flux Rss <b>Auto - Moto</b></label> <label class="flux_label rss"
+	style="background-color: #7898A3;"
+><input type="checkbox" name="formule1"
+	value="http://www-ref.lequipe.fr/Xml/Formule1/Titres/actu_rss_F1.xml"
+/>Flux Rss <b>Formule 1</b></label> <label class="flux_label rss"
+	style="background-color: #7898A3;"
+><input type="checkbox" name="rallye"
+	value="http://www-ref.lequipe.fr/Xml/Formule1/Titres/actu_rss_Rallye.xml"
+/>Flux Rss <b>Rallye</b></label> <label class="flux_label rss"
+	style="background-color: #7898A3;"
+><input type="checkbox" name="moto"
+	value="http://www-ref.lequipe.fr/Xml/Formule1/Titres/actu_rss_Moto.xml"
+/>Flux Rss <b>Moto</b></label></div>
+<div class="section"><label class="flux_label rss"
+	style="background-color: #C65121;"
+><input type="checkbox" name="tenis"
+	value="http://www-ref.lequipe.fr/Xml/Tennis/Titres/actu_rss_Tennis.xml"
+/>Flux Rss <b>Tenis</b></label> <label class="flux_label rss"
+	style="background-color: #C65121;"
+><input type="checkbox" name="golf"
+	value="http://www-ref.lequipe.fr/Xml/Tennis/Titres/actu_rss_Golf.xml"
+/>Flux Rss <b>Golf</b></label></div>
+<div class="section"><label class="flux_label rss"
+	style="background-color: #0F4C30;"
+><input type="checkbox" name="rugby"
+	value="http://www-ref.lequipe.fr/Xml/Rugby/Titres/actu_rss.xml"
+/>Flux Rss <b>Rugby</b></label></div>
+<div class="section"><label class="flux_label rss"
+	style="background-color: #000084;"
+><input type="checkbox" name="basket"
+	value="http://www-ref.lequipe.fr/Xml/Basket/Titres/actu_rss_Basket.xml"
+/>Flux Rss <b>Basket</b></label> <label class="flux_label rss"
+	style="background-color: #000084;"
+><input type="checkbox" name="hand"
+	value="http://www-ref.lequipe.fr/Xml/Basket/Titres/actu_rss_Hand.xml"
+/>Flux Rss <b>Hand</b></label> <label class="flux_label rss"
+	style="background-color: #000084;"
+><input type="checkbox" name="volley"
+	value="http://www-ref.lequipe.fr/Xml/Basket/Titres/actu_rss_Volley.xml"
+/>Flux Rss <b>Volley</b></label></div>
+<div class="section"><label class="flux_label rss"
+	style="background-color: #BDB600;"
+><input type="checkbox" name="cyclisme"
+	value="http://www-ref.lequipe.fr/Xml/Cyclisme/Titres/actu_rss.xml"
+/>Flux Rss <b>Cyclisme</b></label></div>
+<div class="section"><label class="flux_label rss"
+	style="background-color: #59B6AD;"
+><input type="checkbox" name="judo"
+	value="http://www-ref.lequipe.fr/Xml/Aussi/Titres/actu_rss_Judo.xml"
+/>Flux Rss <b>Judo</b></label> <label class="flux_label rss"
+	style="background-color: #59B6AD;"
+><input type="checkbox" name="ski"
+	value="http://www-ref.lequipe.fr/Xml/Ski/Titres/actu_rss_Ski.xml"
+/>Flux Rss <b>Ski</b></label> <label class="flux_label rss"
+	style="background-color: #59B6AD;"
+><input type="checkbox" name="athlétisme"
+	value="http://www-ref.lequipe.fr/Xml/Aussi/Titres/actu_rss_Athletisme.xml"
+/>Flux Rss <b>Athlétisme</b></label> <label class="flux_label rss"
+	style="background-color: #59B6AD;"
+><input type="checkbox" name="voile"
+	value="http://www-ref.lequipe.fr/Xml/Aussi/Titres/actu_rss_Voile.xml"
+/>Flux Rss <b>Voile</b></label> <label class="flux_label rss"
+	style="background-color: #59B6AD;"
+><input type="checkbox" name="natation"
+	value="http://www-ref.lequipe.fr/Xml/Aussi/Titres/actu_rss_Natation.xml"
+/>Flux Rss <b>Natation</b></label> <label class="flux_label rss"
+	style="background-color: #59B6AD;"
+><input type="checkbox" name="escrime"
+	value="http://www-ref.lequipe.fr/Xml/Aussi/Titres/actu_rss_Natation.xml"
+/>Flux Rss <b>Escrime</b></label> </di</div>
 </fieldset>
-<label>Taux de raffraichissement (en secondes) : 
-<select name="rafraichissement" id="rafraichissement">
-<option value="5">5 secondes</option>
-<option value="10">10 secondes</option>
-<option value="30">30 secondes</option>
-<option value="60">1 minute</option>
-<option value="300">5 minutes</option>
-<option value="600">10 minutes</option>
-<option value="1800">30 minutes</option>
-<option value="3600">1 heure</option>
+<label>Taux de raffraichissement (en secondes) : <select
+	name="rafraichissement" id="rafraichissement"
+>
+	<option value="5">5 secondes</option>
+	<option value="10">10 secondes</option>
+	<option value="30">30 secondes</option>
+	<option value="60">1 minute</option>
+	<option value="300">5 minutes</option>
+	<option value="600">10 minutes</option>
+	<option value="1800">30 minutes</option>
+	<option value="3600">1 heure</option>
 </select></label><br />
-<label><input type="checkbox" name="__notification" value="true" /> Me notifier à chaque nouvelle information <br />(popup de notification en bas à droite de l'écran)
-</label>
-</div>
+<label><input type="checkbox" name="__notification" value="true" />
+Me notifier à chaque nouvelle information <br />
+(popup de notification en bas à droite de l'écran) </label></div>
 </body>
 </html>
