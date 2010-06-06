@@ -1,85 +1,459 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-body {
-  font-family: helvetica, arial, sans-serif;
-  font-size: 12px;
-  overflow: hidden;
-}
+    <head>
+        <script type="text/javascript" src="jquery-1.4.2.js"></script>
+        <style type="text/css">
+            body {
+                height: 500px;
+                width: 500px;
+                background-color: #F0F0F0;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 12px;
+            }
+            
+            a {
+                text-decoration: none;
+                color: #000;
+                cursor: pointer
+            }
+            
+            a:hover, #liens a:hover {
+            }
+            
+            #liens {
+                font-size: 11px;
+                background: url(http://img.lequipe.fr/img_v5/fond_top_middle.jpg) repeat-x;
+                border-top: 0px;
+                height: 18px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            #liens a {
+                background: url(http://img.lequipe.fr/img_v5/icones_png.png?20100527) no-repeat 0px -961px;
+                color: #D60000;
+                float: left;
+                color: white;
+                display: inline-block;
+                padding: 0px 12px;
+            }
+            
+            #liens a:hover {
+            }
+            
+            #bloc_top {
+                background: #FFF;
+                border-bottom: 2px solid #d60000
+            }
+            
+            #bloc_top_middle {
+                border-top: 0;
+                height: 18px;
+                margin-left: 0px;
+                margin-right: 0px;
+                background: url(http://img.lequipe.fr/img_v5/fond_top_middle.jpg) repeat-x
+            }
+            
+            #liens_sites {
+                background: url(http://img.lequipe.fr/img_v5/icones_png.png?20100527) no-repeat 0 -961px;
+                padding-left: 10px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+                color: #d60000;
+                float: left;
+            }
+            
+            #liens_sites a {
+                color: #FFF;
+                padding: 0 8px;
+                display: inline-block
+            }
+            
+            .nav {
+                font-size: 11px;
+                border-bottom: solid 1px black;
+                height: 20px
+            }
+            
+            .onglets {
+                background-image: url(http://img.lequipe.fr/medias/commun/navigation_fond_tr.gif)
+            }
+            
+            .lienNav, .lienNavActif {
+                background-position: left top;
+				background-position: 0px 0px;
+                background-repeat: no-repeat;
+                border-right: 1px solid #FFFFFF;
+                color: #000000;
+                height: 20px;
+                line-height: 20px;
+                padding-left: 7px;
+                padding-right: 8px;
+                padding-top: 4px;
+                padding-bottom: 3px;
+				margin: 0px;
+                text-align: left;
+                background-image: url(http://img.lequipe.fr/medias/commun/navigation_fond_th.gif)
+            }
+            
+            .lienNavActif {
+                background-color: #D60000;
+                color: #FFFFFF !important;
+                font-weight: bold
+            }
+            
+            a#GENERAL:hover {
+                background-color: #D60000 !important;
+                color: #FFF !important
+            }
+            
+            a#FOOT:hover {
+                background-color: #78A130 !important;
+                color: #FFF !important
+            }
+            
+            a#AUTO:hover {
+                background-color: #5A7984 !important;
+                color: #FFF !important
+            }
+            
+            a#TENNIS:hover {
+                background-color: #DB7141 !important;
+                color: #FFF !important
+            }
+            
+            a#RUGBY:hover {
+                background-color: #004C30 !important;
+                color: #FFF !important
+            }
+            
+            a#NEXT:hover, a#PREVIOUS:hover {
+                background-color: #CCC !important;
+                color: #FFF !important
+            }
+            
+            a#BHV:hover {
+                background-color: #000084 !important;
+                color: #FFF !important
+            }
+            
+            a#CYCLISME:hover {
+                background-color: #BDB600 !important;
+                color: #FFF !important
+            }
+            
+            a#AUTRES:hover {
+                background-color: #5AB6AD !important;
+                color: #FFF !important
+            }
+            
+            .nav2 {
+                background-color: #F5F5F5;
+                border-bottom: 1px solid #EBEBEB;
+                font-size: 11px;
+                margin-bottom: 6px;
+                padding: 2px 4px
+            }
+            
+            .lienNav2 {
+            }
+            
+            .lienNav2Actif {
+                text-decoration: none;
+                cursor: text;
+                color: black !important;
+                font-weight: bold
+            }
+            
+            .content {
+                font-size: 11px;
+                background-color: white;
+				margin-top: 20px;
+            }
+            
+            .footer {
+                font-size: 10px;
+                margin-top: 10px;
+                text-align: right
+            }
+            
+            tbody {
+                font-size: 10px
+            }
+            
+            img {
+                border: 0
+            }
+            
+            .combo {
+                margin-bottom: 4px
+            }
+            
+            #RESULTAT, #CLASSEMENT {
+                border-collapse: collapse;
+                width: 100%
+            }
+            
+            #RESULTAT th, #RESULTAT td, #CLASSEMENT th, #CLASSEMENT td {
+                font-size: 11px;
+                border-bottom: 1px solid #CCC
+            }
+            
+            #RESULTAT th, #CLASSEMENT th {
+                text-align: left
+            }
+            
+            .domicile {
+                text-align: right
+            }
+            
+            .score {
+                padding: 0 6px 0 6px
+            }
+            
+            .alternate2 {
+                background-color: #F5F5F5
+            }
+            
+            .separateur {
+                font-size: 0px !important;
+                height: 2px;
+                overflow: hidden
+            }
+            
+            .DIV_RUBRIQUE {
+                float: left;
+                width: 98%;
+                border: 1px #EBEBEB solid;
+                margin: 0px;
+                height: 320px;
+                overflow: hidden;
+                padding: 5px;
+				background-color: white;
 
-a {
-  color:#0000CC;
-  text-decoration: underline;
-  cursor: pointer;
-}
 
-.open_box {
-  display: block;
-  overflow: hidden;
-  margin-right: 4px;
-  margin-top: 2px;
-  height: 12px;
-  width: 12px;
-  float: left;
-  clear: left;
-  background-image: url(sprite_arrows.gif);
-  background-position: 0px -24px;
-  cursor: pointer;
-}
-
-.opened .open_box {
-  background-position:-12px -24px;
-}
-
-.item {
-  padding: 2px 0px;
-}
-
-.item_title {
-  display: block;
-  min-width: 300px;
-  padding-left: 15px;
-  cursor: pointer;
-}
-
-.item_desc {
-  min-width: 500px;
-  height: 0px;
-  display: block;
-  border: none;
-  padding: 0px;
-  margin: 0px;
-  -webkit-transition: height 0.2s ease-out;
-}
-
-#title {
-  display: block;
-  margin-left: auto;
-}
-
-.error {
-  white-space: nowrap;
-  color: red;
-}
-
-.more {
-  display: block;
-  text-align: right;
-  padding-top: 20px;
-  padding-right: 10px;
-  color: #88C;
-}
-
-</style>
-<script>
-function main() {
-
-}
-</script>
-</head>
-<body onload="main();">
-<a id="title_a"><img id='title'></a>
-<div id="feed"></div>
-</body>
+            }
+            
+            .ENTETE {
+                font-size: 12px;
+                padding: 3px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                background-image: url(http://img.lequipe.fr/medias/commun/navigation_fond_th.gif) no-repeat;
+            }
+        </style>
+        <script type="text/javascript">
+            
+            
+            
+            _IG_RegisterOnloadHandler(loadAll);
+            
+            function loadAll(){
+            
+                setTimeout('loadDiv("FOOT")', 200);
+                setTimeout('loadDiv("AUTO")', 300);
+                setTimeout('loadDiv("TENNIS")', 400);
+                setTimeout('loadDiv("RUGBY")', 500);
+                setTimeout('loadDiv("BHV")', 600);
+                setTimeout('loadDiv("CYCLISME")', 700);
+                setTimeout('loadDiv("AUTRES")', 800);
+                
+                setTimeout('_IG_AdjustIFrameHeight()', 1000);
+            }
+            
+            function loadDiv(content){
+            
+                var tabEntetes = new Array();
+                
+                tabEntetes["FOOT"] = '<a href="http://www.lequipe.fr/Football/index.html" target="_blank" style="color:white!important">Football</a>';
+                tabEntetes["AUTO"] = '<a href="http://www.lequipe.fr/Formule1/index.html" target="_blank" style="color:white!important">Auto/Moto</a>';
+                tabEntetes["TENNIS"] = '<a href="http://www.lequipe.fr/Tennis/index.html" target="_blank" style="color:white!important">Tennis/Golf</a>';
+                tabEntetes["RUGBY"] = '<a href="http://www.lequipe.fr/Rugby/index.html" target="_blank" style="color:white!important">Rugby</a>';
+                tabEntetes["BHV"] = '<a href="http://www.lequipe.fr/Basket/index.html" target="_blank" style="color:white!important">Basket/Hand/Volley</a>';
+                tabEntetes["CYCLISME"] = '<a href="http://www.lequipe.fr/Cyclisme/index.html" target="_blank" style="color:white!important">Cyclisme</a>';
+                tabEntetes["AUTRES"] = '<a href="http://www.lequipe.fr/Aussi/index.html" target="_blank" style="color:white!important">Autres</a>';
+                
+                var entete = tabEntetes[content];
+                
+                var tabColors = new Array();
+                
+                tabColors["FOOT"] = '#78A130';
+                tabColors["AUTO"] = '#5A7984';
+                tabColors["TENNIS"] = '#DB7141';
+                tabColors["RUGBY"] = '#004C30';
+                tabColors["BHV"] = '#000084';
+                tabColors["CYCLISME"] = '#BDB600';
+                tabColors["AUTRES"] = '#5AB6AD';
+                
+                var color = tabColors[content];
+                
+                
+                var tabRss = new Array();
+                
+                tabRss["GENERAL"] = "http://www.lequipe.fr/Xml/actu_rss.xml";
+                tabRss["FOOT"] = "http://www.lequipe.fr/Xml/Football/Titres/actu_rss.xml";
+                tabRss["AUTO"] = "http://www.lequipe.fr/Xml/Formule1/Titres/actu_rss.xml";
+                tabRss["TENNIS"] = "http://www.lequipe.fr/Xml/Tennis/Titres/actu_rss.xml";
+                tabRss["RUGBY"] = "http://www.lequipe.fr/Xml/Rugby/Titres/actu_rss.xml";
+                tabRss["BHV"] = "http://www.lequipe.fr/Xml/Basket/Titres/actu_rss.xml";
+                tabRss["CYCLISME"] = "http://www.lequipe.fr/Xml/Cyclisme/Titres/actu_rss.xml";
+                tabRss["AUTRES"] = "http://www.lequipe.fr/Xml/Aussi/Titres/actu_rss.xml";
+                
+                var RSS = tabRss[content];
+                
+                var html = "";
+                
+                _IG_FetchXmlContent(RSS + "?" + (Math.random() * 10000000), function(response){
+                
+                    if (response == null || typeof(response) != "object" || response.firstChild == null) {
+                        _gel("content").innerHTML = "";
+                        return;
+                    }
+                    
+                    var itemList = response.getElementsByTagName("item");
+                    
+                    
+                    
+                    for (var i = 0; i < 10; i++) {
+                    
+                        var nodeList = itemList.item(i).childNodes;
+                        
+                        var img = "";
+                        
+                        for (var j = 0; j < nodeList.length; j++) {
+                        
+                            var node = nodeList.item(j);
+                            
+                            if (node.nodeName == "title") {
+                                var titre = node.firstChild.nodeValue;
+                            }
+                            if (node.nodeName == "enclosure") {
+                                img = "<img src=\"" + node.getAttribute("url") + "\" width=\"50\" style=\"float:left; text-align:center; margin:0 8px 4px 0\">";
+                            }
+                            if (node.nodeName == "link") {
+                                var lien = node.firstChild.nodeValue;
+                            }
+                            if (node.nodeName == "pubDate") {
+                                var date = node.firstChild.nodeValue;
+                            }
+                        }
+                        
+                        var tmp = titre.split("-");
+                        var sport = tmp[0];
+                        
+                        titre = titre.substring(sport.length + 1, titre.length);
+                        
+                        
+                        html += "<a href=\"" + lien + "\" target=\"_blank\">" + img + " <b>" + getDateEnFrancais(date) + " - " + sport + ":</b> " + titre + "</a><div style=\"clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px\"></div>";
+                    }
+                    
+                    var div = '<div class="DIV_RUBRIQUE"><div class="ENTETE" style="background:' + color + '">' + entete + '</div>' + html + '</div>';
+                    
+                    _gel('content').innerHTML += div;
+                    
+                }, {
+                    refreshInterval: 1
+                });
+            }
+            
+            
+            function getDateEnFrancais(date){
+            
+                var newDate = "";
+                
+                laDate = new Date(date);
+                
+                var minutes = "" + laDate.getMinutes();
+                
+                minutes = minutes.length == 1 ? "0" + minutes : minutes;
+                
+                newDate = laDate.getHours() + "h" + minutes;
+                
+                return newDate;
+            }
+            
+            function loadFooter(nav){
+            
+                var tabFooters = new Array();
+                
+                tabFooters["GENERAL"] = "<a href=\"http://www.lequipe.fr\" target=\"_blank\">Plus d'infos >>></a>";
+                tabFooters["FOOT"] = "<a href=\"http://www.lequipe.fr/Football/index.html\" target=\"_blank\">Plus d'infos Football >>></a>";
+                tabFooters["AUTO"] = "<a href=\"http://www.lequipe.fr/Formule1/index.html\" target=\"_blank\">Plus d'infos Auto/Moto>>></a>";
+                tabFooters["TENNIS"] = "<a href=\"http://www.lequipe.fr/Tennis/index.html\" target=\"_blank\">Plus d'infos Tennis>>></a>";
+                tabFooters["RUGBY"] = "<a href=\"http://www.lequipe.fr/Rugby/index.html\" target=\"_blank\">Plus d'infos Rugby>>></a>";
+                tabFooters["BHV"] = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos Basket/Hand/Volley>>></a>";
+                tabFooters["CYCLISME"] = "<a href=\"http://www.lequipe.fr/Cyclisme/index.html\" target=\"_blank\">Plus d'infos Cyclisme>>></a>";
+                tabFooters["AUTRES"] = "<a href=\"http://www.lequipe.fr/Aussi/index.html\" target=\"_blank\">Plus d'infos Autres Sports>>></a>";
+                
+                _gel("footer").innerHTML = tabFooters[nav];
+            }
+        </script>
+    </head>
+    <body>
+        <div id="bloc_top">
+            <div id="logo">
+                <a href="http://www.lequipe.fr" target="_blank"><img src="http://img.lequipe.fr/Gadgets/iGoogle/img/logo_lequipe.gif" hspace="5" vspace="5"></a>
+            </div>
+            <div id="bloc_top_middle">
+                <div id="liens_sites">
+                    <a href="http://www.lequipemag.fr" alt="" target="_blank">lequipemag.fr</a>
+                    | <a href="http://www.lequipetv.fr" alt="" target="_blank">lequipetv.fr</a>
+                    | <a href="http://www.rtl-lequipe.fr" alt="" target="_blank">rtl-lequipe.fr</a>
+                    | <a href="http://www.lequipeauto.fr" alt="" target="_blank">lequipeauto.fr</a>
+                </div>
+                <div id="rss_top">
+                    <a href="www.lequipe.fr/Fonctions/services_RSS.html" title="Les flux RSS de L'Equipe.fr"><img src="http://img.lequipe.fr/img_v5/RSS_top.gif" alt="Les flux RSS de L'Equipe.fr" width="19" height="20"></a>
+                </div>
+                <div class="onglets">
+                    <div id="nav" class="nav">
+                        <a id="GENERAL" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">G&eacute;n&eacute;ral</a>
+                        <a id="FOOT" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Football</a>
+                        <a id="AUTO" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Auto</a>
+                        <a id="TENNIS" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Tennis</a>
+                        <a id="RUGBY" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Rugby</a>
+                        <a id="BHV" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Basket/Hand/Volley</a>
+                        <a id="CYCLISME" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Cyclisme</a>
+                        <a id="AUTRES" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Autres</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content" class="content">
+            <div class="DIV_RUBRIQUE">
+                <div class="ENTETE" style="background:#5A7984">
+                    <a href="http://www.lequipe.fr/Formule1/index.html" target="_blank" style="color:white!important">Auto/Moto</a>
+                </div>
+                <a href="http://www.lequipe.fr/redir.php?ORIG=RSS&amp;RUB=Formule1&amp;URL=http://www.lequipe.fr/Formule1/20100606_130658_iannone-l-emporte.html" target="_blank"><b>13h06 - Moto :</b> Moto2 - Italie - Iannone l'emporte</a>
+                <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px">
+                </div>
+                <a href="http://www.lequipe.fr/redir.php?ORIG=RSS&amp;RUB=Formule1&amp;URL=http://www.lequipe.fr/Formule1/20100606_115142_marquez-premiere.html" target="_blank"><b>11h51 - Moto :</b> 125cc - Italie - Marquez première</a>
+                <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px">
+                </div>
+                <a href="http://www.lequipe.fr/redir.php?ORIG=RSS&amp;RUB=Formule1&amp;URL=http://www.lequipe.fr/Formule1/20100606_092341_briscoe-l-emporte.html" target="_blank"><b>9h23 - Auto :</b> IndyCar - Briscoe l'emporte</a>
+                <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px">
+                </div>
+                <a href="http://www.lequipe.fr/redir.php?ORIG=RSS&amp;RUB=Formule1&amp;URL=http://www.lequipe.fr/Formule1/20100605_114457_rossi-chute-lourdement.html" target="_blank"><img src="http://www.lequipe.fr/Medias/Formule1/201006/270x197/rossi-a-lourdement-chute-lors-de-la-deuxieme-seance-d-essais.jpg" width="50" style="float:left; text-align:center; margin:0 8px 4px 0"><b>11h44 - Moto :</b> MotoGP - Italie - Saison terminée pour Rossi</a>
+                <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px">
+                </div>
+                <a href="http://www.lequipe.fr/redir.php?ORIG=RSS&amp;RUB=Formule1&amp;URL=http://www.lequipe.fr/Formule1/20100605_202133_onslow-cole-en-pole.html" target="_blank"><b>20h21 - Auto :</b> BTCC - Onslow-Cole en pole</a>
+                <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px">
+                </div>
+                <a href="http://www.lequipe.fr/redir.php?ORIG=RSS&amp;RUB=Formule1&amp;URL=http://www.lequipe.fr/Formule1/20100605_183024_cluzel-c-est-encourageant.html" target="_blank"><img src="http://www.lequipe.fr/Medias/Formule1/201006/270x197/cluzel-croit-au-titre.jpg" width="50" style="float:left; text-align:center; margin:0 8px 4px 0"><b>18h30 - Moto :</b> Moto2 - Cluzel : «C'est encourageant»</a>
+                <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px">
+                </div>
+                <a href="http://www.lequipe.fr/redir.php?ORIG=RSS&amp;RUB=Formule1&amp;URL=http://www.lequipe.fr/Formule1/20100605_175206_di-resta-maitrise.html" target="_blank"><b>17h52 - Auto :</b> DTM - Lausitz - Di Resta maîtrise</a>
+                <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px">
+                </div>
+                <a href="http://www.lequipe.fr/redir.php?ORIG=RSS&amp;RUB=Formule1&amp;URL=http://www.lequipe.fr/Formule1/20100605_174136_guerrieri-vainqueur.html" target="_blank"><b>17h41 - Auto :</b> F. Renault - Brno - Guerrieri vainqueur</a>
+                <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px">
+                </div>
+                <a href="http://www.lequipe.fr/redir.php?ORIG=RSS&amp;RUB=Formule1&amp;URL=http://www.lequipe.fr/Formule1/20100605_171658_iannone-s-eclate.html" target="_blank"><b>17h16 - Moto :</b> Moto2 - Italie - Iannone s'éclate</a>
+                <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px">
+                </div>
+                <a href="http://www.lequipe.fr/redir.php?ORIG=RSS&amp;RUB=Formule1&amp;URL=http://www.lequipe.fr/Formule1/20100605_164259_la-pole-pour-cortese.html" target="_blank"><b>16h42 - Moto :</b> 125cc - Italie - Cortese en pole</a>
+                <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px">
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

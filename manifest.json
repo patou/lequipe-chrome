@@ -1,10 +1,10 @@
 {
-  "name": "L'équipe.fr",
+  "name": "L'Equipe.fr",
   "version": "1.0",
-  "description": "Affiche les résultats sportifs des informations venant du site l'équipe.fr",
+  "description": "Affiche les résultats sportifs des informations venant du site l'Equipe.fr",
   "icons": {"16" : "favicon.png"},
   "browser_action": {
-    "default_title": "L'équipe.fr",
+    "default_title": "L'Equipe.fr",
     "default_icon": "equipe.png",
     "popup": "popup.html"
   },
@@ -13,5 +13,6 @@
   "permissions": [
     "notifications",
     "http://*.lequipe.fr/*"
+
   ]
 }
