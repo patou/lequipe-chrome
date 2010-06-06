@@ -1,5 +1,6 @@
 <html>
 <head>
+<script type="text/javascript" src="jquery-1.4.2.js"></script>
 <script type="text/javascript">
 var db;
 var log = document.getElementById('db-log');
@@ -60,7 +61,7 @@ function deleteRecord() {
 function countUnread(fct) {
 	db.transaction(function(tx) {
 		tx.executeSql("SELECT * FROM Items Where read = ?", [false], fct, onError);
-	}
+	});
 }
 
 // delete table from db
@@ -72,8 +73,69 @@ function dropTable() {
   });
 }
 
+// Parseurs
+function parse() {
+  var feedUrl = 'http://www.lequipe.fr/Xml/actu_rss.xml';
+
+  // The XMLHttpRequest object that tries to load and parse the feed.
+  var req = false;
+  try {
+	req = new XMLHttpRequest();
+  } catch(e) {
+    req = false;
+  }
+  if(req) {
+    req.onload = handleResponse;
+    req.onerror = handleError;
+    req.open("GET", feedUrl, true);
+    req.send("");
+  } else {
+	console.log("XMLHttpRequest failed");
+  }
+}
+
+// Handles feed parsing errors.
+function handleFeedParsingFailed(error) {
+  //var feed = document.getElementById("channel");
+ //feed.className = "error";
+  //feed.innerText = "Error: " + error;
+}
+
+// Handles errors during the XMLHttpRequest.
+function handleError() {
+  handleFeedParsingFailed('Failed to fetch RSS feed.');
+}
+
+// Handles parsing the feed data we got back from XMLHttpRequest.
+function handleResponse() {
+  var doc = req.responseXML;
+  if (!doc) {
+    handleFeedParsingFailed("Not a valid feed.");
+    return;
+  }
+  xmlParser(doc);
+  
+}
+
+function xmlParser(doc) {
+  var itemList = [];
+  $(doc).find("item").each(function() {
+    var item = $(this);
+    var itemToAdd = {
+	  title: item.find("title").text(),
+	  link: item.find("link").text(),
+	  description: item.find("description").text(),
+	  pubDate: item.find("pubDate").text()
+	};
+  newRecord(itemToAdd.link, itemToAdd.title, itemToAdd.link, "rss", itemToAdd.description, true);
+  itemList.append(item);
+  });
+  return itemList;
+}
+
 function init() {
 	createTable();
+	parse();
 }
 </script>
 </head>
