@@ -50,9 +50,15 @@ function newRecord(id, title, url, type, text, read, fct) {
   });
 }
 
-function readRecord(id, read) {
+function readRecord(id, read, fct) {
   db.transaction(function(tx) {
-    tx.executeSql("UPDATE Items SET read = ? WHERE id = ?", [read, id], null, onError);
+    tx.executeSql("UPDATE Items SET read = ? WHERE id = ?", [read, id], fct, onError);
+  });
+}
+
+function setReadAllRecord(fct) {
+  db.transaction(function(tx) {
+	    tx.executeSql("UPDATE Items SET read = ?", [true], fct, onError);
   });
 }
 
@@ -194,6 +200,9 @@ function notify(item) {
   			  item.title,  // notification title
   			  item.text  // notification body text
   		);
+  		notification.onclose = function () {
+  			setReadItem(item.id);
+  		};
     	notification.show();
 	}
 }
@@ -202,6 +211,18 @@ function insertItemList(name, itemList) {
   for (var i = 0, j = itemList.length; i < j; i++) {
     newRecord(itemList[i].link, itemList[i].title, itemList[i].link, name, itemList[i].description, false, i < 3 ? notify : undefined);
   }
+}
+
+function setReadItem(id) {
+	readRecord(id, true, function () {
+		countUnread(function(n){chrome.browserAction.setBadgeText({text :n.toString()});});
+	});
+}
+
+function setReadAllItems() {
+	setReadAllRecord(function () {
+		countUnread(function(n){chrome.browserAction.setBadgeText({text :n.toString()});});
+	});
 }
 
 var intervalID = 0;
