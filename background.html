@@ -76,7 +76,8 @@ function deleteRecord() {
 	  db.transaction(function(tx) {
 	    tx.executeSql("DELETE FROM Items;", [],
 	        function(tx, result) {
-	        	console.log("successfull delete items"); 
+	        	console.log("successfull delete items");
+	        	count(); 
 	        }, 
 	        onError);
 	  });
@@ -219,8 +220,8 @@ function notify(item) {
   			  item.title,  // notification title
   			  text  // notification body text
   		);*/
-		var htmlUrl = "notification.html?titre="+item.title+"&content="+text+"&img=logo_lequipe.png&lien=http://www.lequipe.fr"; 
-		
+		//var htmlUrl = "notification.html?titre="+item.title+"&content="+text+"&img=logo_lequipe.png&lien=http://www.lequipe.fr"; 
+		var htmlUrl = "notification.html?" + encodeURIComponent(JSON.stringify(item));
 		var notification = webkitNotifications.createHTMLNotification(htmlUrl);
   		notification.onclose = function () {
   			setReadItem(item.id);
@@ -238,7 +239,7 @@ function count() {
 
 function insertItemList(name, itemList) {
   for (var i = 0, j = itemList.length; i < j; i++) {
-    newRecord(itemList[i].link, itemList[i].title, itemList[i].link, name, itemList[i].description, false, i < 3 ? notify : count);
+    newRecord(itemList[i].link, itemList[i].title, itemList[i].link, name, itemList[i].description, false, i < 1 ? notify : count);
   }
 }
 
