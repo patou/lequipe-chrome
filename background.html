@@ -65,7 +65,9 @@ function setReadAllRecord(fct) {
 function deleteRecordRead() {
   db.transaction(function(tx) {
     tx.executeSql("DELETE FROM Items WHERE read = true", [],
-        function(tx, result) {console.log("successfull delete unread items") }, 
+        function(tx, result) {
+        	console.log("successfull delete unread items"); 
+        }, 
         onError);
   });
 }
@@ -73,7 +75,9 @@ function deleteRecordRead() {
 function deleteRecord() {
 	  db.transaction(function(tx) {
 	    tx.executeSql("DELETE FROM Items;", [],
-	        function(tx, result) {console.log("successfull delete items") }, 
+	        function(tx, result) {
+	        	console.log("successfull delete items"); 
+	        }, 
 	        onError);
 	  });
 }
@@ -127,12 +131,10 @@ function parseAllFeeds() {
   for(var i = 0; i < feeds.length; i++) {
 	  if (typeof feeds[i] == "object") {
 		feedName = feeds[i].key;
-		if(feedName.charAt(0) != '_') {
-		  parse(feedName, feeds[i].value);
-		}
+		console.log(feeds[i].value);
+		parse(feedName, feeds[i].value);
 	  }
   }
-  countUnread(function(n){chrome.browserAction.setBadgeText({text :n.toString()});})
 }
 
 function parse(name, url) {
@@ -192,7 +194,6 @@ function xmlParser(doc) {
 }
 
 function notify(item) {
-
 	if (localStorage["__notification"]) {
 		console.log(item);
     	var notification = webkitNotifications.createNotification(
@@ -205,11 +206,18 @@ function notify(item) {
   		};
     	notification.show();
 	}
+	count();
+}
+
+function count() {
+	countUnread(function(n){
+		chrome.browserAction.setBadgeText({text :n.toString()});
+	});
 }
 
 function insertItemList(name, itemList) {
   for (var i = 0, j = itemList.length; i < j; i++) {
-    newRecord(itemList[i].link, itemList[i].title, itemList[i].link, name, itemList[i].description, false, i < 3 ? notify : undefined);
+    newRecord(itemList[i].link, itemList[i].title, itemList[i].link, name, itemList[i].description, false, i < 3 ? notify : count);
   }
 }
 
