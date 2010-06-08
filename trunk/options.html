@@ -58,7 +58,7 @@ function save_flux(e) {
 	else {
 		localStorage.removeItem(checkbox.name);
 	}
-	chrome.getBackgroundPage().init();
+	chrome.extension.getBackgroundPage().init();
 }
 
 function restore_options() {
@@ -91,12 +91,12 @@ function restore_options() {
   select.onchange = function(e) {
 	var option = e.target[e.target.selectedIndex];
 	localStorage["__rafraichissement"] = option.value;
-	chrome.getBackgroundPage().init();
+	chrome.extension.getBackgroundPage().init();
   }
 }
 
 function deleteDb() {
-	chrome.getBackgroundPage().deleteRecord();
+	chrome.extension.getBackgroundPage().deleteRecord();
 }
 </script>
 </head>
