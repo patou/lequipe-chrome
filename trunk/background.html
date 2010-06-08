@@ -138,13 +138,16 @@ function parseAllFeeds() {
 }
 
 function parse(name, url) {
+  var req;
   try {
 	req = new XMLHttpRequest();
   } catch(e) {
     req = false;
   }
   if(req) {
-    req.onload = function () {handleResponse(name)};
+    req.onload = function () {
+        handleResponse(req, name);
+    };
     req.onerror = handleError;
     req.open("GET", url, true);
     req.send("");
@@ -153,23 +156,17 @@ function parse(name, url) {
   }
 }
 
-// Handles feed parsing errors.
-function handleFeedParsingFailed(error) {
-  //var feed = document.getElementById("channel");
- //feed.className = "error";
-  //feed.innerText = "Error: " + error;
-}
-
 // Handles errors during the XMLHttpRequest.
 function handleError() {
-  handleFeedParsingFailed('Failed to fetch RSS feed.');
+  console.log('Failed to fetch RSS feed.');
 }
 
 // Handles parsing the feed data we got back from XMLHttpRequest.
-function handleResponse(name) {
+function handleResponse(req, name) {
   var doc = req.responseXML;
   if (!doc) {
-    handleFeedParsingFailed("Not a valid feed.");
+	 console.log("Not a valid feed.");
+	 console.log(req);
     return;
   }
   insertItemList(name, xmlParser(doc));
