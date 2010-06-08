@@ -190,14 +190,38 @@ function xmlParser(doc) {
   return itemList;
 }
 
+function stripHtml(htmlString){
+    if (htmlString) {
+        var mydiv = document.createElement("div");
+        mydiv.innerHTML = htmlString;
+        
+        if (document.all) // IE Stuff
+        {
+            return mydiv.innerText;
+            
+        }
+        else // Mozilla does not work with innerText
+        {
+            return mydiv.textContent;
+        }
+    }
+}
+
+
 function notify(item) {
 	if (localStorage["__notification"]) {
 		console.log(item);
-    	var notification = webkitNotifications.createNotification(
+		// mise en texte simple de item.text:
+		var text = stripHtml(item.text);
+		
+    	/*var notification = webkitNotifications.createNotification(
   			  "logo_lequipe.png",  // icon url - can be relative
   			  item.title,  // notification title
-  			  item.text  // notification body text
-  		);
+  			  text  // notification body text
+  		);*/
+		var htmlUrl = "notification.html?titre="+item.title+"&content="+text+"&img=logo_lequipe.png&lien=http://www.lequipe.fr"; 
+		
+		var notification = webkitNotifications.createHTMLNotification(htmlUrl);
   		notification.onclose = function () {
   			setReadItem(item.id);
   		};
