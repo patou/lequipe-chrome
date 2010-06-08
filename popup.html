@@ -3,11 +3,13 @@
     <head>
         <script type="text/javascript" src="jquery-1.4.2.js">
         </script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <style type="text/css">
             body {
-                height: 500px;
+                height: auto;
+                max-height: 500px;
                 width: 500px;
-                background-color: #F0F0F0;
+                background-color: #FFF;
                 font-family: Arial, Helvetica, sans-serif;
                 font-size: 12px;
             }
@@ -227,7 +229,6 @@
                 width: 98%;
                 border: 1px #EBEBEB solid;
                 margin: 0px;
-                height: 320px;
                 overflow: hidden;
                 padding: 5px;
                 background-color: white;
@@ -239,6 +240,10 @@
                 font-weight: bold;
                 margin-bottom: 10px;
                 background-image: url(http://img.lequipe.fr/medias/commun/navigation_fond_th.gif) no-repeat;
+            }
+            
+            #DIV_CONTENT {
+            	overflow: auto;
             }
         </style>
         <script type="text/javascript">
@@ -252,14 +257,15 @@
             				
             				// Selection des Items :
             				db.transaction(function(tx) {
-            				    tx.executeSql("SELECT * FROM Items", [], function(tx, result) {
+            				    tx.executeSql("SELECT * FROM Items WHERE read = ?", [false], function(tx, result) {
             				      for (var i = 0, item = null; i < result.rows.length; i++) {
             				        item = result.rows.item(i);
-									
-									html = '<a href="'+item['url']+'" target="_blank"><b>'+item['id']+' - '+item['id']+' :</b> '+item['title']+' </a>';
+									console.log(item['title']);
+									html = '<a href="'+item['url']+'" target="_blank"><b>'+item['type']+' :</b> '+item['title']+' </a>';
+									html += '<p>' + item['text'] + '</p>';
 									html += ' <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px"></div>';
                             
-            						$('DIV_CONTENT').prepend(html);
+            						$('#DIV_CONTENT').prepend(html);
             				        
             				      }
             				    });
@@ -269,12 +275,12 @@
             				
             			}
                         
-            			$().ready(function (){
-							loadDiv ();
-						})
+//            			$().ready(function (){
+//							loadDiv ();
+//						})
             			
                         
-                    loadDiv ();
+                    
 //                        
 //                        function loadAll(){
 //                        
@@ -418,7 +424,7 @@
                     
         </script>
     </head>
-    <body>
+    <body onload="loadDiv();">
         <div id="bloc_top">
             <div id="logo">
                 <a href="http://www.lequipe.fr" target="_blank"><img src="http://img.lequipe.fr/Gadgets/iGoogle/img/logo_lequipe.gif" hspace="5" vspace="5"></a>
