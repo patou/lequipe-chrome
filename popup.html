@@ -245,35 +245,48 @@
             #DIV_CONTENT {
             	overflow: auto;
             }
+			
+			.title {
+				font-size: 140%;
+				font-weight: bold;
+				color: #2244BB;
+			}
+			
+			.link-to-go {
+				background: url(link.png);
+				
+			}
         </style>
         <script type="text/javascript">
-                        function loadDiv ()
-            			{
-            				db = openDatabase("Equipe.fr", "1.0", "Items database", 200000);
-            
-            				function onError(tx, error) {
-            				  console.log(error.message);
-            				}
-            				
-            				// Selection des Items :
-            				db.transaction(function(tx) {
-            				    tx.executeSql("SELECT * FROM Items WHERE read = ?", [false], function(tx, result) {
-            				      for (var i = 0, item = null; i < result.rows.length; i++) {
-            				        item = result.rows.item(i);
-									console.log(item['title']);
-									html = '<a href="'+item['url']+'" target="_blank"><b>'+item['type']+' :</b> '+item['title']+' </a>';
-									html += '<p>' + item['text'] + '</p>';
-									html += ' <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px"></div>';
-                            
-            						$('#DIV_CONTENT').prepend(html);
-            				        
-            				      }
-            				    });
-							});
-            				
-            				
-            				
+            function loadDiv () {	
+				db = openDatabase("Equipe.fr", "1.0", "Items database", 200000);
+				function onError(tx, error) {
+					console.log(error.message);
+            	}
+            	// Selection des Items :
+            	db.transaction(function(tx) {
+					tx.executeSql("SELECT * FROM Items WHERE read = ?", [false], function(tx, result) {
+						for (var i = 0, item = null; i < result.rows.length; i++) {
+							item = result.rows.item(i);
+							console.log(item['title']);
+							html = '<a class="title" href="'+item['url']+'" target="_blank">'+item['title']+' </a>';
+							html += '<div class="link-to-go"/>';
+							html += '<p>' + correctImg(item['text']) + '</p>';
+							html += ' <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px"></div>';
+							
+							$('#DIV_CONTENT').prepend(html);
             			}
+            		});
+				});	
+			}
+			
+			function correctImg(html) {
+				var i = html.indexOf("/Medias/");
+				if(i != -1) {
+					html = html.substr(0,i)+ 'http://img.lequipe.fr' + html.substr(i);
+				}
+				return html;
+			}
                         
 //            			$().ready(function (){
 //							loadDiv ();
@@ -460,7 +473,7 @@
                 </div>
                 <div id="DIV_CONTENT">
                 </div>
-                <a href="#" onclick="chrome.extension.getBackgroundPage().setReadAllItems()">Marquer tous comme lu</a>
+                <input type="button" onclick="chrome.extension.getBackgroundPage().setReadAllItems()" value="Tout marquer comme lu"></input>
             </div>
         </div>
     </body>
