@@ -113,7 +113,7 @@ function getUpdateInterval() {
 
 function getFeedsList() {
 	if (localStorage.length == 0) {
-		localStorage["tous"] = "http://www-ref.lequipe.fr/Xml/actu_rss.xml";
+		localStorage["general_tous"] = "http://www-ref.lequipe.fr/Xml/actu_rss.xml";
 	}
 	var feeds = [];
 	for(var i = 0; i < localStorage.length; i++) {
