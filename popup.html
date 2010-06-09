@@ -105,6 +105,11 @@
                 font-weight: bold
             }
             
+			a#TOUS:hover {
+                background-color: #D60000 !important;
+                color: #FFF !important
+            }
+
             a#GENERAL:hover {
                 background-color: #D60000 !important;
                 color: #FFF !important
@@ -258,28 +263,53 @@
 			}
         </style>
         <script type="text/javascript">
-            function loadDiv () {	
+            function loadDiv (type) {
 				db = openDatabase("Equipe.fr", "1.0", "Items database", 200000);
 				function onError(tx, error) {
 					console.log(error.message);
             	}
+				
+				$('#DIV_CONTENT').text("");
+
+				var req = "SELECT * FROM Items WHERE read = ? AND type LIKE ?";
+				var categorie = "%";
+				var args = [false, categorie];
+
+				if(type == "GENERAL") {
+					categorie = "general%";
+				} else if(type == "FOOT"){
+					categorie = "foot%";
+				}else if(type == "AUTO"){
+					categorie = "auto%";
+				} else if(type == "TENNIS"){
+					categorie = "tennis%";
+				} else if(type == "RUGBY"){
+					categorie = "rugby%";
+				} else if(type == "BHV"){
+					categorie = "bhv%";
+				} else if(type == "CYCLISME"){
+					categorie = "cyclisme%";
+				} else if(type == "AUTRES"){
+					categorie = "autre%";
+				} 
+				
             	// Selection des Items :
             	db.transaction(function(tx) {
-					tx.executeSql("SELECT * FROM Items WHERE read = ?", [false], function(tx, result) {
+					tx.executeSql(req, [false, categorie], function(tx, result) {
 						for (var i = 0, item = null; i < result.rows.length; i++) {
 							item = result.rows.item(i);
 							console.log(item['title']);
 							html = '<a class="title" href="'+item['url']+'" target="_blank">'+item['title']+' </a>';
 							html += '<div class="link-to-go"/>';
 							html += '<p>' + correctImg(item['text']) + '</p>';
-							html += ' <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px"></div>';
+							html += ' <div style="clear:both; height:1px; overflow:hidden; border-top:1px dashed #99BB00; margin:2px 4px 2px 4px"></div>';
 							
 							$('#DIV_CONTENT').prepend(html);
             			}
             		});
-				});	
+				});
 			}
-			
+
 			function correctImg(html) {
 				var i = html.indexOf("/Medias/");
 				if(i != -1) {
@@ -288,10 +318,46 @@
 				return html;
 			}
                         
-//            			$().ready(function (){
-//							loadDiv ();
-//						})
-            			
+			function loadNavTab() {
+				var feeds = chrome.extension.getBackgroundPage().getFeedsList();
+				var feedName;
+				var navTab;
+				
+				for(var i = 0; i < feeds.length; i++) {
+					if (typeof feeds[i] == "object") {
+						feedName = feeds[i].key;
+						if(feedName.indexOf("general") == 0) {
+							navTab = '<a id="GENERAL" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Général</a>';
+						}
+						if(feedName.indexOf("foot") == 0) {
+							navTab = '<a id="FOOT" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Football</a>';
+						}
+						if(feedName.indexOf("auto") == 0) {
+							navTab = '<a id="AUTO" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Auto</a>';
+						}
+						if(feedName.indexOf("tennis") == 0) {
+							navTab = '<a id="TENNIS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tennis</a>';
+						}
+						if(feedName.indexOf("rugby") == 0) {
+							navTab = '<a id="RUGBY" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Rugby</a>';
+						}
+						if(feedName.indexOf("bhv") == 0) {
+							navTab = '<a id="BHV" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Basket/Hand/Volley</a>';
+						}
+						if(feedName.indexOf("cyclisme") == 0) {
+							navTab = '<a id="CYCLISME" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Cyclisme</a>';
+						}
+						if(feedName.indexOf("autre") == 0) {
+							navTab = '<a id="AUTRES" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Autres</a>';
+						}
+						$('#nav').prepend(navTab);
+					}
+				}
+				if(feeds.length>0)
+					$('#nav').prepend('<a id="TOUS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tous</a>');
+			}
+			
+
                         
                     
 //                        
@@ -435,9 +501,13 @@
                             _gel("footer").innerHTML = tabFooters[nav];
                         }
                     
+		function init() {
+			loadNavTab();
+			loadDiv();
+		}
         </script>
     </head>
-    <body onload="loadDiv();">
+    <body onload='init();'>
         <div id="bloc_top">
             <div id="logo">
                 <a href="http://www.lequipe.fr" target="_blank"><img src="http://img.lequipe.fr/Gadgets/iGoogle/img/logo_lequipe.gif" hspace="5" vspace="5"></a>
@@ -454,14 +524,7 @@
                 </div>
                 <div class="onglets">
                     <div id="nav" class="nav">
-                        <a id="GENERAL" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Général</a>
-                        <a id="FOOT" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Football</a>
-                        <a id="AUTO" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Auto</a>
-                        <a id="TENNIS" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Tennis</a>
-                        <a id="RUGBY" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Rugby</a>
-                        <a id="BHV" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Basket/Hand/Volley</a>
-                        <a id="CYCLISME" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Cyclisme</a>
-                        <a id="AUTRES" href="#javascript" class="lienNav" onclick="loadNav2(this.id)">Autres</a>
+                       
                     </div>
                 </div>
             </div>
@@ -469,11 +532,11 @@
         <div id="content" class="content">
             <div class="DIV_RUBRIQUE">
                 <div class="ENTETE" style="background:#5A7984">
-                    <a href="http://www.lequipe.fr/Formule1/index.html" target="_blank" style="color:white!important">Général</a>
+                    <input type="button" onclick="chrome.extension.getBackgroundPage().setReadAllItems()" value="Tout marquer comme lu"></input>
                 </div>
                 <div id="DIV_CONTENT">
                 </div>
-                <input type="button" onclick="chrome.extension.getBackgroundPage().setReadAllItems()" value="Tout marquer comme lu"></input>
+                
             </div>
         </div>
     </body>
