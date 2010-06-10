@@ -125,7 +125,7 @@
                 color: #FFF !important
             }
             
-            a#TENNIS:hover, .AUTO {
+            a#TENNIS:hover, .TENNIS {
                 background-color: #DB7141 !important;
                 color: #FFF !important
             }
@@ -539,42 +539,55 @@ if (widthTot - widthElmt > 10)
             }
             
             function loadNavTab(){
-                var feeds = chrome.extension.getBackgroundPage().getFeedsList();
-                var feedName;
-                var navTab;
-                
-                for (var i = 0; i < feeds.length; i++) {
-                    if (typeof feeds[i] == "object") {
-                        feedName = feeds[i].key;
-                        if (feedName.indexOf("general") == 0) {
-                            navTab = '<a id="GENERAL" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Général</a>';
-                        }
-                        if (feedName.indexOf("foot") == 0) {
-                            navTab = '<a id="FOOT" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Football</a>';
-                        }
-                        if (feedName.indexOf("auto") == 0) {
-                            navTab = '<a id="AUTO" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Auto</a>';
-                        }
-                        if (feedName.indexOf("tennis") == 0) {
-                            navTab = '<a id="TENNIS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tennis</a>';
-                        }
-                        if (feedName.indexOf("rugby") == 0) {
-                            navTab = '<a id="RUGBY" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Rugby</a>';
-                        }
-                        if (feedName.indexOf("bhv") == 0) {
-                            navTab = '<a id="BHV" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Basket/Hand/Volley</a>';
-                        }
-                        if (feedName.indexOf("cyclisme") == 0) {
-                            navTab = '<a id="CYCLISME" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Cyclisme</a>';
-                        }
-                        if (feedName.indexOf("autre") == 0) {
-                            navTab = '<a id="AUTRES" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Autres</a>';
-                        }
-                        $('#nav').prepend(navTab);
-                    }
-                }
-                if (feeds.length > 0) 
+				var feeds = chrome.extension.getBackgroundPage().getFeedsList();
+				var feedName;
+				var navTab;
+				var tabs = {};
+				$('#nav').empty();
+				for(var i = 0; i < feeds.length; i++) {
+					if (typeof feeds[i] == "object") {
+						feedName = feeds[i].key;
+						navTab = false;
+						if(feedName.indexOf("general") == 0 && !tabs["general"]) {
+							tabs["general"] = true;
+							navTab = '<a id="GENERAL" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Général</a>';
+						}
+						if(feedName.indexOf("foot") == 0 && !tabs["foot"]) {
+							tabs["foot"] = true;
+							navTab = '<a id="FOOT" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Football</a>';
+						}
+						if(feedName.indexOf("auto") == 0 && !tabs["auto"]) {
+							tabs["auto"] = true;
+							navTab = '<a id="AUTO" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Auto</a>';
+						}
+						if(feedName.indexOf("tennis") == 0 && !tabs["tennis"]) {
+							tabs["tennis"] = true;
+							navTab = '<a id="TENNIS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tennis</a>';
+						}
+						if(feedName.indexOf("rugby") == 0 && !tabs["rugby"]) {
+							tabs["rugby"] = true;
+							navTab = '<a id="RUGBY" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Rugby</a>';
+						}
+						if(feedName.indexOf("bhv") == 0 && !tabs["bhv"]) {
+							tabs["bhv"] = true;
+							navTab = '<a id="BHV" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Basket/Hand/Volley</a>';
+						}
+						if(feedName.indexOf("cyclisme") == 0 && !tabs["cyclisme"]) {
+							tabs["cyclisme"] = true;
+							navTab = '<a id="CYCLISME" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Cyclisme</a>';
+						}
+						if(feedName.indexOf("autre") == 0 && !tabs["autre"]) {
+							tabs["autre"] = true;
+							navTab = '<a id="AUTRES" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Autres</a>';
+						}
+						if (navTab) {
+							$('#nav').prepend(navTab);
+						}
+					}
+				}
+				if (feeds.length > 0) {
                     $('#nav').prepend('<a id="TOUS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tous</a>');
+				}
             }
             
             function getDateEnFrancais(date){
