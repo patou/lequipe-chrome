@@ -105,32 +105,32 @@
                 font-weight: bold
             }
             
-			a#TOUS:hover {
-                background-color: #D60000 !important;
-                color: #FFF !important
-            }
-
-            a#GENERAL:hover {
+            a#TOUS:hover, .TOUS {
                 background-color: #D60000 !important;
                 color: #FFF !important
             }
             
-            a#FOOT:hover {
+            a#GENERAL:hover, .GENERAL {
+                background-color: #D60000 !important;
+                color: #FFF !important
+            }
+            
+            a#FOOT:hover, .FOOT {
                 background-color: #78A130 !important;
                 color: #FFF !important
             }
             
-            a#AUTO:hover {
+            a#AUTO:hover, .AUTO {
                 background-color: #5A7984 !important;
                 color: #FFF !important
             }
             
-            a#TENNIS:hover {
+            a#TENNIS:hover, .AUTO {
                 background-color: #DB7141 !important;
                 color: #FFF !important
             }
             
-            a#RUGBY:hover {
+            a#RUGBY:hover, .RUGBY {
                 background-color: #004C30 !important;
                 color: #FFF !important
             }
@@ -140,17 +140,17 @@
                 color: #FFF !important
             }
             
-            a#BHV:hover {
+            a#BHV:hover, .BHV {
                 background-color: #000084 !important;
                 color: #FFF !important
             }
             
-            a#CYCLISME:hover {
+            a#CYCLISME:hover, .CYCLISME {
                 background-color: #BDB600 !important;
                 color: #FFF !important
             }
             
-            a#AUTRES:hover {
+            a#AUTRES:hover, .AUTRES {
                 background-color: #5AB6AD !important;
                 color: #FFF !important
             }
@@ -248,178 +248,377 @@
             }
             
             #DIV_CONTENT {
-            	overflow: auto;
+               
+            }
+            
+            #DIV_CONTENT img {
+                width: 80px;
+                margin: 5px;
+            }
+            
+            .title {
+                font-size: 140%;
+                font-weight: bold;
+                color: #2244BB;
+            }
+            
+            .link-to-go {
+                background: url(link.png);
+            }
+            
+            .allo_home {
+                
+                font-size: 11px;
+                font-family: Arial;
+                color: #333;
+                margin-top: -4px
+            }
+            
+            #allo_tt {
+                /*background-image: url(http://img.lequipe.fr/Football/CM2010/img/allo_home_tt.gif);*/
+                height: 20px
             }
 			
-			#DIV_CONTENT img {
-				width : 80px;
-				margin : 5px;
+			#header {
+				text-align: right;
 			}
-			
-			.title {
-				font-size: 140%;
-				font-weight: bold;
-				color: #2244BB;
-			}
-			
-			.link-to-go {
-				background: url(link.png);
-				
-			}
+            
+            .allo_home_content {
+                border: 1px solid #d7d7d7;
+                border-top: 0;
+                border-bottom: 0;
+                height: 300px;
+                position: relative;
+               
+                overflow: hidden
+            }
+            
+            .allo_home_scroll {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 400px
+            }
+            
+            .allo_home .nave {
+                background-color: #D7D7D7;
+                background-image: url("http://img.lequipe.fr/img_v5/icones_png.png?20100527");
+                background-position: 0 -446px;
+                background-repeat: no-repeat;
+                float: left;
+                height: 17px;
+                padding-left: 120px;
+               
+                width: 100%;
+            }
+            
+            .allo_home .nave div {
+                background-image: url("http://img.lequipe.fr/img_v5/icones_png.png?20100520-1");
+                cursor: pointer;
+                float: left;
+                height: 17px;
+                margin-right: 4px;
+                width: 17px
+            }
+            
+            .allo_home .nave #back {
+                background-position: 0 -523px !important
+            }
+            
+            .allo_home .nave #next {
+                background-position: -26px -523px !important
+            }
+            
+            .allo_home .nave #back:hover {
+                background-position: 0 -506px !important
+            }
+            
+            .allo_home .nave #next:hover {
+                background-position: -26px -506px !important
+            }
+            
+            .allo_home .blok {
+                cursor: pointer;
+                border-bottom: 1px solid #D60000;
+                margin-bottom: 1px;
+                padding-bottom: 2px;
+                padding-top: 2px;
+                margin-left: 4px;;
+                -moz-opacity: 0.8;
+                filter: alpha(opacity = 80);
+                opacity: 0.8
+            }
+            
+            .blok .hour {
+                float: left;
+                font-weight: bold;
+                text-align: center;
+                width: 34px;
+                padding: 2px 4px 0 4px;
+            }
+            
+            .blok .icon {
+                float: left;
+                min-height: 18px;
+                text-align: center;
+                width: 40px;
+                padding: 0 2px;
+                padding-bottom: 0;
+                background: url("http://img.lequipe.fr/Allos/fond_gris.gif");
+                margin-right: 4px
+            }
+            
+            .blok .icon img {
+                width: 30px;
+                margin-left: 4px;
+                vertical-align: middle
+            }
+            
+            .blok .content {
+                float: left;
+                width: 200px;
+            }
+            
+            .blok .content h2 {
+                font-size: 11px;
+                margin: 0;
+                padding: 2px 0 0 0
+            }
+            
+            .allo_home .blok:hover {
+                -moz-opacity: 1;
+                filter: alpha(opacity = 100);
+                opacity: 1
+            }
+            
+            .allo_home .nave {
+                margin-top: -1px
+            }
         </style>
         <script type="text/javascript">
-			var db;
-			
-            function loadDiv (type) {
-				
-				
-				$('#DIV_CONTENT').text("");
+            var db;
+		
+  
+  function scroll(cible, sens){
+  
+    var hauteur = parseInt($("#" + cible).parent().css('height'));
+    var top = parseInt($("#" + cible).css('top'));
+     if (sens == '+' && top < 0) 
+ {
+      $("#" + cible).animate({
+         'top': '+=' + hauteur + 'px'
+      }, 'slow');
+    }else 
+      if (sens == '-') 
+{
+      var length = parseInt($("#" + cible + " > div").length);
+        var divHauteur = parseInt($("#" + cible + " div:eq(0)").outerHeight(true));
+        
+// Cas ou il y en a plusieurs sur une ligne 
+        var widthElmt = parseInt($("#" + cible + " div:eq(0)").css('width'));
+        var widthTot = parseInt($("#" + cible).outerWidth(true));
+        
+if (widthTot - widthElmt > 10) 
+{
+          length = Math.floor(length / Math.floor(widthTot / widthElmt));
+        }
+        
+        // Calcul 
+        var calc = length * divHauteur - hauteur;
+        
+        if (Math.abs(top) < calc) 
+        $("#" + cible).animate({
+          'top': '-=' + hauteur + 'px'
+           }, 'slow');  
+      }  
+  } 
+  
+  $('#next').click(function () {
+		scroll('allo', '+'); 
+  });
+  
+  $('#back').click(function () {
+		scroll('allo', '-'); 
+  });
+  
+  
+  
 
-				var req = "SELECT * FROM Items WHERE read = ? AND type LIKE ?";
-				var categorie = "%";
-				var args = [false, categorie];
-
-				if(type == "GENERAL") {
-					categorie = "general%";
-				} else if(type == "FOOT"){
-					categorie = "foot%";
-				}else if(type == "AUTO"){
-					categorie = "auto%";
-				} else if(type == "TENNIS"){
-					categorie = "tennis%";
-				} else if(type == "RUGBY"){
-					categorie = "rugby%";
-				} else if(type == "BHV"){
-					categorie = "bhv%";
-				} else if(type == "CYCLISME"){
-					categorie = "cyclisme%";
-				} else if(type == "AUTRES"){
-					categorie = "autre%";
-				} 
-				else {
-					type = "GENERAL";
-				}
-				
-            	// Selection des Items :
-            	db.transaction(function(tx) {
-					tx.executeSql(req, [false, categorie], function(tx, result) {
-						for (var i = 0, item = null; i < result.rows.length; i++) {
-							item = result.rows.item(i);
-							console.log(item['title']);
-							html = '<a class="title" href="'+item['url']+'" target="_blank">'+item['title']+' </a>';
-							html += '<div class="link-to-go"/>';
-							html += '<p>' + correctImg(item['text']) + '</p>';
-							html += ' <div style="clear:both; height:1px; overflow:hidden; border-top:1px dashed #99BB00; margin:2px 4px 2px 4px"></div>';
-							
-							$('#DIV_CONTENT').prepend(html);
-							
-							
-							
-            			}
-            		});
-				});
-				
-				// redimentionnement des images 
-				// Correction des images 
-		// Correction des images 
-				
-				loadFooter(type);
-				
-/*					$('#DIV_CONTENT.img[src*=Medias]').each(		function () {
-			$(this).attr('width', 80); // .attr('src', 'http://img.lequipe.fr' + $(this).attr('src') ).
-			}); 
-	*/
-
-			}
-
-			function correctImg(html) {
-				var i = html.indexOf("/Medias/");
-				if(i != -1) {
-					html = html.substr(0,i)+ 'http://img.lequipe.fr' + html.substr(i);
-				}
-				return html;
-			}
-                        
-			function loadNavTab() {
-				var feeds = chrome.extension.getBackgroundPage().getFeedsList();
-				var feedName;
-				var navTab;
-				
-				for(var i = 0; i < feeds.length; i++) {
-					if (typeof feeds[i] == "object") {
-						feedName = feeds[i].key;
-						if(feedName.indexOf("general") == 0) {
-							navTab = '<a id="GENERAL" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Général</a>';
-						}
-						if(feedName.indexOf("foot") == 0) {
-							navTab = '<a id="FOOT" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Football</a>';
-						}
-						if(feedName.indexOf("auto") == 0) {
-							navTab = '<a id="AUTO" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Auto</a>';
-						}
-						if(feedName.indexOf("tennis") == 0) {
-							navTab = '<a id="TENNIS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tennis</a>';
-						}
-						if(feedName.indexOf("rugby") == 0) {
-							navTab = '<a id="RUGBY" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Rugby</a>';
-						}
-						if(feedName.indexOf("bhv") == 0) {
-							navTab = '<a id="BHV" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Basket/Hand/Volley</a>';
-						}
-						if(feedName.indexOf("cyclisme") == 0) {
-							navTab = '<a id="CYCLISME" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Cyclisme</a>';
-						}
-						if(feedName.indexOf("autre") == 0) {
-							navTab = '<a id="AUTRES" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Autres</a>';
-						}
-						$('#nav').prepend(navTab);
-					}
-				}
-				if(feeds.length>0)
-					$('#nav').prepend('<a id="TOUS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tous</a>');
-			}
-			
-                        function getDateEnFrancais(date){
-                        
-                            var newDate = "";
-                            
-                            laDate = new Date(date);
-                            
-                            var minutes = "" + laDate.getMinutes();
-                            
-                            minutes = minutes.length == 1 ? "0" + minutes : minutes;
-                            
-                            newDate = laDate.getHours() + "h" + minutes;
-                            
-                            return newDate;
+	
+            
+            function loadDiv(type){
+            
+            
+                $('#DIV_CONTENT').text("");
+                
+                var req = "SELECT * FROM Items WHERE read = ? AND type LIKE ?";
+                var categorie = "%";
+                var args = [false, categorie];
+                
+                if (type == "GENERAL") {
+                    categorie = "general%";
+                }
+                else 
+                    if (type == "FOOT") {
+                        categorie = "foot%";
+                    }
+                    else 
+                        if (type == "AUTO") {
+                            categorie = "auto%";
                         }
-                        
-                        function loadFooter(nav){
-                        
-                            var tabFooters = new Array();
+                        else 
+                            if (type == "TENNIS") {
+                                categorie = "tennis%";
+                            }
+                            else 
+                                if (type == "RUGBY") {
+                                    categorie = "rugby%";
+                                }
+                                else 
+                                    if (type == "BHV") {
+                                        categorie = "bhv%";
+                                    }
+                                    else 
+                                        if (type == "CYCLISME") {
+                                            categorie = "cyclisme%";
+                                        }
+                                        else 
+                                            if (type == "AUTRES") {
+                                                categorie = "autre%";
+                                            }
+                                            else {
+                                                type = "GENERAL";
+                                            }
+                
+                // Selection des Items :
+                db.transaction(function(tx){
+                    tx.executeSql(req, [false, categorie], function(tx, result){
+                        for (var i = 0, item = null; i < result.rows.length; i++) {
+                            item = result.rows.item(i);
+                            console.log(item['title']);
+                            html = '<div id="item' + i + '" onclick="readItem(' + i + ', \'' + encodeURI(item['id']) + '\' )" ><a class="title" href="' + item['url'] + '" target="_blank" onclick="readItem(' + i + '); return true;" >' + item['title'] + ' </a>';
+                            html += '<div class="link-to-go"/>';
+                            html += '<p class="content" >' + correctImg(item['text']) + '</p>';
+                            html += ' <div style="clear:both; height:1px; overflow:hidden; border-top:1px dashed #99BB00; margin:2px 4px 2px 4px"></div><div>';
                             
-                            tabFooters["GENERAL"] = "<a href=\"http://www.lequipe.fr\" target=\"_blank\">Plus d'infos >>></a>";
-                            tabFooters["FOOT"] = "<a href=\"http://www.lequipe.fr/Football/index.html\" target=\"_blank\">Plus d'infos Football >>></a>";
-                            tabFooters["AUTO"] = "<a href=\"http://www.lequipe.fr/Formule1/index.html\" target=\"_blank\">Plus d'infos Auto/Moto>>></a>";
-                            tabFooters["TENNIS"] = "<a href=\"http://www.lequipe.fr/Tennis/index.html\" target=\"_blank\">Plus d'infos Tennis>>></a>";
-                            tabFooters["RUGBY"] = "<a href=\"http://www.lequipe.fr/Rugby/index.html\" target=\"_blank\">Plus d'infos Rugby>>></a>";
-                            tabFooters["BHV"] = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos Basket/Hand/Volley>>></a>";
-                            tabFooters["CYCLISME"] = "<a href=\"http://www.lequipe.fr/Cyclisme/index.html\" target=\"_blank\">Plus d'infos Cyclisme>>></a>";
-                            tabFooters["AUTRES"] = "<a href=\"http://www.lequipe.fr/Aussi/index.html\" target=\"_blank\">Plus d'infos Autres Sports>>></a>";
+                            $('#DIV_CONTENT').prepend(html);
                             
-                            $("#footer, #header").html(tabFooters[nav]);
+                            
+                            
                         }
-                    
-		function init() {
-			db = openDatabase("Equipe.fr", "1.0", "Items database", 200000);
-				function onError(tx, error) {
-					console.log(error.message);
-            	}
-			
-			
-			loadNavTab();
-			loadDiv();
-		}
+                    });
+                });
+                
+                // redimentionnement des images 
+                // Correction des images 
+                // Correction des images 
+                
+                loadFooter(type);
+                
+                /*					$('#DIV_CONTENT.img[src*=Medias]').each(		function () {
+                
+                 $(this).attr('width', 80); // .attr('src', 'http://img.lequipe.fr' + $(this).attr('src') ).
+                
+                 });
+                
+                 */
+                
+            }
+            
+            function readItem(id, itemId){
+                chrome.extension.getBackgroundPage().setReadItem(decodeURI(itemId));
+                $('#item' + id).hide().remove();
+            }
+            
+            function correctImg(html){
+                var i = html.indexOf("/Medias/");
+                if (i != -1) {
+                    html = html.substr(0, i) + 'http://img.lequipe.fr' + html.substr(i);
+                }
+                return html;
+            }
+            
+            function loadNavTab(){
+                var feeds = chrome.extension.getBackgroundPage().getFeedsList();
+                var feedName;
+                var navTab;
+                
+                for (var i = 0; i < feeds.length; i++) {
+                    if (typeof feeds[i] == "object") {
+                        feedName = feeds[i].key;
+                        if (feedName.indexOf("general") == 0) {
+                            navTab = '<a id="GENERAL" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Général</a>';
+                        }
+                        if (feedName.indexOf("foot") == 0) {
+                            navTab = '<a id="FOOT" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Football</a>';
+                        }
+                        if (feedName.indexOf("auto") == 0) {
+                            navTab = '<a id="AUTO" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Auto</a>';
+                        }
+                        if (feedName.indexOf("tennis") == 0) {
+                            navTab = '<a id="TENNIS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tennis</a>';
+                        }
+                        if (feedName.indexOf("rugby") == 0) {
+                            navTab = '<a id="RUGBY" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Rugby</a>';
+                        }
+                        if (feedName.indexOf("bhv") == 0) {
+                            navTab = '<a id="BHV" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Basket/Hand/Volley</a>';
+                        }
+                        if (feedName.indexOf("cyclisme") == 0) {
+                            navTab = '<a id="CYCLISME" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Cyclisme</a>';
+                        }
+                        if (feedName.indexOf("autre") == 0) {
+                            navTab = '<a id="AUTRES" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Autres</a>';
+                        }
+                        $('#nav').prepend(navTab);
+                    }
+                }
+                if (feeds.length > 0) 
+                    $('#nav').prepend('<a id="TOUS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tous</a>');
+            }
+            
+            function getDateEnFrancais(date){
+            
+                var newDate = "";
+                
+                laDate = new Date(date);
+                
+                var minutes = "" + laDate.getMinutes();
+                
+                minutes = minutes.length == 1 ? "0" + minutes : minutes;
+                
+                newDate = laDate.getHours() + "h" + minutes;
+                
+                return newDate;
+            }
+            
+            function loadFooter(nav){
+            
+                var tabFooters = new Array();
+                
+                tabFooters["GENERAL"] = "<a href=\"http://www.lequipe.fr\" target=\"_blank\">Plus d'infos >>></a>";
+                tabFooters["FOOT"] = "<a href=\"http://www.lequipe.fr/Football/index.html\" target=\"_blank\">Plus d'infos Football >>></a>";
+                tabFooters["AUTO"] = "<a href=\"http://www.lequipe.fr/Formule1/index.html\" target=\"_blank\">Plus d'infos Auto/Moto>>></a>";
+                tabFooters["TENNIS"] = "<a href=\"http://www.lequipe.fr/Tennis/index.html\" target=\"_blank\">Plus d'infos Tennis>>></a>";
+                tabFooters["RUGBY"] = "<a href=\"http://www.lequipe.fr/Rugby/index.html\" target=\"_blank\">Plus d'infos Rugby>>></a>";
+                tabFooters["BHV"] = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos Basket/Hand/Volley>>></a>";
+                tabFooters["CYCLISME"] = "<a href=\"http://www.lequipe.fr/Cyclisme/index.html\" target=\"_blank\">Plus d'infos Cyclisme>>></a>";
+                tabFooters["AUTRES"] = "<a href=\"http://www.lequipe.fr/Aussi/index.html\" target=\"_blank\">Plus d'infos Autres Sports>>></a>";
+                
+				$('#titreHeader').text(nav).parent().attr('class', nav);
+                $("#footer, #header").html(tabFooters[nav]);
+            }
+            
+            function init(){
+                db = openDatabase("Equipe.fr", "1.0", "Items database", 200000);
+                function onError(tx, error){
+                    console.log(error.message);
+                }
+                
+                
+                loadNavTab();
+                loadDiv();
+            }
         </script>
     </head>
     <body onload='init();'>
@@ -439,22 +638,44 @@
                 </div>
                 <div class="onglets">
                     <div id="nav" class="nav">
-                       
                     </div>
                 </div>
             </div>
         </div>
         <div id="content" class="content">
             <div class="DIV_RUBRIQUE">
-                <div class="ENTETE" style="background:#5A7984">
-                    <input type="button" onclick="chrome.extension.getBackgroundPage().setReadAllItems()" value="Tout marquer comme lu"></input>
+           
+			<div class="clear">
+                        </div>
+            <div class="allo_home">
+                <div id="allo_tt" class="TOUS" >
+                	<div id='titreHeader' class='titreHeader' > TOUS </div> 
+                	 <div id="header"></div>
                 </div>
-				<div id="header" ></div>
-                <div id="DIV_CONTENT">
-                </div>
-				<div id="footer" ></div>
+                <div class="allo_home_content">
+                    <div class="allo_home_scroll chain-element" id="DIV_CONTENT" style="top: 0px; ">
+                        
+                 </div>       
+                    </div>
+					<div class="clear">
+                        </div>
+                        <div class="nave">
+                        	 <span id="footer">
+                    		</span>
+                            <div id="back" onclick="scroll('DIV_CONTENT', '-')">
+                            </div>
+                            <div id="next" onclick="scroll('DIV_CONTENT', '+')">
+                            </div>
+							<span id="readAll" onclick="chrome.extension.getBackgroundPage().setReadAllItems()" >
+								Tout marquer comme lu
+                    		</span>
+							
+                </input>
+                        </div>
+					<div class="clear">
+                        </div>
+                   
                 
             </div>
-        </div>
-    </body>
-</html>
+            </body>
+        </html>
