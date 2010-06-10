@@ -52,6 +52,14 @@ span.lower {
 	font-size: .7em;
 	text-align: right
 }
+
+#DIV_CONTENT img {
+				
+				margin : 5px;
+			}
+#DIV_CONTENT {
+	clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px
+}
 </style>
 <script type="text/javascript">
 
@@ -84,13 +92,16 @@ function afficheInfo(type)
 
 function afficheItem(item)
 {
-	html = '<a href="'+item['url']+'" target="_blank"><b>'+item['type']+' :</b> '+item['title']+' </a>';
-									html += '<p>' + item['text'] + '</p>';
-									html += ' <div style="clear:both; height:1px; overflow:hidden; border-top:1px dotted #CCC; margin:2px 4px 2px 4px"></div>';
+	html = '<div class="Notification"><a href="'+item['url']+'" target="_blank" class="titre">'+item['type']+' :'+item['title']+' </a>';
+	html += '<div class="content">' + item['text'] + '</div>';
+	html += ' </div>';
     $('#DIV_CONTENT').html(html);
 	
 	// Correction des images 
-	$('img[src*=Medias]').attr('src', 'http://img.lequipe.fr' + $('img[src*=Medias]').attr('src') )
+	$('img[src*=Medias]').attr('src', 'http://img.lequipe.fr' + $('img[src*=Medias]').attr('src') ).attr('height', 60).attr('width', 60);
+	
+	
+	// lecture de l'item 
 }
 
 function afficheNext()
