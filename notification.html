@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>L'équipe.fr Notification</title>
+<title>L'quipe.fr Notification</title>
 <script type="text/javascript" src="jquery-1.4.2.js"></script>
 <meta http-equiv=Content-Type content="text/html; charset=utf-8">
 <style type="text/css">
@@ -71,6 +71,49 @@ span.lower {
 	color: #2244BB;
 	text-decoration: none;
 }
+
+#notif_nav {
+	background-image: 	url(http://img.lequipe.fr/img_v5/icones_png.png?20100527);
+background-position: 0px -623px;
+background-repeat: no-repeat;
+height: 15px;
+padding-left: 10px;
+padding-top: 1px;
+margin-botom: 0px;
+width: 98%;
+}
+
+#notif_nav a {
+	color: #565151;
+	float: left;
+	font-size: 11px;
+	font-weight: 700;
+	margin-right: 24px;
+}
+#notif_retour {
+	background-position: -166px -148px;
+	cursor: pointer;
+}
+
+#notif_retour, #notif_suite, .notif_pt_rouge, .notif_pt_gris {
+	background-image: url(http://www-ref.lequipe.fr/img_v5/icones_png.png?20100527);
+	float: left;
+	height: 15px;
+	width: 15px;
+}
+
+.notif_pt_gris {
+	background-position: -125px -148px;
+}
+
+.notif_pt_rouge {
+	background-position: -125px -148px;
+}
+
+#notif_suite {
+	background-position: -188px -148px;
+	cursor: pointer;
+}
 </style>
 <script type="text/javascript">
 
@@ -90,6 +133,18 @@ function afficheInfo(type)
             				    tx.executeSql("SELECT * FROM Items WHERE read = ? AND type = ?", [false, type], function(tx, result) {
 								
 								listItems = result.rows;
+								
+								for (var i = 0, item = null; i < result.rows.length; i++) {
+								item = result.rows.item(i);
+								
+								if (i < 5) {
+								
+									$('#listeUnread').prepend('<div id="notif_nav_'+i+'" class="notif_pt_gris" onclick="afficheItem('+i+')"></div>');
+								
+								}
+							}
+								
+								
             				     /* for (var i = 0, item = null; i < result.rows.length; i++) {
             				        item = result.rows.item(i);
 									console.log(item['title']);
@@ -106,6 +161,10 @@ function afficheItem(item)
 	html = '<div class="Notification"><a href="'+item['url']+'" target="_blank" class="titre">'+item['type']+' :'+item['title']+' </a>';
 	html += '<div class="content">' + item['text'] + '</div>';
 	html += ' </div>';
+	
+	
+	
+	
     $('#DIV_CONTENT').html(html);
 	
 	// Correction des images 
@@ -113,7 +172,27 @@ function afficheItem(item)
 	
 	
 	// lecture de l'item 
+	chrome.extension.getBackgroundPage().setReadItem(item['id']);
 }
+
+
+function loadFooter(nav){
+                        
+                            var tabFooters = new Array();
+                            
+                            tabFooters["tous"] = "<a href=\"http://www.lequipe.fr\" target=\"_blank\">Plus d'infos >>></a>";
+                            tabFooters["foot"] = "<a href=\"http://www.lequipe.fr/Football/index.html\" target=\"_blank\">Plus d'infos Football >>></a>";
+                            tabFooters["auto"] = "<a href=\"http://www.lequipe.fr/Formule1/index.html\" target=\"_blank\">Plus d'infos Auto/Moto>>></a>";
+                            tabFooters["tennis"] = "<a href=\"http://www.lequipe.fr/Tennis/index.html\" target=\"_blank\">Plus d'infos Tennis>>></a>";
+                            tabFooters["rugby"] = "<a href=\"http://www.lequipe.fr/Rugby/index.html\" target=\"_blank\">Plus d'infos Rugby>>></a>";
+                            tabFooters["bhv"] = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos Basket/Hand/Volley>>></a>";
+                            tabFooters["cyclisme"] = "<a href=\"http://www.lequipe.fr/Cyclisme/index.html\" target=\"_blank\">Plus d'infos Cyclisme>>></a>";
+                            tabFooters["autres"] = "<a href=\"http://www.lequipe.fr/Aussi/index.html\" target=\"_blank\">Plus d'infos Autres Sports>>></a>";
+                            
+                            $("#plusInfo").html(tabFooters[nav]);
+                        }
+						
+						
 
 function afficheNext()
 {
@@ -122,18 +201,43 @@ function afficheNext()
 	afficheItem(item);
 }
 
+function affichePrec()
+{
+	if (currentTabId != 0) currentTabId -= 1;
+	var item = listItems.item(currentTabId);
+	afficheItem(item);
+}
+
 function init () {
 	console.log(window.location.search);
 	var item = eval("a="+decodeURIComponent(window.location.search.substring(1)));
 	afficheItem(item);
+	loadFooter(item.type);
 	afficheInfo(item.type);
 }
+
+$('#notif_retour').click(function () {
+	afficheNext();
+});
+
+$('#notif_suite').click(function () {
+	affichePrec();
+});
+
 </script>
 </head>
 <body onload="init();">
 <div class='notification' id="DIV_CONTENT">
 <div class="content">Nouvelle alerte !</div>
 </div>
-<a href="javascript:afficheNext();return false;"> Suivant </a>
+<div id="notif_nav">  
+	<div id="plusInfo" ><a href="http://www.lequipe.fr" target="_blank">Plus d'infos >>></a></div>  
+	<div id="notif_retour" onclick="affichePrec();"></div>  
+	<div id="listeUnread" >
+		
+	</div>
+<div id="notif_suite" onclick="afficheNext();"></div>
+</div>
+
 </body>
 </html>
