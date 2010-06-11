@@ -3,11 +3,51 @@
 <script type="text/javascript" src="jquery-1.4.2.js"></script>
 <script type="text/javascript">
 var db;
-var log = document.getElementById('db-log');
-// The XMLHttpRequest object that tries to load and parse the feed.
-var req = false;
 
 db = openDatabase("Equipe.fr", "1.0", "Items database", 200000);
+
+var animationFrames = 36;
+var animationSpeed = 10; // ms
+var rotation = 0;
+var iconImage;
+
+function ease(x) {
+  return (1-Math.sin(Math.PI/2+x*Math.PI))/2;
+}
+
+function animateFlip() {
+    rotation += 1/animationFrames;
+    drawIconAtRotation();
+    if (rotation <= 1) {
+        setTimeout("animateFlip()", animationSpeed);
+    } else {
+        rotation = 0;
+        drawIconAtRotation();
+    }
+}
+
+function showIconImage() {
+    canvasContext.save();
+    canvasContext.clearRect(0, 0, 19, 19);
+    canvasContext.translate(19/2, 19/2);
+    canvasContext.drawImage(iconImage, -iconImage.width/2 - 1, -iconImage.height/2);
+    canvasContext.restore();
+    chrome.browserAction.setIcon({imageData:canvasContext.getImageData(0, 0, 19, 19)});
+    chrome.browserAction.setBadgeBackgroundColor({color:[255, 40, 40, 200]});
+    chrome.browserAction.setBadgeText({text:""});
+    unreadCount = -1;
+}
+
+function drawIconAtRotation() {
+    canvasContext.save();
+    canvasContext.clearRect(0, 0, 19, 19);
+    canvasContext.translate(19/2, 19/2);
+    canvasContext.rotate(2*Math.PI*ease(rotation));
+    canvasContext.drawImage(iconImage, -iconImage.width/2, -iconImage.height/2 );
+    canvasContext.restore();
+    chrome.browserAction.setIcon({imageData:canvasContext.getImageData(0, 0, 19, 19)});
+}
+
 
 function onError(tx, error) {
   console.log(error.message);
@@ -234,6 +274,7 @@ function notify(item) {
 function count() {
 	countUnread(function(n){
 		chrome.browserAction.setBadgeText({text :n.toString()});
+		animateFlip();
 	});
 }
 
@@ -260,6 +301,9 @@ var intervalID = 0;
 function init() {
 	createTable();
 	parseAllFeeds();
+	iconImage = $('#icon')[0];
+    canvasContext = $('#canvas')[0].getContext('2d');
+	showIconImage();
 	if (intervalID != 0) {
 		clearInterval(intervalID);
 	}
@@ -267,5 +311,8 @@ function init() {
 }
 </script>
 </head>
-<body onload="init();"></body>
+<body onload="init();">
+<img id="icon" src="equipe.png" />
+<canvas id="canvas" width="19" height="19" />
+</body>
 </html>
