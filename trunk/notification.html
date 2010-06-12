@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>L'quipe.fr Notification</title>
+<title>L'Equipe.fr Notification</title>
 <script type="text/javascript" src="jquery-1.4.2.js"></script>
 <meta http-equiv=Content-Type content="text/html; charset=utf-8">
 <style type="text/css">
@@ -13,10 +13,24 @@ a:hover {
 	text-decoration: underline;
 }
 
+#entete_titre {
+	padding-left : 5px;
+	
+}
+
+#entete_unread {
+	padding-right : 5px;
+	text-align: right;
+	float: right;
+}
+
 body {
 	color: black;
 	font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
+	margin: 0px; 
+	height : 90px; 
+	overflow: hidden;
 }
 
 h1 {
@@ -32,6 +46,59 @@ h2 {
 ul {
 	list-style-type: circle
 }
+
+ a#TOUS:hover, .tous {
+                background-color: #D60000 !important;
+                color: #FFF !important
+            }
+            
+            .general {
+                background-color: #D60000 !important;
+                color: #FFF !important
+            }
+			
+			 .video {
+                background-color: #EBEBEB !important;
+                color: #000 !important
+            }
+            
+            .foot {
+                background-color: #78A130 !important;
+                color: #FFF !important
+            }
+            
+            .auto {
+                background-color: #5A7984 !important;
+                color: #FFF !important
+            }
+            
+            .tennis {
+                background-color: #DB7141 !important;
+                color: #FFF !important
+            }
+            
+            .rugby {
+                background-color: #004C30 !important;
+                color: #FFF !important
+            }
+            
+                       
+            .bhv {
+                background-color: #000084 !important;
+                color: #FFF !important
+            }
+            
+            .cyclisme {
+                background-color: #BDB600 !important;
+                color: #FFF !important
+            }
+            
+            .autres {
+                background-color: #5AB6AD !important;
+                color: #FFF !important
+            }
+			
+			
 
 /* b { font-family: Arial, sans-serif; font-size: .9em }
 span.nagios { font-family: Arial, sans-serif; font-size: .9em } */
@@ -59,7 +126,15 @@ span.lower {
 				margin : 5px;
 			}
 #DIV_CONTENT {
-	height:80px; overflow:hidden;  margin:2px 4px 2px 4px
+	height:84px; 
+	overflow:hidden;  
+	margin:2px 4px 2px 4px
+}
+
+.content 
+{
+	width : 297px;
+	height: 70px;
 }
 
 .titre {
@@ -81,6 +156,7 @@ padding-left: 10px;
 padding-top: 1px;
 margin-botom: 0px;
 width: 98%;
+
 }
 
 #notif_nav a {
@@ -106,8 +182,9 @@ width: 98%;
 	background-position: -125px -148px;
 }
 
-.notif_pt_rouge {
-	background-position: -125px -148px;
+.notif_pt_rouge, .notif_pt_gris:hover {
+	background-position: -145px -148px;
+	cursor: hand;
 }
 
 #notif_suite {
@@ -119,6 +196,8 @@ width: 98%;
 
 var listItems; 
 var currentTabId = 0;
+var totalUnreadItem = 0;
+var currentUnreadItem = 0;
 
 function afficheInfo(type)
 {
@@ -133,18 +212,25 @@ function afficheInfo(type)
             				    tx.executeSql("SELECT * FROM Items WHERE read = ? AND type = ?", [false, type], function(tx, result) {
 								
 								listItems = result.rows;
+								totalUnreadItem = listItems.length;
+								currentUnreadItem = totalUnreadItem-1;
+								
+								$('#entete_unread').text(totalUnreadItem+' alertes non lus');
 								
 								for (var i = 0, item = null; i < result.rows.length; i++) {
 								item = result.rows.item(i);
 								
 								if (i < 5) {
 								
-									$('#listeUnread').prepend('<div id="notif_nav_'+i+'" class="notif_pt_gris" onclick="afficheItem('+i+')"></div>');
+									$('#listeUnread').append('<div id="notif_nav_'+i+'" class="notif_pt_gris" onclick="onclickAfficheItem(\''+i+'\')"></div>');
 								
 								}
+								
+								
+								
 							}
 								
-								
+								 $('#notif_nav_0').addClass('notif_pt_rouge');
             				     /* for (var i = 0, item = null; i < result.rows.length; i++) {
             				        item = result.rows.item(i);
 									console.log(item['title']);
@@ -156,9 +242,18 @@ function afficheInfo(type)
 							});
 }
 
+function onclickAfficheItem (num){
+	afficheItem(listItems.item(num));
+}
+
+
 function afficheItem(item)
 {
-	html = '<div class="Notification"><a href="'+item['url']+'" target="_blank" class="titre">'+item['type']+' :'+item['title']+' </a>';
+	 $('#DIV_CONTENT').slideUp();
+	
+	
+	
+	html = '<div class="Notification"><a href="'+item['url']+'" target="_blank" class="titre">'+item['title']+' </a>';
 	html += '<div class="content">' + item['text'] + '</div>';
 	html += ' </div>';
 	
@@ -167,43 +262,141 @@ function afficheItem(item)
 	
     $('#DIV_CONTENT').html(html);
 	
+	 $('#DIV_CONTENT').slideDown();
+	
+	
 	// Correction des images 
 	$('img[src*=Medias]').attr('src', 'http://img.lequipe.fr' + $('img[src*=Medias]').attr('src') ).attr('height', 60).attr('width', 60);
 	
 	
 	// lecture de l'item 
 	chrome.extension.getBackgroundPage().setReadItem(item['id']);
+	
+	$('#entete_unread').text(currentUnreadItem+' alertes non lus');
+	$('.notif_pt_rouge').removeClass('notif_pt_rouge');
+	$('#notif_nav_'+currentTabId).addClass('notif_pt_rouge');
 }
 
 
-function loadFooter(nav){
+function loadFooter(nav)
+{
+	
+	
                         
-                            var tabFooters = new Array();
-                            
-                            tabFooters["tous"] = "<a href=\"http://www.lequipe.fr\" target=\"_blank\">Plus d'infos >>></a>";
-                            tabFooters["foot"] = "<a href=\"http://www.lequipe.fr/Football/index.html\" target=\"_blank\">Plus d'infos Football >>></a>";
-                            tabFooters["auto"] = "<a href=\"http://www.lequipe.fr/Formule1/index.html\" target=\"_blank\">Plus d'infos Auto/Moto>>></a>";
-                            tabFooters["tennis"] = "<a href=\"http://www.lequipe.fr/Tennis/index.html\" target=\"_blank\">Plus d'infos Tennis>>></a>";
-                            tabFooters["rugby"] = "<a href=\"http://www.lequipe.fr/Rugby/index.html\" target=\"_blank\">Plus d'infos Rugby>>></a>";
-                            tabFooters["bhv"] = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos Basket/Hand/Volley>>></a>";
-                            tabFooters["cyclisme"] = "<a href=\"http://www.lequipe.fr/Cyclisme/index.html\" target=\"_blank\">Plus d'infos Cyclisme>>></a>";
-                            tabFooters["autres"] = "<a href=\"http://www.lequipe.fr/Aussi/index.html\" target=\"_blank\">Plus d'infos Autres Sports>>></a>";
-                            
-                            $("#plusInfo").html(tabFooters[nav]);
-                        }
+        var tabFooters;
+        switch(nav) {
+			case "video": 
+				 tabFooters  = "<a href=\"http://videos.lequipe.fr\" target=\"_blank\">Plus de video >>></a>";
+				break;
+			case "general": ;
+			case "tous":
+			     tabFooters  = "<a href=\"http://www.lequipe.fr\" target=\"_blank\">Plus d'infos >>></a>";
+				break;
+			case "foot":
+			     tabFooters  = "<a href=\"http://www.lequipe.fr/Football/index.html\" target=\"_blank\">Plus d'infos Football >>></a>";
+				break;
+			case "auto_auto_moto": ;
+			case "moto": ;
+			case "rallye" : ;
+			case "auto":
+			     tabFooters  = "<a href=\"http://www.lequipe.fr/Formule1/index.html\" target=\"_blank\">Plus d'infos Auto/Moto>>></a>";
+				break;
+			case "tenis" : ;
+			case "golf" : ;
+			case "tennis":
+			     tabFooters  = "<a href=\"http://www.lequipe.fr/Tennis/index.html\" target=\"_blank\">Plus d'infos Tennis>>></a>";
+				break;
+			case "rugby":
+			     tabFooters  = "<a href=\"http://www.lequipe.fr/Rugby/index.html\" target=\"_blank\">Plus d'infos Rugby>>></a>";
+				break;
+			case "bhv_basket" : ;
+			case "volley" :;
+			case "hand": ;
+			case "bhv":
+			     tabFooters  = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos Basket/Hand/Volley>>></a>";
+				break;
+			case "cyclisme":
+			     tabFooters  = "<a href=\"http://www.lequipe.fr/Cyclisme/index.html\" target=\"_blank\">Plus d'infos Cyclisme>>></a>";
+				break;
+			default: 
+				tabFooters = "<a href=\"http://www.lequipe.fr/Aussi/index.html\" target=\"_blank\">Plus d'infos Autres Sports>>></a>";
+		}      
+        
+        $("#plusInfo").html(tabFooters);
+}
+
+function loadHeader(nav){
+                        
+        var tabHeader;
+        switch(nav) {
+			case "video": 
+				 tabHeader  = "Videos";
+				 classheader = "video";
+				break;
+			case "general": ;
+			case "tous":
+			     tabHeader  = "Tous";
+				  classheader = "video";
+				break;
+			case "foot":
+			     tabHeader  = "Football";
+				  classheader = "foot";
+				break;
+			case "auto_auto_moto": ;
+			case "moto": ;
+			case "rallye" : ;
+			case "auto":
+			     tabHeader  = "Auto/Moto";
+				  classheader = "auto";
+				break;
+			case "tenis" : ;
+			case "golf" : ;
+			case "tennis":
+			     tabHeader  = "Tennis/Golf";
+				  classheader = "tennis";
+				break;
+			case "rugby":
+			     tabHeader  = "Rugby";
+				  classheader = "rugby";
+				break;
+			case "bhv_basket" : ;
+			case "volley" :;
+			case "hand": ;
+			case "bhv":
+			     tabHeader  = "Basket/Hand/Volley";
+				  classheader = "bhv";
+				break;
+			case "cyclisme":
+			     tabHeader  = "Cyclisme";
+				  classheader = "cyclisme";
+				break;
+			default: 
+				tabHeader = "Autres Sports";
+				 classheader = "autres";
+		}      
+        
+       
+        
+        $("#entete_titre").text(tabHeader).parent().addClass(classheader);
+ }
 						
 						
 
 function afficheNext()
 {
-	currentTabId += 1;
+	if (currentTabId <= totalUnreadItem) 
+	{
+		currentTabId += 1;
+		if (currentUnreadItem > 0) currentUnreadItem--;
+	}
+		
 	var item = listItems.item(currentTabId);
 	afficheItem(item);
 }
 
 function affichePrec()
 {
-	if (currentTabId != 0) currentTabId -= 1;
+	if (currentTabId > 0) currentTabId -= 1;
 	var item = listItems.item(currentTabId);
 	afficheItem(item);
 }
@@ -213,6 +406,7 @@ function init () {
 	var item = eval("a="+decodeURIComponent(window.location.search.substring(1)));
 	afficheItem(item);
 	loadFooter(item.type);
+	loadHeader(item.type);
 	afficheInfo(item.type);
 }
 
@@ -227,16 +421,20 @@ $('#notif_suite').click(function () {
 </script>
 </head>
 <body onload="init();">
+<div class="entete tous" >
+	<span id="entete_titre">Tous </span>
+	<span id="entete_unread"></span>
+</div>
 <div class='notification' id="DIV_CONTENT">
 <div class="content">Nouvelle alerte !</div>
 </div>
 <div id="notif_nav">  
-	<div id="plusInfo" ><a href="http://www.lequipe.fr" target="_blank">Plus d'infos >>></a></div>  
-	<div id="notif_retour" onclick="affichePrec();"></div>  
-	<div id="listeUnread" >
-		
+	<div id="plusInfo" ><a href="http://www.lequipe.fr" target="_blank">Plus d'infos >>></a></div>
+	<div id="navigation" >  
+			<div id="notif_retour" onclick="affichePrec();"></div>  
+			<div id="listeUnread" ></div>
+			<div id="notif_suite" onclick="afficheNext();"></div>
 	</div>
-<div id="notif_suite" onclick="afficheNext();"></div>
 </div>
 
 </body>
