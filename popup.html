@@ -105,32 +105,32 @@
                 font-weight: bold
             }
             
-            a#TOUS:hover, .TOUS {
+            a#TOUS:hover, .TOUS, a.selected#TOUS {
                 background-color: #D60000 !important;
                 color: #FFF !important
             }
             
-            a#GENERAL:hover, .GENERAL {
+            a#GENERAL:hover, .GENERAL, a.selected#GENERAL {
                 background-color: #D60000 !important;
                 color: #FFF !important
             }
             
-            a#FOOT:hover, .FOOT {
+            a#FOOT:hover, .FOOT, a.selected#FOOT {
                 background-color: #78A130 !important;
                 color: #FFF !important
             }
             
-            a#AUTO:hover, .AUTO {
+            a#AUTO:hover, .AUTO, a.selected#AUTO {
                 background-color: #5A7984 !important;
                 color: #FFF !important
             }
             
-            a#TENNIS:hover, .TENNIS {
+            a#TENNIS:hover, .TENNIS, a.selected#TENNIS {
                 background-color: #DB7141 !important;
                 color: #FFF !important
             }
             
-            a#RUGBY:hover, .RUGBY {
+            a#RUGBY:hover, .RUGBY, a.selected#RUGBY {
                 background-color: #004C30 !important;
                 color: #FFF !important
             }
@@ -140,17 +140,17 @@
                 color: #FFF !important
             }
             
-            a#BHV:hover, .BHV {
+            a#BHV:hover, .BHV, a.selected#BHV {
                 background-color: #000084 !important;
                 color: #FFF !important
             }
             
-            a#CYCLISME:hover, .CYCLISME {
+            a#CYCLISME:hover, .CYCLISME, a.selected#CYCLISME {
                 background-color: #BDB600 !important;
                 color: #FFF !important
             }
             
-            a#AUTRES:hover, .AUTRES {
+            a#AUTRES:hover, .AUTRES, a.selected#AUTRES {
                 background-color: #5AB6AD !important;
                 color: #FFF !important
             }
@@ -231,11 +231,10 @@
             
             .DIV_RUBRIQUE {
                 float: left;
-                width: 98%;
-                border: 1px #EBEBEB solid;
+                width: 100%;
                 margin: 0px;
                 overflow: hidden;
-                padding: 5px;
+                padding-op: 5px;
                 background-color: white;
             }
             
@@ -281,6 +280,9 @@
 			
 			#header {
 				text-align: right;
+				margin-top: 6px;
+				padding-right: 2px;
+				float: right;
 			}
             
             .allo_home_content {
@@ -394,6 +396,12 @@
             .allo_home .nave {
                 margin-top: -1px
             }
+			
+			.titreHeader {
+				margin-top: 4px;
+				float: left;
+				padding-left: 2px;
+			}
         </style>
         <script type="text/javascript">
             var db;
@@ -604,9 +612,9 @@ if (widthTot - widthElmt > 10)
                 
                 return newDate;
             }
-            
+            var lastNav = "";
             function loadFooter(nav){
-            
+				
                 var tabFooters = new Array();
                 
                 tabFooters["GENERAL"] = "<a href=\"http://www.lequipe.fr\" target=\"_blank\">Plus d'infos >>></a>";
@@ -619,6 +627,11 @@ if (widthTot - widthElmt > 10)
                 tabFooters["AUTRES"] = "<a href=\"http://www.lequipe.fr/Aussi/index.html\" target=\"_blank\">Plus d'infos Autres Sports>>></a>";
                 
 				$('#titreHeader').text(nav).parent().attr('class', nav);
+				if (lastNav) {
+					$('#' + lastNav).removeClass("selected");
+				}
+				$('#' + nav).addClass("selected");
+				lastNav = nav;
                 $("#footer, #header").html(tabFooters[nav]);
             }
             
