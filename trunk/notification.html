@@ -3,6 +3,7 @@
 <head>
 <title>L'Equipe.fr Notification</title>
 <script type="text/javascript" src="jquery-1.4.2.js"></script>
+<script type="text/javascript" src="jquery-ui-1.8.2.custom.min.js"></script>
 <meta http-equiv=Content-Type content="text/html; charset=utf-8">
 <style type="text/css">
 a {
@@ -180,6 +181,7 @@ width: 98%;
 
 .notif_pt_gris {
 	background-position: -125px -148px;
+	cursor: hand;
 }
 
 .notif_pt_rouge, .notif_pt_gris:hover {
@@ -222,7 +224,7 @@ function afficheInfo(type)
 								
 								if (i < 5) {
 								
-									$('#listeUnread').append('<div id="notif_nav_'+i+'" class="notif_pt_gris" onclick="onclickAfficheItem(\''+i+'\')"></div>');
+									$('#listeUnread').append('<div id="notif_nav_'+i+'" class="notif_pt_gris" onclick="onclickAfficheItem('+i+')"></div>');
 								
 								}
 								
@@ -247,9 +249,14 @@ function onclickAfficheItem (num){
 }
 
 
-function afficheItem(item)
+function afficheItem(item, directionAnim)
 {
-	 $('#DIV_CONTENT').slideUp();
+	if (directionAnim == null) directionAnim = "left";
+	
+	if (directionAnim == 'right')
+		$('#DIV_CONTENT').hide("slide", { direction: 'right' }, 300);
+	else if (directionAnim != 'begin')
+		$('#DIV_CONTENT').hide("slide", { direction: 'left' }, 300);
 	
 	
 	
@@ -262,7 +269,13 @@ function afficheItem(item)
 	
     $('#DIV_CONTENT').html(html);
 	
-	 $('#DIV_CONTENT').slideDown();
+	
+	if (directionAnim == 'right')
+		$('#DIV_CONTENT').show("slide", { direction: 'left' }, 300);
+	else 
+		$('#DIV_CONTENT').show("slide", { direction: 'right' }, 300);
+		
+	 
 	
 	
 	// Correction des images 
@@ -398,13 +411,13 @@ function affichePrec()
 {
 	if (currentTabId > 0) currentTabId -= 1;
 	var item = listItems.item(currentTabId);
-	afficheItem(item);
+	afficheItem(item, "right");
 }
 
 function init () {
 	console.log(window.location.search);
 	var item = eval("a="+decodeURIComponent(window.location.search.substring(1)));
-	afficheItem(item);
+	afficheItem(item, 'begin');
 	loadFooter(item.type);
 	loadHeader(item.type);
 	afficheInfo(item.type);
@@ -425,9 +438,11 @@ $('#notif_suite').click(function () {
 	<span id="entete_titre">Tous </span>
 	<span id="entete_unread"></span>
 </div>
+
 <div class='notification' id="DIV_CONTENT">
-<div class="content">Nouvelle alerte !</div>
+<div class="content" id="content">Nouvelle alerte !</div>
 </div>
+
 <div id="notif_nav">  
 	<div id="plusInfo" ><a href="http://www.lequipe.fr" target="_blank">Plus d'infos >>></a></div>
 	<div id="navigation" >  
