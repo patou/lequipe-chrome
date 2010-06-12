@@ -406,7 +406,6 @@
 			.item {
 				margin: 0px;
 				padding-bottom: 10px;
-				background: url(images/background.png) repeat-x bottom;
 				border:2px solid #FFFFFF;
 				-webkit-border-radius: 3px;
 				border-radius: 3px;
@@ -709,9 +708,9 @@ if (widthTot - widthElmt > 10)
                             </div>
                             <div id="next" onclick="scroll('DIV_CONTENT', '+')">
                             </div>
-							<span id="readAll" onclick="chrome.extension.getBackgroundPage().setReadAllItems()" >
+							<a id="readAll" href="#" onclick="chrome.extension.getBackgroundPage().setReadAllItems(); return false;" >
 								Tout marquer comme lu
-                    		</span>
+                    		</a>
 							
                 </input>
                         </div>
