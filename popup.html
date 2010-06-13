@@ -471,8 +471,10 @@
                 margin: 0px 10px 0px 10px;
                 padding: 15px 0px 0px 15px;
 				text-align: center;
-
+				
             }
+			
+			
             
             .sc2 {
                 background-position: -89px 0px;
@@ -547,6 +549,10 @@
 			.tennis_table td {
 				width: 50px;
 				
+			}
+			
+			.logo1 img, .logo2 img {
+				width: 55px !important;
 			}
         </style>
         <script type="text/javascript">
@@ -764,7 +770,7 @@
 				
 				
 				html =  '<div class="logo1"> <a href="http://www.lequipe.fr/Tennis/TFJM_'+item['id1']+'.html" target="_blank" class="eq1">';
-				html += '<img src="http://img.lequipe.fr/Tennis/photos/TennisImage'+item['id1']+'.jpg" height="70px" width="35px" />';
+				html += '<img src="http://img.lequipe.fr/Tennis/photos/TennisImage'+item['id1']+'.jpg" />';
 				html += '<br/>'+item['equipe_1']+'</a></div>';
 				
 				
@@ -775,7 +781,7 @@
 				
 					html += item['temps']+'</div>';
 					
-					if (item['score']!= '-')
+					if (item['score']!= '')
 					{
 						var score = item['score'].split(' ');
 						html += '<table class="tennis_table">';
@@ -792,7 +798,7 @@
 				html += '</div>';
 				
 				html +=  '<div class="logo2"> <a href="http://www.lequipe.fr/Tennis/TFJM_'+item['id2']+'.html" target="_blank" class="eq2">';
-				html += '<img src="http://img.lequipe.fr/Tennis/photos/TennisImage'+item['id2']+'.jpg" height="70px" width="35px" />';
+				html += '<img src="http://img.lequipe.fr/Tennis/photos/TennisImage'+item['id2']+'.jpg" />';
 				html += '<br/>'+item['equipe_2']+'</a></div>';
 				
 				return html;
