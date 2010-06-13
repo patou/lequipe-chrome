@@ -159,7 +159,11 @@ function getFeedsList() {
 	for(var i = 0; i < localStorage.length; i++) {
 		feedName = localStorage.key(i);
 		if(feedName.charAt(0) != '_') {
-		  feeds[i] = {key: feedName, value: localStorage.getItem(feedName)};
+		  feeds[i] = {
+				key: feedName, 
+				value: localStorage.getItem(feedName),
+				notification: localStorage.getItem("_" + feedName + "_notification") == "true" ? true : false
+		  };
 		}
 	 }
 	 return feeds;
@@ -167,18 +171,57 @@ function getFeedsList() {
 
 // Parseurs
 function parseAllFeeds() {
-  var feedName;
   var feeds = getFeedsList(); 
   for(var i = 0; i < feeds.length; i++) {
-	  if (typeof feeds[i] == "object") {
-		feedName = feeds[i].key;
+	  if (typeof feeds[i] == "object" && feeds[i].value.indexOf("http://") == 0) {
+		var feedName = feeds[i];
 		console.log(feeds[i].value);
-		parse(feedName, feeds[i].value);
+		loadUrl(feeds[i].value, function (req) {
+			handleResponse(req, feedName);
+		});
 	  }
   }
 }
 
-function parse(name, url) {
+//date="samedi 12/06" heure="13:30" sport="FOOT" competition="Coupe du Monde" journee="Groupe B 1ère j." equipe_1="COREE DU SUD" equipe_2="GRECE" score="2-0" statut="T" temps="Term." lien="/Football/directs/Live190774.html" lieu="" id1="636" id2="155"
+
+function getAllLive(fct) {
+	loadUrl("http://www-ref.lequipe.fr/Xml/Directs41.xml", function (req) {
+		var items = [];
+		var doc = req.responseXML;
+		if (!doc) {
+			 console.log("live feed.");
+			 console.log(req);
+			return;
+		}
+		$(doc).find("live").each(function(index, element) {
+			var e = $(this);
+			var item = {
+				id: e.attr("lien"),
+				date: e.attr("date"),
+				heure: e.attr("heure"),
+				sport: e.attr("sport"),
+				competition: e.attr("competition"),
+				journee: e.attr("journee"),
+				equipe_1: e.attr("equipe_1"),
+				equipe_2: e.attr("equipe_2"),
+				id1: e.attr("id1"),
+				id2: e.attr("id2"),
+				score: e.attr("score"),
+				statut: e.attr("statut"),
+				temps: e.attr("temps"),
+				lien: "http://www-ref.lequipe.fr" + e.attr("lien"),
+				lieu: e.attr("lieu")
+			};
+			items.push(item);
+		});
+		if (fct) {
+			fct(items);
+		}
+	});
+}
+
+function loadUrl(url, fct) {
   var req;
   try {
 	req = new XMLHttpRequest();
@@ -187,7 +230,7 @@ function parse(name, url) {
   }
   if(req) {
     req.onload = function () {
-        handleResponse(req, name);
+        fct(req);
     };
     req.onerror = handleError;
     req.open("GET", url, true);
@@ -214,12 +257,21 @@ function handleResponse(req, name) {
   
 }
 
+function getUniqueUrl(url) {
+	var index = url.lastIndexOf("http://");
+	if (index > 0) {
+		return url.substring(index);
+	}
+	return url;
+}
+
 function xmlParser(doc) {
   var i = 0;
   var itemList = [];
   $(doc).find("item").each(function() {
     var item = $(this);
     var itemToAdd = {
+	  id: getUniqueUrl(item.find("link").text()),
 	  title: item.find("title").text(),
 	  link: item.find("link").text(),
 	  description: item.find("description").text(),
@@ -250,7 +302,7 @@ function stripHtml(htmlString){
 
 
 function notify(item) {
-	if (localStorage["__notification"]) {
+	if (localStorage["__notification"] == "true" && webkitNotifications) {
 		console.log(item);
 		// mise en texte simple de item.text:
 		var text = stripHtml(item.text);
@@ -280,7 +332,7 @@ function count() {
 
 function insertItemList(name, itemList) {
   for (var i = 0, j = itemList.length; i < j; i++) {
-    newRecord(itemList[i].link, itemList[i].title, itemList[i].link, name, itemList[i].description, false, i < 1 ? notify : count);
+    newRecord(itemList[i].id, itemList[i].title, itemList[i].link, name.key, itemList[i].description, false, (i < 1 && name.notification) ? notify : count);
   }
 }
 
@@ -313,6 +365,6 @@ function init() {
 </head>
 <body onload="init();">
 <img id="icon" src="equipe.png" />
-<canvas id="canvas" width="19" height="19" />
+<canvas id="canvas" width="19" height="19"></canvas>
 </body>
 </html>
