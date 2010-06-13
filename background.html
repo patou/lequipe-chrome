@@ -222,6 +222,11 @@ function notifyLive(lastLive, newLive) {
   	  newLive.sport + ": " + newLive.competition,  // notification title
   	  newLive.equipe_1 + " " + newLive.score + " " + newLive.equipe_2 + "\n" + newLive.temps + " (" + newLive.statut + ")"  // notification body text
   	);
+	notification.ondisplay = function () {
+		setTimeout(function() { 
+			notification.cancel();
+		}, 2000);
+	};
 	notification.show();
 }
 
