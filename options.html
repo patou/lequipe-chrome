@@ -58,6 +58,7 @@ label.flux_label {
 	margin-right; 8px;
 }
 </style>
+<script type="text/javascript" src="jquery-1.4.2.js"></script>
 <script>
 function save_flux(e) {
 	var checkbox = e.target;
@@ -67,6 +68,17 @@ function save_flux(e) {
 	}
 	else {
 		localStorage.removeItem(checkbox.name);
+	}
+	if (checkbox.name.charAt(0) != "_") {
+		var checked = checkbox.checked && document.getElementById("__notification").checked;
+		document.getElementById("_"+checkbox.name+"_notification").checked = checked;
+		if (checked) {
+			localStorage["_"+checkbox.name+"_notification"] = checked;
+		}
+		else {
+			localStorage.removeItem("_"+checkbox.name+"_notification");
+		}
+		
 	}
 	chrome.extension.getBackgroundPage().init();
 }
@@ -83,6 +95,7 @@ function restore_options() {
 		else {
 			checkbox.checked = false;
 		}
+		checkbox.onchange = save_flux;
 		checkbox.onclick = save_flux;
 	}
   }
@@ -103,6 +116,24 @@ function restore_options() {
 	localStorage["__rafraichissement"] = option.value;
 	chrome.extension.getBackgroundPage().init();
   }
+  $("input#__notification").click(function(){
+		var checked = $(this).attr("checked");
+		console.log(checked);
+		$(":checkbox:checked").each(function() {
+			var el = $(this);
+			var name = el.attr("name");
+			if (name && name.charAt(0) != '_') {
+				document.getElementById("_"+name+"_notification").checked = checked;
+				if (checked) {
+					localStorage["_"+name+"_notification"] = checked;
+				}
+				else {
+					localStorage.removeItem("_"+name+"_notification");
+				}			
+				console.log(name);
+			}
+		});
+  });
 }
 
 function deleteDb() {
@@ -118,151 +149,157 @@ function deleteDb() {
 <div style="clear:both"></div>
 <label class="flux_label rss"
 	style="background-color: #D60000;"
-><input type="checkbox" name="general_tous"
+><input type="checkbox" name="general_tous" id="general_tous"
 	value="http://www-ref.lequipe.fr/Xml/actu_rss.xml"
-/>Flux Rss <b>Général</b> - tous sports <input type="checkbox" name="_general_tous_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Général</b> - tous sports <input type="checkbox" name="_general_tous_notification"  id="_general_tous_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #EBEBEB; color: #000;"
-><input type="checkbox" name="general_video"
+><input type="checkbox" name="general_video"  id="general_video"
 	value="http://www-ref.lequipe.fr/Xml/videos_rss.xml"
-/>Flux des <b>vidéos</b> de l'Equipe.fr <input type="checkbox" name="_general_video_notification" value="true" class="flux_notification"/></label>
+/>Flux des <b>vidéos</b> de l'Equipe.fr <input type="checkbox" name="_general_video_notification"  id="_general_video_notification" value="true" class="flux_notification"/></label>
 <div class="section"><label class="flux_label rss"
 	style="background-color: #639210;"
-><input type="checkbox" name="foot"
+><input type="checkbox" name="foot"  id="foot"
 	value="http://www-ref.lequipe.fr/Xml/Football/Titres/actu_rss.xml"
-/>Flux Rss <b>Football</b> <input type="checkbox" name="_foot_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Football</b> <input type="checkbox" name="_foot_notification"  id="_foot_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #7AB114;"
-><input type="checkbox" name="foot_trf"
+><input type="checkbox" name="foot_trf"  id="foot_trf"
 	value="http://www-ref.lequipe.fr/Xml/Football/Titres/actu_TRF_rss.xml"
-/>Flux Rss Football - <b>Transferts</b> <input type="checkbox" name="_foot_trf_notification" value="true" class="flux_notification"/>
+/>Flux Rss Football - <b>Transferts</b> <input type="checkbox" name="_foot_trf_notification"  id="_foot_trf_notification" value="true" class="flux_notification"/>
 </label></div>
 <div class="section"><label class="flux_label rss"
 	style="background-color: #5a7984;"
-><input type="checkbox" name="auto_auto_moto"
+><input type="checkbox" name="auto_auto_moto"  id="auto_auto_moto"
 	value="http://www-ref.lequipe.fr/Xml/Formule1/Titres/actu_rss.xml"
-/>Flux Rss <b>Auto - Moto</b> <input type="checkbox" name="_auto_auto_moto_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Auto - Moto</b> <input type="checkbox" name="_auto_auto_moto_notification" id="_auto_auto_moto_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #7898A3;"
-><input type="checkbox" name="auto_formule1"
+><input type="checkbox" name="auto_formule1"  id="auto_formule1"
 	value="http://www-ref.lequipe.fr/Xml/Formule1/Titres/actu_rss_F1.xml"
-/>Flux Rss <b>Formule 1</b> <input type="checkbox" name="_auto_formule1_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Formule 1</b> <input type="checkbox" name="_auto_formule1_notification"  id="_auto_formule1_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #7898A3;"
-><input type="checkbox" name="auto_rallye"
+><input type="checkbox" name="auto_rallye"  id="auto_rallye"
 	value="http://www-ref.lequipe.fr/Xml/Formule1/Titres/actu_rss_Rallye.xml"
-/>Flux Rss <b>Rallye</b> <input type="checkbox" name="_auto_rallye_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Rallye</b> <input type="checkbox" name="_auto_rallye_notification"  id="_auto_rallye_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #7898A3;"
-><input type="checkbox" name="auto_moto"
+><input type="checkbox" name="auto_moto"  id="auto_moto"
 	value="http://www-ref.lequipe.fr/Xml/Formule1/Titres/actu_rss_Moto.xml"
-/>Flux Rss <b>Moto</b> <input type="checkbox" name="_auto_moto_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Moto</b> <input type="checkbox" name="_auto_moto_notification"  id="_auto_moto_notification" value="true" class="flux_notification"/>
 </label></div>
 <div class="section"><label class="flux_label rss"
 	style="background-color: #C65121;"
-><input type="checkbox" name="tennis"
+><input type="checkbox" name="tennis"  id="tennis"
 	value="http://www-ref.lequipe.fr/Xml/Tennis/Titres/actu_rss_Tennis.xml"
-/>Flux Rss <b>Tennis</b> <input type="checkbox" name="_tennis_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Tennis</b> <input type="checkbox" name="_tennis_notification"  id="_tennis_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #C65121;"
-><input type="checkbox" name="tennis_golf"
+><input type="checkbox" name="tennis_golf"  id="tennis_golf"
 	value="http://www-ref.lequipe.fr/Xml/Tennis/Titres/actu_rss_Golf.xml"
-/>Flux Rss <b>Golf</b> <input type="checkbox" name="_tennis_golf_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Golf</b> <input type="checkbox" name="_tennis_golf_notification"  id="_tennis_golf_notification" value="true" class="flux_notification"/>
 </label></div>
 <div class="section"><label class="flux_label rss"
 	style="background-color: #0F4C30;"
-><input type="checkbox" name="rugby"
+><input type="checkbox" name="rugby"  id="rugby"
 	value="http://www-ref.lequipe.fr/Xml/Rugby/Titres/actu_rss.xml"
-/>Flux Rss <b>Rugby</b> <input type="checkbox" name="_rugby_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Rugby</b> <input type="checkbox" name="_rugby_notification"  id="_rugby_notification" value="true" class="flux_notification"/>
 </label></div>
 <div class="section"><label class="flux_label rss"
 	style="background-color: #000084;"
-><input type="checkbox" name="bhv_basket"
+><input type="checkbox" name="bhv_basket"  id="bhv_basket"
 	value="http://www-ref.lequipe.fr/Xml/Basket/Titres/actu_rss_Basket.xml"
-/>Flux Rss <b>Basket</b> <input type="checkbox" name="_bhv_basket_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Basket</b> <input type="checkbox" name="_bhv_basket_notification"  id="_bhv_basket_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #000084;"
-><input type="checkbox" name="bhv_hand"
+><input type="checkbox" name="bhv_hand"  id="bhv_hand"
 	value="http://www-ref.lequipe.fr/Xml/Basket/Titres/actu_rss_Hand.xml"
-/>Flux Rss <b>Hand</b> <input type="checkbox" name="_bhv_hand_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Hand</b> <input type="checkbox" name="_bhv_hand_notification"  id="_bhv_hand_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #000084;"
-><input type="checkbox" name="bhv_volley"
+><input type="checkbox" name="bhv_volley"  id="bhv_volley"
 	value="http://www-ref.lequipe.fr/Xml/Basket/Titres/actu_rss_Volley.xml"
-/>Flux Rss <b>Volley</b> <input type="checkbox" name="_bhv_volley_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Volley</b> <input type="checkbox" name="_bhv_volley_notification"  id="_bhv_volley_notification" value="true" class="flux_notification"/>
 </label></div>
 <div class="section"><label class="flux_label rss"
 	style="background-color: #BDB600;"
-><input type="checkbox" name="cyclisme"
+><input type="checkbox" name="cyclisme"  id="cyclisme"
 	value="http://www-ref.lequipe.fr/Xml/Cyclisme/Titres/actu_rss.xml"
-/>Flux Rss <b>Cyclisme</b> <input type="checkbox" name="_cyclisme_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Cyclisme</b> <input type="checkbox" name="_cyclisme_notification"  id="_cyclisme_notification" value="true" class="flux_notification"/>
 </label></div>
 <div class="section"><label class="flux_label rss"
 	style="background-color: #59B6AD;"
-><input type="checkbox" name="autre_judo"
+><input type="checkbox" name="autre_judo"  id="autre_judo"
 	value="http://www-ref.lequipe.fr/Xml/Aussi/Titres/actu_rss_Judo.xml"
-/>Flux Rss <b>Judo</b> <input type="checkbox" name="_autre_judo_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Judo</b> <input type="checkbox" name="_autre_judo_notification"  id="_autre_judo_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #59B6AD;"
-><input type="checkbox" name="autre_ski"
+><input type="checkbox" name="autre_ski"  id="autre_ski"
 	value="http://www-ref.lequipe.fr/Xml/Ski/Titres/actu_rss_Ski.xml"
-/>Flux Rss <b>Ski</b> <input type="checkbox" name="_autre_ski_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Ski</b> <input type="checkbox" name="_autre_ski_notification" id="_autre_ski_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #59B6AD;"
-><input type="checkbox" name="autre_athletisme"
+><input type="checkbox" name="autre_athletisme"  id="autre_athletisme"
 	value="http://www-ref.lequipe.fr/Xml/Aussi/Titres/actu_rss_Athletisme.xml"
-/>Flux Rss <b>Athlétisme</b> <input type="checkbox" name="_autre_athletisme_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Athlétisme</b> <input type="checkbox" name="_autre_athletisme_notification" id="_autre_athletisme_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #59B6AD;"
-><input type="checkbox" name="autre_voile"
+><input type="checkbox" name="autre_voile"  id="autre_voile"
 	value="http://www-ref.lequipe.fr/Xml/Aussi/Titres/actu_rss_Voile.xml"
-/>Flux Rss <b>Voile</b> <input type="checkbox" name="_autre_voile_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Voile</b> <input type="checkbox" name="_autre_voile_notification" id="_autre_voile_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #59B6AD;"
-><input type="checkbox" name="autre_natation"
+><input type="checkbox" name="autre_natation"  id="autre_natation"
 	value="http://www-ref.lequipe.fr/Xml/Aussi/Titres/actu_rss_Natation.xml"
-/>Flux Rss <b>Natation</b> <input type="checkbox" name="_autre_natation_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Natation</b> <input type="checkbox" name="_autre_natation_notification" id="_autre_natation_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label rss"
 	style="background-color: #59B6AD;"
-><input type="checkbox" name="autre_escrime"
+><input type="checkbox" name="autre_escrime"  id="autre_escrime"
 	value="http://www-ref.lequipe.fr/Xml/Aussi/Titres/actu_rss_Natation.xml"
-/>Flux Rss <b>Escrime</b> <input type="checkbox" name="_autre_escrime_notification" value="true" class="flux_notification"/>
+/>Flux Rss <b>Escrime</b> <input type="checkbox" name="_autre_escrime_notification"  id="_autre_escrime_notification" value="true" class="flux_notification"/>
 </label> </div>
 </fieldset>
 <fieldset><legend>Flux live</legend> <label class="flux_label live"
 	style="background-color: #D60000;"
-><input type="checkbox" name="live_tous"
+><input type="checkbox" name="live_tous"  id="live_tous"
 	value="TOUS"
-/>Live <b>Tous les sports</b> <input type="checkbox" name="_live_tous_notification" value="true" class="flux_notification"/>
+/>Live <b>Tous les sports</b> <input type="checkbox" name="_live_tous_notification"  id="_live_tous_notification" value="true" class="flux_notification"/>
 </label> <label class="flux_label live"
 	style="background-color: #7AB114;"
-><input type="checkbox" name="live_foot"
+><input type="checkbox" name="live_foot"  id="live_foot"
 	value="FOOT"
-/>Live <b>Football</b> <input type="checkbox" name="_live_foot_notification" value="true" class="flux_notification"/>
+/>Live <b>Football</b> <input type="checkbox" name="_live_foot_notification"  id="_live_foot_notification" value="true" class="flux_notification"/>
 </label>
 <label class="flux_label live"
 	style="background-color: #C65121;"
-><input type="checkbox" name="live_tennis"
+><input type="checkbox" name="live_tennis"  id="live_tennis"
 	value="TENNIS"
-/>Live <b>Tennis</b> <input type="checkbox" name="_live_tennis_notification" value="true" class="flux_notification"/>
+/>Live <b>Tennis</b> <input type="checkbox" name="_live_tennis_notification"  id="_live_tennis_notification" value="true" class="flux_notification"/>
 </label>
 <label class="flux_label live"
 	style="background-color: #5a7984;"
-><input type="checkbox" name="live_auto"
+><input type="checkbox" name="live_auto"  id="live_auto"
 	value="F1"
-/>Live <b>Auto-Moto</b> <input type="checkbox" name="_live_auto_notification" value="true" class="flux_notification"/>
+/>Live <b>Auto-Moto</b> <input type="checkbox" name="_live_auto_notification"  id="_live_auto_notification" value="true" class="flux_notification"/>
 </label>
 <label class="flux_label live"
 	style="background-color: #BDB600;"
-><input type="checkbox" name="live_cyclisme"
+><input type="checkbox" name="live_cyclisme"  id="live_cyclisme"
 	value="CYCLISME"
-/>Live <b>Cyclisme</b> <input type="checkbox" name="_live_cyclisme_notification" value="true" class="flux_notification"/></label>
+/>Live <b>Cyclisme</b> <input type="checkbox" name="_live_cyclisme_notification" id="_live_cyclisme_notification" value="true" class="flux_notification"/></label>
+<label class="flux_label live"
+	style="background-color: #000084;"
+><input type="checkbox" name="live_bhv"  id="live_bhv"
+	value="CYCLISME"
+/>Live <b>Basket, Hand, Volley</b> <input type="checkbox" name="_live_bhv_notification" id="_live_bhv_notification" value="true" class="flux_notification"/></label>
 <label class="flux_label live"
 	style="background-color: #03ACAC;"
-><input type="checkbox" name="live_hippisme"
+><input type="checkbox" name="live_hippisme" id="live_hippisme"
 	value="HIPPISME"
-/>Live <b>Hippisme</b> <input type="checkbox" name="_live_hippisme_notification" value="true" class="flux_notification"/></label>
+/>Live <b>Hippisme</b> <input type="checkbox" name="_live_hippisme_notification" id="_live_hippisme_notification" value="true" class="flux_notification"/></label>
 </fieldset>
+<br />
 <label>Taux de raffraichissement (en secondes) : <select
 	name="rafraichissement" id="rafraichissement"
 >
@@ -274,7 +311,7 @@ function deleteDb() {
 	<option value="1800">30 minutes</option>
 	<option value="3600">1 heure</option>
 </select></label><br />
-<label><input type="checkbox" name="__notification" value="true" />
+<label><input type="checkbox" name="__notification" id="__notification" value="true" />
 Me notifier à chaque nouvelle information <br />
 (popup de notification en bas à droite de l'écran) </label>
 <input type="button" value="Nettoyer la base de donnée" onclick="deleteDb();" />
