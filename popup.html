@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="footLive.css" type="text/css" rel="stylesheet"/>
         <script type="text/javascript" src="jquery-1.4.2.js">
         </script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -12,14 +13,18 @@
                 background-color: #FFF;
                 font-family: Arial, Helvetica, sans-serif;
                 font-size: 12px;
-				margin: 0px;
-				padding: 0px;
+                margin: 0px;
+                padding: 0px;
             }
             
             a {
                 text-decoration: none;
                 color: #000;
                 cursor: pointer
+            }
+            
+            p {
+                margin_top: 10px;
             }
             
             a:hover, #liens a:hover {
@@ -111,8 +116,8 @@
                 background-color: #D60000 !important;
                 color: #FFF !important
             }
-			
-			a#GENERAL:hover, .GENERAL, a.selected#GENERAL {
+            
+            a#GENERAL:hover, .GENERAL, a.selected#GENERAL {
                 background-color: #D60000 !important;
                 color: #FFF !important
             }
@@ -161,8 +166,8 @@
                 background-color: #5AB6AD !important;
                 color: #FFF !important
             }
-			
-			a#LIVE:hover, .LIVE, a.selected#LIVE {
+            
+            a#LIVE:hover, .LIVE, a.selected#LIVE {
                 background-color: #000000 !important;
                 color: #FFF !important
             }
@@ -259,7 +264,6 @@
             }
             
             #DIV_CONTENT {
-               
             }
             
             #DIV_CONTENT img {
@@ -271,9 +275,9 @@
                 font-size: 140%;
                 font-weight: bold;
                 color: #2244BB;
-				padding-right: 16px;
-				text-overflow: ellipse;
-				background-position: 100% 0%;
+                padding-right: 16px;
+                text-overflow: ellipse;
+                background-position: 100% 0%;
                 background-repeat: no-repeat;
                 background-image: url(fleche.png);
             }
@@ -283,7 +287,6 @@
             }
             
             .allo_home {
-                
                 font-size: 11px;
                 font-family: Arial;
                 color: #333;
@@ -294,13 +297,13 @@
                 /*background-image: url(http://img.lequipe.fr/Football/CM2010/img/allo_home_tt.gif);*/
                 height: 20px
             }
-			
-			#header {
-				text-align: right;
-				margin-top: 6px;
-				padding-right: 2px;
-				float: right;
-			}
+            
+            #header {
+                text-align: right;
+                margin-top: 6px;
+                padding-right: 2px;
+                float: right;
+            }
             
             .allo_home_content {
                 border: 1px solid #d7d7d7;
@@ -308,7 +311,6 @@
                 border-bottom: 0;
                 height: 300px;
                 position: relative;
-               
                 overflow: hidden
             }
             
@@ -327,7 +329,6 @@
                 float: left;
                 height: 17px;
                 padding-left: 120px;
-               
                 width: 100%;
             }
             
@@ -413,160 +414,353 @@
             .allo_home .nave {
                 margin-top: -1px
             }
-			
-			.titreHeader {
-				margin-top: 4px;
-				float: left;
-				padding-left: 2px;
-			}
-			
-			.item {
-				margin: 0px;
-				padding-bottom: 10px;
-				border:2px solid #FFFFFF;
-				-webkit-border-radius: 3px;
-				border-radius: 3px;
-			}
-
-			.item:hover {
-				border:2px solid #5590D2;
-				-webkit-border-radius: 3px;
-				border-radius: 3px;
-				cursor: pointer;
-			}
-
+            
+            .titreHeader {
+                margin-top: 4px;
+                float: left;
+                padding-left: 2px;
+            }
+            
+            .item {
+                margin: 0px;
+                padding-bottom: 10px;
+                border: 2px solid #FFFFFF;
+                -webkit-border-radius: 3px;
+                border-radius: 3px;
+            }
+            
+            .item:hover {
+                border: 2px solid #5590D2;
+                -webkit-border-radius: 3px;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+            
+            .score {
+                background: #F8F8F8 url(http://img.lequipe.fr/img_v5/degrade_live_v2.jpg) repeat-y;
+                background-position-x: -180px;
+                width: 500px;
+            }
+            
+            .board {
+                height: 110px;
+            }
+            
+            .sc1, .sc2 {
+                float: left;
+                width: 52px;
+                height: 73px;
+                color: #FFFFFF;
+                font-size: 55px;
+                font-weight: bolder;
+                font-family: Century Gothic, Trebuchet MS, Arial;
+                background: #F8F8F8 url(http://img.lequipe.fr/img_v5/icon_Foot_score.jpg) no-repeat;
+                margin: 0px 10px 0px 10px;
+                padding: 10px 0px 10px 20px;
+            }
+            
+            .sc2 {
+                background-position: -89px 0px;
+                float: left;
+            }
+            
+            .sc1 {
+                background-position: -2px 0px;
+                float: left;
+                margin-left: 0px;
+            }
+            
+            .scx {
+                padding-left: 0px;
+                padding-right: 0px;
+                margin: 0px 40px 0px 20px;
+            }
+            
+            .logo2 {
+                float: left;
+                width: 80px !important;
+            }
+            
+            .statut {
+                float: left;
+                display: block;
+                width: 80px;
+                margin: 20px 5px 0px 5px;
+            }
+            
+            .logo1 {
+                float: left;
+                width: 80px !important;
+            }
+            
+            .scx {
+                float: left;
+            }
+            
+            .liveHead {
+                width: 100%;
+            }
         </style>
         <script type="text/javascript">
             var db;
-		
-  
-  function scroll(cible, sens){
-  
-    var hauteur = parseInt($("#" + cible).parent().css('height'));
-    var top = parseInt($("#" + cible).css('top'));
-     if (sens == '+' && top < 0) 
- {
-      $("#" + cible).animate({
-         'top': '+=' + hauteur + 'px'
-      }, 'slow');
-    }else 
-      if (sens == '-') 
-{
-      var length = parseInt($("#" + cible + " > div").length);
-        var divHauteur = parseInt($("#" + cible + " div:eq(0)").outerHeight(true));
-        
-// Cas ou il y en a plusieurs sur une ligne 
-        var widthElmt = parseInt($("#" + cible + " div:eq(0)").css('width'));
-        var widthTot = parseInt($("#" + cible).outerWidth(true));
-        
-if (widthTot - widthElmt > 10) 
-{
-          length = Math.floor(length / Math.floor(widthTot / widthElmt));
-        }
-        
-        // Calcul 
-        var calc = length * divHauteur - hauteur;
-        
-        if (Math.abs(top) < calc) 
-        $("#" + cible).animate({
-          'top': '-=' + hauteur + 'px'
-           }, 'slow');  
-      }  
-  } 
-  
-  $('#next').click(function () {
-		scroll('allo', '+'); 
-  });
-  
-  $('#back').click(function () {
-		scroll('allo', '-'); 
-  });
-  
-  
-  
+            
+            
+            function scroll(cible, sens){
+            
+                var hauteur = parseInt($("#" + cible).parent().css('height'));
+                var top = parseInt($("#" + cible).css('top'));
+                if (sens == '+' && top < 0) {
+                    $("#" + cible).animate({
+                        'top': '+=' + hauteur + 'px'
+                    }, 'slow');
+                }
+                else 
+                    if (sens == '-') {
+                        var length = parseInt($("#" + cible + " > div").length);
+                        var divHauteur = parseInt($("#" + cible + " div:eq(0)").outerHeight(true));
+                        
+                        // Cas ou il y en a plusieurs sur une ligne 
+                        var widthElmt = parseInt($("#" + cible + " div:eq(0)").css('width'));
+                        var widthTot = parseInt($("#" + cible).outerWidth(true));
+                        
+                        if (widthTot - widthElmt > 10) {
+                            length = Math.floor(length / Math.floor(widthTot / widthElmt));
+                        }
+                        
+                        // Calcul 
+                        var calc = length * divHauteur - hauteur;
+                        
+                        if (Math.abs(top) < calc) 
+                            $("#" + cible).animate({
+                                'top': '-=' + hauteur + 'px'
+                            }, 'slow');
+                    }
+            }
+            
+            $('#next').click(function(){
+                scroll('allo', '+');
+            });
+            
+            $('#back').click(function(){
+                scroll('allo', '-');
+            });
+            
+            
+			
+			function loadDirect()
+			{
+				$('#DIV_CONTENT').text("");
+				
+				var req = "SELECT * FROM Lives WHERE read = ? AND date LIKE ?";
+				var args = [false, '%13/06'];
+				
+				db.transaction(function(tx){
+					tx.executeSql(req, args, function(tx, result){
+						for (var i = 0, item = null; i < result.rows.length; i++) {
+							item = result.rows.item(i);
+							console.log(item['id']);
+							
+							/*
+							 * 
+							 * <div class='liveHead BHV'>
+            Live Basket : 
+        </div>
+        <div class="clear">
+        </div>
+        <div id="match" class="score">
+            <div class="board">
+                <div class="logo1">
+                    <img src="http://www.lequipe.fr/Basket/logos/BasketLogo12_s60.gif" /><br/>Limoge
+                </div>
+                <div class="scx">
+                    <div class="sc1">
+                        50
+                    </div>
+                    <div class="statut">
+                        2e période
+                    </div>
+                    <div class="sc2">
+                        43
+                    </div>
+                </div>
+                <div class="logo2">
+                <img src="http://www.lequipe.fr/Basket/logos/BasketLogo9_s60.gif" /><br/>Pau
+               
+            </div>
+        </div>
+      </div>
+		 <div class="clear">
+        </div>
+							 */
+							
+							html = '<div class="liveHead '+item['sport']+'">Live '+item['sport']+': '+item['competition']+' '+item['journee']+' le '+item['date']+' à '+item['heure']+'</div>'
+							html += '<div id="match" class="score"><div class="board">';
+							switch(item['sport']) {
+								case "FOOT":
+									
+									html += loadDirectFoot(item); 
+								   
+          
+									break;
+								default: 
+									html += '<div class="scx"> ';
+									//  <div class="sc1">                    0                    </div>
+									html += '<div class="statut">'+item['statut']+'</div>'; 
+									//  <div class="sc2">                    0                    </div>
+									html += '</div>'; 
+									break;
+							}
+							html += '</div> </div>';
 
-	
+
+							
+							
+							
+//							html = '<div class="item" id="item' + i + '" onclick="readItem(' + i + ', \'' + encodeURI(item['id']) + '\' )" ><a class="title" href="' + item['url'] + '" target="_blank" onclick="readItem(' + i + '); return true;" >' + item['title'] + ' </a>';
+//							html += '<div class="link-to-go"/>';
+//							html += '<p class="content" >' + correctImg(item['text']) + '</p>';
+//							html += ' <div style="clear:both; height:1px; overflow:hidden; border-top:1px dashed #99BB00; margin:2px 4px 0px 4px"></div><div>';
+//							
+							
+							html += '<div class="clear"></div>';
+							$('#DIV_CONTENT').prepend(html);
+						}
+					});
+				});
+				
+				loadFooter('LIVE');
+				
+			}
+			
+			
+			function loadDirectFoot(item) {
+				 html =  '<div class="logo1"> <a href="http://www.lequipe.fr/Football/FootballFicheClub'+item['id1']+'.html" target="_blank" class="eq1">';
+				html += '<img src="http://img.lequipe.fr/Football/logos/FootballLogo'+item['id1']+'_s60.gif" />';
+				html += '<br/>'+item['equipe_1']+'</a></div>';
+				
+				
+				
+				html += '<div class="scx"> ';
+				//  <div class="sc1">                    0                    </div>
+				html += '<div class="statut">';
+				
+					html += item['statut'];
+				
+				html += '</div>'; 
+				//  <div class="sc2">                    0                    </div>
+				html += '</div>';
+				
+				html +=  '<div class="logo2"> <a href="http://www.lequipe.fr/Football/FootballFicheClub'+item['id2']+'.html" target="_blank" class="eq1">';
+				html += '<img src="http://img.lequipe.fr/Football/logos/FootballLogo'+item['id2']+'_s60.gif" />';
+				html += '<br/>'+item['equipe_2']+'</a></div>';
+				
+				return html;
+				
+			}
+			
+			
+			function loadDirectFoot(item) {
+				 html =  '<div class="logo1"> <a href="http://www.lequipe.fr/Football/FootballFicheClub'+item['id1']+'.html" target="_blank" class="eq1">';
+				html += '<img src="http://img.lequipe.fr/Football/logos/FootballLogo'+item['id1']+'_s60.gif" />';
+				html += '<br/>'+item['equipe_1']+'</a></div>';
+				
+				
+				
+				html += '<div class="scx"> ';
+				//  <div class="sc1">                    0                    </div>
+				html += '<div class="statut">';
+				
+					html += item['statut'];
+				
+				html += '</div>'; 
+				//  <div class="sc2">                    0                    </div>
+				html += '</div>';
+				
+				html +=  '<div class="logo2"> <a href="http://www.lequipe.fr/Football/FootballFicheClub'+item['id2']+'.html" target="_blank" class="eq1">';
+				html += '<img src="http://img.lequipe.fr/Football/logos/FootballLogo'+item['id2']+'_s60.gif" />';
+				html += '<br/>'+item['equipe_2']+'</a></div>';
+				
+				return html;
+				
+			}
+            
+            
+            
             
             function loadDiv(type){
             
-            
-                $('#DIV_CONTENT').text("");
-                
-                var req = "SELECT * FROM Items WHERE read = ? AND type LIKE ?";
-                var categorie = "%";
-                var args = [false, categorie];
-                
-                if (type == "GENERAL") {
-                    categorie = "general%";
-                }
-                else 
-                    if (type == "FOOT") {
-                        categorie = "foot%";
-                    }
-                    else 
-                        if (type == "AUTO") {
-                            categorie = "auto%";
-                        }
-                        else 
-                            if (type == "TENNIS") {
-                                categorie = "tennis%";
-                            }
-                            else 
-                                if (type == "RUGBY") {
-                                    categorie = "rugby%";
-                                }
-                                else 
-                                    if (type == "BHV") {
-                                        categorie = "bhv%";
-                                    }
-                                    else 
-                                        if (type == "CYCLISME") {
-                                            categorie = "cyclisme%";
-                                        }
-                                        else 
-                                            if (type == "AUTRES") {
-                                                categorie = "autre%";
-                                            }
-											else
+			if (type == 'LIVE') {
+				loadDirect();
+			}
+			else {
+			
+			
+			
+				$('#DIV_CONTENT').text("");
+				
+				var req = "SELECT * FROM Items WHERE read = ? AND type LIKE ?";
+				var categorie = "%";
+				var args = [false, categorie];
+				
+				if (type == "GENERAL") {
+					categorie = "general%";
+				}
+				else 
+				if (type == "FOOT") {
+					categorie = "foot%";
+				}
+				else 
+					if (type == "AUTO") {
+					categorie = "auto%";
+				}
+					else 
+						if (type == "TENNIS") {
+							categorie = "tennis%";
+						}
+						else 
+							if (type == "RUGBY") {
+								categorie = "rugby%";
+							}
+							else 
+								if (type == "BHV") {
+									categorie = "bhv%";
+								}
+								else 
+									if (type == "CYCLISME") {
+										categorie = "cyclisme%";
+									}
+									else 
+										if (type == "AUTRES") {
+											categorie = "autre%";
+										}
+										else 
 											if (type == "LIVE") {
-                                                categorie = "live%";
-                                            }
-                                            else {
-                                                type = "TOUS";
-                                            }
-                
-                // Selection des Items :
-                db.transaction(function(tx){
-                    tx.executeSql(req, [false, categorie], function(tx, result){
-                        for (var i = 0, item = null; i < result.rows.length; i++) {
-                            item = result.rows.item(i);
-                            console.log(item['title']);
-                            html = '<div class="item" id="item' + i + '" onclick="readItem(' + i + ', \'' + encodeURI(item['id']) + '\' )" ><a class="title" href="' + item['url'] + '" target="_blank" onclick="readItem(' + i + '); return true;" >' + item['title'] + ' </a>';
-                            html += '<div class="link-to-go"/>';
-                            html += '<p class="content" >' + correctImg(item['text']) + '</p>';
-                            html += ' <div style="clear:both; height:1px; overflow:hidden; border-top:1px dashed #99BB00; margin:2px 4px 0px 4px"></div><div>';
-                            
-                            $('#DIV_CONTENT').prepend(html);
-                            
-                            
-                            
-                        }
-                    });
-                });
-                
-                // redimentionnement des images 
-                // Correction des images 
-                // Correction des images 
-                
-                loadFooter(type);
-                
-                /*					$('#DIV_CONTENT.img[src*=Medias]').each(		function () {
-                
-                 $(this).attr('width', 80); // .attr('src', 'http://img.lequipe.fr' + $(this).attr('src') ).
-                
-                 });
-                
-                 */
+												categorie = "live%";
+											}
+											else {
+												type = "TOUS";
+											}
+				
+				// Selection des Items :
+				db.transaction(function(tx){
+					tx.executeSql(req, [false, categorie], function(tx, result){
+						for (var i = 0, item = null; i < result.rows.length; i++) {
+							item = result.rows.item(i);
+							console.log(item['title']);
+							html = '<div class="item" id="item' + i + '" onclick="readItem(' + i + ', \'' + encodeURI(item['id']) + '\' )" ><a class="title" href="' + item['url'] + '" target="_blank" onclick="readItem(' + i + '); return true;" >' + item['title'] + ' </a>';
+							html += '<div class="link-to-go"/>';
+							html += '<p class="content" >' + correctImg(item['text']) + '</p>';
+							html += ' <div style="clear:both; height:1px; overflow:hidden; border-top:1px dashed #99BB00; margin:2px 4px 0px 4px"></div><div>';
+							
+							$('#DIV_CONTENT').prepend(html);
+						}
+					});
+				});
+				
+			
+				loadFooter(type);
+				
+			}
                 
             }
             
@@ -584,59 +778,59 @@ if (widthTot - widthElmt > 10)
             }
             
             function loadNavTab(){
-				var feeds = chrome.extension.getBackgroundPage().getFeedsList();
-				var feedName;
-				var navTab;
-				var tabs = {};
-				$('#nav').empty();
-				for(var i = 0; i < feeds.length; i++) {
-					if (typeof feeds[i] == "object") {
-						feedName = feeds[i].key;
-						navTab = false;
-						if(feedName.indexOf("general") == 0 && !tabs["general"]) {
-							tabs["general"] = true;
-							navTab = '<a id="GENERAL" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Général</a>';
-						}
-						if(feedName.indexOf("foot") == 0 && !tabs["foot"]) {
-							tabs["foot"] = true;
-							navTab = '<a id="FOOT" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Football</a>';
-						}
-						if(feedName.indexOf("auto") == 0 && !tabs["auto"]) {
-							tabs["auto"] = true;
-							navTab = '<a id="AUTO" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Auto</a>';
-						}
-						if(feedName.indexOf("tennis") == 0 && !tabs["tennis"]) {
-							tabs["tennis"] = true;
-							navTab = '<a id="TENNIS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tennis</a>';
-						}
-						if(feedName.indexOf("rugby") == 0 && !tabs["rugby"]) {
-							tabs["rugby"] = true;
-							navTab = '<a id="RUGBY" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Rugby</a>';
-						}
-						if(feedName.indexOf("bhv") == 0 && !tabs["bhv"]) {
-							tabs["bhv"] = true;
-							navTab = '<a id="BHV" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Basket/Hand/Volley</a>';
-						}
-						if(feedName.indexOf("cyclisme") == 0 && !tabs["cyclisme"]) {
-							tabs["cyclisme"] = true;
-							navTab = '<a id="CYCLISME" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Cyclisme</a>';
-						}
-						if(feedName.indexOf("autre") == 0 && !tabs["autre"]) {
-							tabs["autre"] = true;
-							navTab = '<a id="AUTRES" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Autres</a>';
-						}
-						if(feedName.indexOf("live") == 0 && !tabs["live"]) {
-							tabs["live"] = true;
-							navTab = '<a id="LIVE" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Directs</a>';
-						}
-						if (navTab) {
-							$('#nav').prepend(navTab);
-						}
-					}
-				}
-				if (feeds.length > 0) {
+                var feeds = chrome.extension.getBackgroundPage().getFeedsList();
+                var feedName;
+                var navTab;
+                var tabs = {};
+                $('#nav').empty();
+                for (var i = 0; i < feeds.length; i++) {
+                    if (typeof feeds[i] == "object") {
+                        feedName = feeds[i].key;
+                        navTab = false;
+                        if (feedName.indexOf("general") == 0 && !tabs["general"]) {
+                            tabs["general"] = true;
+                            navTab = '<a id="GENERAL" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Général</a>';
+                        }
+                        if (feedName.indexOf("foot") == 0 && !tabs["foot"]) {
+                            tabs["foot"] = true;
+                            navTab = '<a id="FOOT" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Football</a>';
+                        }
+                        if (feedName.indexOf("auto") == 0 && !tabs["auto"]) {
+                            tabs["auto"] = true;
+                            navTab = '<a id="AUTO" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Auto</a>';
+                        }
+                        if (feedName.indexOf("tennis") == 0 && !tabs["tennis"]) {
+                            tabs["tennis"] = true;
+                            navTab = '<a id="TENNIS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tennis</a>';
+                        }
+                        if (feedName.indexOf("rugby") == 0 && !tabs["rugby"]) {
+                            tabs["rugby"] = true;
+                            navTab = '<a id="RUGBY" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Rugby</a>';
+                        }
+                        if (feedName.indexOf("bhv") == 0 && !tabs["bhv"]) {
+                            tabs["bhv"] = true;
+                            navTab = '<a id="BHV" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Basket/Hand/Volley</a>';
+                        }
+                        if (feedName.indexOf("cyclisme") == 0 && !tabs["cyclisme"]) {
+                            tabs["cyclisme"] = true;
+                            navTab = '<a id="CYCLISME" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Cyclisme</a>';
+                        }
+                        if (feedName.indexOf("autre") == 0 && !tabs["autre"]) {
+                            tabs["autre"] = true;
+                            navTab = '<a id="AUTRES" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Autres</a>';
+                        }
+                        if (feedName.indexOf("live") == 0 && !tabs["live"]) {
+                            tabs["live"] = true;
+                            navTab = '<a id="LIVE" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Directs</a>';
+                        }
+                        if (navTab) {
+                            $('#nav').prepend(navTab);
+                        }
+                    }
+                }
+                if (feeds.length > 0) {
                     $('#nav').prepend('<a id="TOUS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tous</a>');
-				}
+                }
             }
             
             function getDateEnFrancais(date){
@@ -653,9 +847,10 @@ if (widthTot - widthElmt > 10)
                 
                 return newDate;
             }
+            
             var lastNav = "";
             function loadFooter(nav){
-				
+            
                 var tabFooters = new Array();
                 
                 tabFooters["GENERAL"] = "<a href=\"http://www.lequipe.fr\" target=\"_blank\">Plus d'infos >>></a>";
@@ -666,14 +861,14 @@ if (widthTot - widthElmt > 10)
                 tabFooters["BHV"] = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos Basket/Hand/Volley>>></a>";
                 tabFooters["CYCLISME"] = "<a href=\"http://www.lequipe.fr/Cyclisme/index.html\" target=\"_blank\">Plus d'infos Cyclisme>>></a>";
                 tabFooters["AUTRES"] = "<a href=\"http://www.lequipe.fr/Aussi/index.html\" target=\"_blank\">Plus d'infos Autres Sports>>></a>";
-				tabFooters["LIVE"] = "<a href=\"http://www.lequipe.fr/direct_data.html\" target=\"_blank\">Tous les directs>>></a>";
+                tabFooters["LIVE"] = "<a href=\"http://www.lequipe.fr/direct_data.html\" target=\"_blank\">Tous les directs>>></a>";
                 
-				$('#titreHeader').text(nav).parent().attr('class', nav);
-				if (lastNav) {
-					$('#' + lastNav).removeClass("selected");
-				}
-				$('#' + nav).addClass("selected");
-				lastNav = nav;
+                $('#titreHeader').text(nav).parent().attr('class', nav);
+                if (lastNav) {
+                    $('#' + lastNav).removeClass("selected");
+                }
+                $('#' + nav).addClass("selected");
+                lastNav = nav;
                 $("#footer, #header").html(tabFooters[nav]);
             }
             
@@ -712,38 +907,148 @@ if (widthTot - widthElmt > 10)
         </div>
         <div id="content" class="content">
             <div class="DIV_RUBRIQUE">
-           
-			<div class="clear">
-                        </div>
+            <div class="clear">
+            </div>
             <div class="allo_home">
-                <div id="allo_tt" class="TOUS" >
-                	<div id='titreHeader' class='titreHeader' > TOUS </div> 
-                	 <div id="header"></div>
+                <div id="allo_tt" class="TOUS">
+                    <div id='titreHeader' class='titreHeader'>
+                        TOUS 
+                    </div>
+                    <div id="header">
+                    </div>
                 </div>
                 <div class="allo_home_content">
                     <div class="allo_home_scroll chain-element" id="DIV_CONTENT" style="top: 0px; ">
-                        
-                 </div>       
                     </div>
-					<div class="clear">
-                        </div>
-                        <div class="nave">
-                        	 <span id="footer">
-                    		</span>
-                            <div id="back" onclick="scroll('DIV_CONTENT', '-')">
-                            </div>
-                            <div id="next" onclick="scroll('DIV_CONTENT', '+')">
-                            </div>
-							<a id="readAll" href="#" onclick="chrome.extension.getBackgroundPage().setReadAllItems(); return false;" >
-								Tout marquer comme lu
-                    		</a>
-							
+                </div>
+                <div class="clear">
+                </div>
+                <div class="nave">
+                <span id="footer"></span>
+                <div id="back" onclick="scroll('DIV_CONTENT', '-')">
+                </div>
+                <div id="next" onclick="scroll('DIV_CONTENT', '+')">
+                </div>
+                <a id="readAll" href="#" onclick="chrome.extension.getBackgroundPage().setReadAllItems();">Tout marquer comme lu</a>
                 </input>
-                        </div>
-					<div class="clear">
-                        </div>
-                   
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+        <div class='liveHead FOOT'>
+            Live football 
+        </div>
+        <div class="clear">
+        </div>
+        <div id="match" class="score">
+            <div class="board">
+                <div class="logo1">
+                    <img src="http://img.lequipe.fr/Football/logos/FootballLogo948_s60.gif" />
+					<br/><a href="http://www.lequipe.fr/Football/FootballFicheClub948.html" target="_blank" class="eq1">ALGERIE</a>
+                </div>
+                <div class="scx">
+                    <div class="sc1">
+                        0
+                    </div>
+                    <div class="statut">
+                        2e période
+                    </div>
+                    <div class="sc2">
+                        0
+                    </div>
+                </div>
+                <div class="logo2">
+                <img src="http://img.lequipe.fr/Football/logos/FootballLogo156_s60.gif" />
+				<br/><a href="http://www.lequipe.fr/Football/FootballFicheClub156.html" target="_blank" class="eq2">SLOVENIE</a>
                 
             </div>
-            </body>
-        </html>
+        </div>
+        </div>
+        <div class='liveHead TENNIS'>
+            Live Tennis 
+        </div>
+        <div class="clear">
+        </div>
+        <div id="match" class="score">
+            <div class="board">
+                <div class="logo1">
+                    <img src="http://img.lequipe.fr/Tennis/photos/TennisImage841.jpg" width="60"/>
+					<br/><a href="http://www.lequipe.fr/Tennis/TFJM_841.html" target="_blank" class="eq1">LLEYTON HEWITT</a>
+                </div>
+                <div class="scx">
+                    <div class="statut">
+                        En cours
+						<br/>
+						Score : 6-4-2 4-3-2
+                    </div>
+                </div>
+                <div class="logo2">
+                <img src="http://img.lequipe.fr/Tennis/photos/TennisImage676.jpg" width="60" />
+				<br/><a href="http://www.lequipe.fr/Tennis/TFJM_676.html" target="_blank" class="eq2">ROGER FEDERER</a>
+               
+            </div>
+        </div>
+    </div>
+	 <div class="clear">
+        </div>
+	<div class='liveHead BHV'>
+            Live Basket 
+        </div>
+        <div class="clear">
+        </div>
+        <div id="match" class="score">
+            <div class="board">
+                <div class="logo1">
+                    <img src="http://www.lequipe.fr/Basket/logos/BasketLogo12_s60.gif" /><br/>Limoge
+                </div>
+                <div class="scx">
+                    <div class="sc1">
+                        50
+                    </div>
+                    <div class="statut">
+                        2e période
+                    </div>
+                    <div class="sc2">
+                        43
+                    </div>
+                </div>
+                <div class="logo2">
+                <img src="http://www.lequipe.fr/Basket/logos/BasketLogo9_s60.gif" /><br/>Pau
+               
+            </div>
+        </div>
+      </div>
+		 <div class="clear">
+        </div>
+		
+		<div class='liveHead BHV'>
+            Live Basket : 
+        </div>
+        <div class="clear">
+        </div>
+        <div id="match" class="score">
+            <div class="board">
+                <div class="logo1">
+                    <img src="http://www.lequipe.fr/Basket/logos/BasketLogo12_s60.gif" /><br/>Limoge
+                </div>
+                <div class="scx">
+                    <div class="sc1">
+                        50
+                    </div>
+                    <div class="statut">
+                        2e période
+                    </div>
+                    <div class="sc2">
+                        43
+                    </div>
+                </div>
+                <div class="logo2">
+                <img src="http://www.lequipe.fr/Basket/logos/BasketLogo9_s60.gif" /><br/>Pau
+               
+            </div>
+        </div>
+      </div>
+		 <div class="clear">
+        </div>
+    </body>
+</html>
