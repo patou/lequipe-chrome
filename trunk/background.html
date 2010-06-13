@@ -34,7 +34,6 @@ function showIconImage() {
     canvasContext.restore();
     chrome.browserAction.setIcon({imageData:canvasContext.getImageData(0, 0, 19, 19)});
     chrome.browserAction.setBadgeBackgroundColor({color:[255, 40, 40, 200]});
-    chrome.browserAction.setBadgeText({text:""});
     unreadCount = -1;
 }
 
@@ -253,10 +252,16 @@ function getUpdateInterval() {
 	return 30000;
 }
 
-function getFeedsList() {
+function initLocalStorage() {
 	if (localStorage.length == 0) {
 		localStorage["general_tous"] = "http://www-ref.lequipe.fr/Xml/actu_rss.xml";
+		localStorage["_general_tous_notification"] = "true";
+		localStorage["__notification"] = "true";
 	}
+}
+
+function getFeedsList() {
+	initLocalStorage();
 	var feeds = [];
 	for (var i = 0; i < localStorage.length; i++) {
 		feedName = localStorage.key(i);
@@ -456,6 +461,7 @@ var intervalID = 0;
 function init() {
 	createTable();
 	createLivesTable();
+	initLocalStorage();
 	parseAllFeeds();
 	getAllLives(newLiveAux);
 	
