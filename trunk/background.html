@@ -169,8 +169,39 @@ function newLive(id, date, heure, sport, competition, journee, equipe_1, equipe_
 
 function newLiveAux(items) {
 	for(var i = 0; i < items.length; i++) {
-		newLive(items[i].id, items[i].date, items[i].heure, items[i].sport, items[i].competition, items[i].journee, items[i].equipe_1, items[i].equipe_2, items[i].id1, items[i].id2, items[i].score, items[i].statut, items[i].temps, items[i].lien, items[i].lieu, items[i].read == "true" ? true : false);
+		console.log(items[i].sport+"--"+checkLivesFilter(items[i].sport));
+		if(checkLivesFilter(items[i].sport))
+			newLive(items[i].id, items[i].date, items[i].heure, items[i].sport, items[i].competition, items[i].journee, items[i].equipe_1, items[i].equipe_2, items[i].id1, items[i].id2, items[i].score, items[i].statut, items[i].temps, items[i].lien, items[i].lieu, items[i].read == "true" ? true : false);
 	}
+}
+
+function checkLivesFilter(sport) {
+	var res = false;
+	var feeds = getFeedsList();
+	var feedName;
+	for(var i = 0; i < feeds.length; i++) {
+		if (typeof feeds[i] == "object") {
+			feedName = feeds[i].key;
+			if(feedName == "live_tous") {
+				return true;
+			} else {
+				if(feedName == "live_foot" && sport == "FOOT") {
+					res = true;
+				} else if(feedName == "live_tennis" && sport == "TENNIS") {
+					res = true;|
+				} else if(feedName == "live_auto" && (sport == "RALLYE" || sport == "AUTO" || sport == "MOTO" || sport == "F1")) {
+					res = true;
+				} else if(feedName == "live_cyclisme" && sport == "FOOT") {
+					res = true;
+				} else if(feedName == "live_hippisme" && sport == "HIPPISME") {
+					res = true;
+				} else if(feedName == "live_bhv" && (sport == "BASKET" || sport == "HAND" || sport == "HANDBALL" || sport == "VOLLEY")) {
+					res = true;
+				}
+			}
+		}
+	}
+	return res;
 }
 
 function readLive(id, read, fct) {
