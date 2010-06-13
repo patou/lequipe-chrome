@@ -227,14 +227,14 @@ function getFeedsList() {
 		localStorage["general_tous"] = "http://www-ref.lequipe.fr/Xml/actu_rss.xml";
 	}
 	var feeds = [];
-	for(var i = 0; i < localStorage.length; i++) {
+	for (var i = 0; i < localStorage.length; i++) {
 		feedName = localStorage.key(i);
-		if(feedName.charAt(0) != '_') {
-		  feeds[i] = {
+		if (feedName.charAt(0) != '_') {
+		  feeds.push({
 				key: feedName, 
 				value: localStorage.getItem(feedName),
 				notification: localStorage.getItem("_" + feedName + "_notification") == "true" ? true : false
-		  };
+		  });
 		}
 	 }
 	 return feeds;
@@ -242,16 +242,18 @@ function getFeedsList() {
 
 // Parseurs
 function parseAllFeeds() {
-  var feeds = getFeedsList(); 
-  for(var i = 0; i < feeds.length; i++) {
+	var feedName, feedNotification;
+	var feeds = getFeedsList(); 
+	for (var i = 0; i < feeds.length; i++) {
 	  if (typeof feeds[i] == "object" && feeds[i].value.indexOf("http://") == 0) {
-		var feedName = feeds[i];
+		feedName = feeds[i].key;
+		feedNotification = feeds[i].notification;
 		console.log(feeds[i].value);
-		loadUrl(feeds[i].value, function (req) {
-			handleResponse(req, feedName);
-		});
+		loadUrl(feeds[i].value, function (req, feed) {
+			handleResponse(req, feed.key, feed.notification);
+		}, feeds[i]);
 	  }
-  }
+    }
 }
 
 //date="samedi 12/06" heure="13:30" sport="FOOT" competition="Coupe du Monde" journee="Groupe B 1ère j." equipe_1="COREE DU SUD" equipe_2="GRECE" score="2-0" statut="T" temps="Term." lien="/Football/directs/Live190774.html" lieu="" id1="636" id2="155"
@@ -261,8 +263,8 @@ function getAllLives(fct) {
 		var items = [];
 		var doc = req.responseXML;
 		if (!doc) {
-			 console.log("live feed.");
-			 console.log(req);
+			console.log("live feed.");
+			console.log(req);
 			return;
 		}
 		$(doc).find("live").each(function(index, element) {
@@ -292,7 +294,7 @@ function getAllLives(fct) {
 	});
 }
 
-function loadUrl(url, fct) {
+function loadUrl(url, fct, par) {
   var req;
   try {
 	req = new XMLHttpRequest();
@@ -301,7 +303,7 @@ function loadUrl(url, fct) {
   }
   if(req) {
     req.onload = function () {
-        fct(req);
+        fct(req, par);
     };
     req.onerror = handleError;
     req.open("GET", url, true);
@@ -317,15 +319,14 @@ function handleError() {
 }
 
 // Handles parsing the feed data we got back from XMLHttpRequest.
-function handleResponse(req, name) {
+function handleResponse(req, name, notification) {
   var doc = req.responseXML;
   if (!doc) {
 	 console.log("Not a valid feed.");
 	 console.log(req);
     return;
   }
-  insertItemList(name, xmlParser(doc));
-  
+  insertItemList(name, xmlParser(doc), notification);
 }
 
 function getUniqueUrl(url) {
@@ -337,21 +338,21 @@ function getUniqueUrl(url) {
 }
 
 function xmlParser(doc) {
-  var i = 0;
-  var itemList = [];
-  $(doc).find("item").each(function() {
-    var item = $(this);
-    var itemToAdd = {
-	  id: getUniqueUrl(item.find("link").text()),
-	  title: item.find("title").text(),
-	  link: item.find("link").text(),
-	  description: item.find("description").text(),
-	  pubDate: item.find("pubDate").text()
-	};
-    itemList[i] = itemToAdd;
-    i++;
-  });
-  return itemList;
+	var i = 0;
+	var itemList = [];
+	$(doc).find("item").each(function() {
+		var item = $(this);
+		var itemToAdd = {
+		  id: getUniqueUrl(item.find("link").text()),
+		  title: item.find("title").text(),
+		  link: item.find("link").text(),
+		  description: item.find("description").text(),
+		  pubDate: item.find("pubDate").text()
+		};
+		itemList[i] = itemToAdd;
+		i++;
+	});
+	return itemList;
 }
 
 function stripHtml(htmlString){
@@ -401,9 +402,9 @@ function count() {
 	});
 }
 
-function insertItemList(name, itemList) {
+function insertItemList(name, itemList, notification) {
   for (var i = 0, j = itemList.length; i < j; i++) {
-    newRecord(itemList[i].id, itemList[i].title, itemList[i].link, name.key, itemList[i].description, false, (i < 1 && name.notification) ? notify : count);
+    newRecord(itemList[i].id, itemList[i].title, itemList[i].link, name, itemList[i].description, false, (i < 1 && notification) ? notify : count);
   }
 }
 
