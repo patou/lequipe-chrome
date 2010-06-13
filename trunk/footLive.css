@@ -1,0 +1,1034 @@
+/*
+.megaban {
+    width: 975px;
+    float: left;
+    margin: 0px 7px;
+    text-align: center
+}
+
+#oreillettes {
+    margin: 0px
+}
+
+#match {
+    width: 500px;
+    margin: 7px 5px 7px 5px;
+    float: left;
+    overflow: hidden;
+    border-top: 5px solid #84ad09
+}
+
+#match .score {
+    
+    float: left;
+    background: #F8F8F8 url(http://img.lequipe.fr/img_v5/degrade_live_v2.jpg) repeat-y
+	background-position: -150px 100%;
+	width: 500px;
+}
+
+#match .score .infos {
+    width: 136px;
+    overflow: hidden;
+    float: left;
+    padding: 6px 5px 5px 10px;
+    background: transparent url(http://img.lequipe.fr/img_v5/icon_pack_degrad.gif) no-repeat scroll -4px -580px
+}
+
+#match .score .infos h3 {
+    color: #dad8d9;
+    font-size: 11px
+}
+
+#match .score .infos h3 strong {
+    color: #FFFFFF
+}
+
+#match .score .infos h2 {
+    color: #FFFFFF;
+    font-size: 14px;
+    letter-spacing: -1px
+}
+
+#match .score .infos img {
+    border: 2px solid #dad8d9 !important;
+    margin: 3px !important
+}
+
+#match .score .board {
+    width: 517px;
+    float: left;
+    height: auto !important;
+}
+
+#match .score .board h1 {
+    width: 517px;
+    position: relative;
+    margin-top: 5px
+}
+
+#match .score .board h1 a {
+    float: left;
+    font-size: 22px;
+    letter-spacing: -1px;
+    padding: 9px 0;
+    width: 239px;
+    _width: 169px;
+    color: #575558
+}
+
+#match .score .board .eq1 {
+    text-align: right;
+    margin-right: 15px
+}
+
+#match .score .board .eq2 {
+    text-align: left;
+    margin-left: 15px
+}
+
+#match .score .board h1 .logo1 {
+    position: absolute;
+    _position: static;
+    _float: left;
+    _margin: 4px;
+    left: 7px;
+    top: 0px
+}
+
+#match .score .board h1 .logo2 {
+    position: absolute;
+    _position: static;
+    _float: right;
+    right: 5px;
+    top: 0px
+}
+
+#match .score .board .sco {
+    float: left;
+    clear: both;
+    height: auto;
+    position: relative
+}
+
+#match .score .board .accroche {
+    background: #4e7a0b url(http://img.lequipe.fr/img_v5/icon_Foot_score.jpg?2) repeat-x scroll 0px -176px;
+    float: left;
+    padding: 2px 0;
+    width: 587px;
+    height: 13px;
+}
+
+#match .score .board .accroche a {
+    color: #FFF;
+    float: left;
+    font-size: 11px;
+    width: 307px;
+    text-align: center;
+    font-weight: 900
+}
+
+#match .score .board .accroche a:hover {
+    text-decoration: underline
+}
+
+#match .score .board .accroche .pouceup {
+    float: left;
+    background: transparent url(http://img.lequipe.fr/img_v5/icon_pack.gif) scroll no-repeat 0 -785px;
+    width: 20px;
+    margin-left: 118px
+}
+
+#match .score .board .accroche .poucedown {
+    float: left;
+    background: transparent url(http://img.lequipe.fr/img_v5/icon_pack.gif) scroll no-repeat -20px -786px;
+    width: 20px;
+    margin-right: 100px
+}
+
+#match .score .board .det1, #match .score .board .det2 {
+    float: left;
+    width: 138px;
+    _width: 138px;
+    _overflow: hidden;
+    margin-top: 20px
+}
+
+#match .score .board .det1 a, #match .score .board .det2 a {
+    font-weight: bold;
+    float: left;
+    width: 120px;
+    _width: 100px;
+    font-size: 11px;
+    line-height: 10px;
+    margin: 0px 7px;
+    padding: 1px 0px 6px 20px;
+    background: transparent url(http://img.lequipe.fr/img_v5/icon_Foot_score.jpg) no-repeat
+}
+
+#match .score .board .det1 a b, #match .score .board .det2 a b {
+    font-weight: lighter
+}
+
+#match .score .board .det1 a {
+    margin-left: 10px
+}
+
+#match .score .board .det2 a {
+    margin-left: 10px
+}
+
+#match .score .board .det1 a.but {
+    background-position: -165px -96px
+}
+
+#match .score .board .det2 a.but {
+    background-position: -165px -6px
+}
+
+#cj_ext, #cj_dom, #cr_ext, #cr_dom {
+    display: none;
+    color: #828287;
+    font-size: 10px;
+    padding-top: 16px
+}
+
+#cj_ext .carton a, #cj_dom .carton a, #cr_ext .carton a, #cr_dom .carton a {
+    margin-left: 20px !important;
+    height: 12px !important;
+    width: 110px !important
+}
+
+#match .score .board .det1 a.jaune, #cj_dom .carton a {
+    background-position: -165px -122px !important;
+    color: #828687
+}
+
+#match .score .board .det2 a.jaune, #cj_ext .carton a {
+    background-position: -165px -31px !important;
+    color: #828687
+}
+
+#match .score .board .det1 a.rouge, #cr_dom .carton a {
+    background-position: -165px -140px !important;
+    color: #828687
+}
+
+#match .score .board .det2 a.rouge, #cr_ext .carton a {
+    background-position: -165px -49px !important;
+    color: #828687
+}
+
+#match .score .board .scx {
+    float: left;
+    width: 237px;
+    overflow: hidden;
+    text-align: center;
+    color: #121512;
+    font-weight: bolder
+}
+
+#match .score .board .scx .prol font {
+    font-size: 20px !important
+}
+
+#match .score .board .scx .prol .tabe {
+    font-size: 16px;
+    color: #828287;
+    margin-top: 10px
+}
+
+#match .score .board .scx .prol .tabe1, #match .score .board .scx .prol .tabe2 {
+    float: left;
+    width: 114px;
+    font-size: 11px;
+    font-weight: lighter
+}
+
+#match .score .board .scx .prol .tabe1 img, #match .score .board .scx .prol .tabe2 img {
+    margin: 0px 4px
+}
+
+#match .score .board .scx .prol .tabe1 a, #match .score .board .scx .prol .tabe2 a {
+    font-weight: bolder
+}
+
+#match .score .board .scx .prol .tabe1 {
+    text-align: right;
+    margin-right: 4px
+}
+
+#match .score .board .scx .prol .tabe2 {
+    text-align: left;
+    margin-left: 4px
+}
+
+#match .score .board .scx .statut {
+    float: left;
+    width: 237px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center
+}
+
+#match .score .board .scx .statut a {
+    padding: 2px 5px;
+    font-size: 16px;
+    color: #121512;
+    font-weight: bolder;
+    border: 1px solid #E9E9E9;
+    background-color: #efefef;
+    opacity: 0.5;
+    -moz-opacity: 0.5;
+    filter: alpha(opacity = 50)
+}
+
+#match .score .board .scx .radio {
+    float: left;
+    width: 237px;
+    text-align: center;
+    margin: 7px 0 5px
+}
+
+#match .score .board .sc1, #match .score .board .sc2 {
+    float: left;
+    width: 72px;
+    height: 93px;
+    color: #FFFFFF;
+    font-size: 55px;
+    font-weight: bolder;
+    font-family: Century Gothic, Trebuchet MS, Arial;
+    background: #F8F8F8 url(http://img.lequipe.fr/img_v5/icon_Foot_score.jpg) no-repeat
+}
+
+#match .score .board .sc1 p, #match .score .board .sc2 p {
+    padding-left: 6px;
+    width: 50px;
+    letter-spacing: -10px;
+    float: left;
+    padding: 0px;
+    text-align: center
+}
+
+#match .score .board .sc1 p {
+    margin: 11px 0px 0px 1px;
+    _margin: 11px 0px 0px 5px
+}
+
+#match .score .board .sc2 p {
+    margin: 11px 0px 0px 11px;
+    _margin: 11px 0px 0px 16px
+}
+
+#match .score .board .sc1 {
+    background-position: -2px 0px
+}
+
+#match .score .board .sc2 {
+    background-position: -89px 0px
+}
+
+#match .score .board input {
+    background: transparent url(http://img.lequipe.fr/img_v5/icon_Foot_score.jpg) no-repeat scroll -35px -96px;
+    border: 0 none;
+    float: left;
+    height: 75px;
+    width: 93px;
+    cursor: pointer
+}
+
+#match .terrain {
+    width: 352px;
+    float: left;
+    background-color: #ebebeb;
+    border: 1px solid #E9E9E9;
+    border-top: 8px solid #84ad09
+}
+
+#match .edito {
+    width: 311px;
+    margin-left: 5px;
+    background-color: #d60000;
+    padding-top: 8px;
+    float: left
+}
+
+#match .edito .filtre {
+    width: 311px;
+    background-color: #F0F0F0;
+    height: 19px;
+    padding: 9px 0px 0px 0px;
+    text-align: center;
+    float: left
+}
+
+#match .edito .filtre a {
+    padding: 4px 5px;
+    text-align: center
+}
+
+#match .edito .filtre a:hover {
+    color: #d60000
+}
+
+#match .edito .filtre a.highlight {
+    color: #d60000;
+    font-weight: bolder;
+    background-color: #ffffff
+}
+
+#match .edito .commentaires {
+    position: relative;
+    width: 307px;
+    background-color: #ffffff;
+    border-left: 1px solid #E9E9E9;
+    border-right: 1px solid #E9E9E9;
+    padding: 0px 1px;
+    float: left;
+    overflow: hidden; 
+    height: 608px
+}
+
+#match .edito .commentaires #com_scroll {
+    position: absolute;
+    top: 0px
+}
+
+#match .edito .commentaires .iteme {
+    width: 307px;
+    clear: both;
+    margin: 0px 1px;
+    padding: 3px;
+    background: transparent url(http://img.lequipe.fr/img_v5/icon_Foot_live.jpg?20100525) repeat-y -282px 0px
+}
+
+#match .edito .commentaires .iteme div, #match .edito .commentaires .iteme span, #match .edito .commentaires .iteme p {
+    float: left
+}
+
+#match .edito .commentaires .iteme span {
+    width: 35px;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 12px;
+    font-weight: bolder;
+    color: #121215
+}
+
+#match .edito .commentaires .iteme div {
+    width: 30px;
+    height: 30px;
+    background-color: #E9E9E9;
+    background: transparent url(http://img.lequipe.fr/img_v5/icon_Foot_score.jpg) no-repeat
+}
+
+#match .edito .commentaires .iteme p {
+    width: 210px;
+    color: #121215;
+    line-height: 14px;
+    font-size: 11px;
+    background-color: #FFFFFF;
+    padding: 5px 4px 5px 10px;
+    text-align: justify
+}
+
+#match .edito .commentaires .temps_fort p, #match .edito .commentaires .but p {
+    font-weight: bold
+}
+
+#match .edito .commentaires .iteme font {
+    line-height: 17px
+}
+
+#match .edito .commentaires .iteme hr {
+    clear: both;
+    color: #F0F0F0;
+    font-size: 1px;
+    height: 1px;
+    border: 0px solid #FFFFFF;
+    border-top: 1px solid #F0F0F0
+}
+
+#match .edito .commentaires .iteme .none {
+    background-image: none !important
+}
+
+#match .edito .commentaires .iteme .picto {
+    float: left;
+    width: 28px;
+    height: 27px;
+    margin: 7px 6px 0 8px;
+    background: url(http://img.lequipe.fr/img_v5/icon_Foot_live.jpg?20100525) no-repeat -80px -80px
+}
+
+#match .edito .commentaires .iteme .carton_rouge {
+    background-position: -27px 0px
+}
+
+#match .edito .commentaires .iteme .carton_jaune {
+    background-position: -54px 0px
+}
+
+#match .edito .commentaires .iteme .but {
+    background-position: 0px 0px
+}
+
+#match .edito .commentaires .iteme .rempl {
+    background-position: -81px 0px
+}
+
+#match .edito .commentaires .iteme .sifflet {
+    background-position: -116px 0px
+}
+
+#match .edito .commentaires .iteme .corner {
+    background-position: -152px 0px
+}
+
+#match .edito .commentaires .iteme .coupfranc, #match .edito .commentaires .iteme .coup_franc {
+    background-position: -187px 0px
+}
+
+#match .edito .commentaires .iteme .penalty {
+    background-position: -253px 0px
+}
+
+#match .edito .commentaires .iteme .hors_jeu {
+    background-position: -221px 0px
+}
+
+#match .edito .commentaires #com_scroll #corps {
+    margin-right: 320px !important;
+    margin: 0 7px !important;
+    text-align: justify
+}
+
+#match .edito .commentaires #com_scroll #corps .chapo {
+    font-size: 12px !important;
+    line-height: 18px !important;
+    margin: 24px 0
+}
+
+#match .edito .commentaires #com_scroll #corps .clear {
+    height: 10px
+}
+
+#match .edito .commentaires #com_scroll #corps strong {
+    color: #000000;
+    font-weight: lighter
+}
+
+#match .edito .commentaires #com_scroll h2 {
+    font-size: 12px;
+    margin-top: 5px
+}
+
+#match .edito .commentaires #com_scroll h3 {
+    font-size: 12px
+}
+
+#match .edito .commentaires #com_scroll h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #000000 !important;
+    text-align: left
+}
+
+#match .edito .commentaires #com_scroll img {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px
+}
+
+#match .edito .commentaires #com_scroll p {
+    font-size: 12px;
+    line-height: 17px !important;
+    color: #000000
+}
+
+#match .edito .commentaires .but p {
+    color: #84ad09 !important;
+}
+
+#match .edito .commentaires .iteme font {
+    color: #D60000 !important;
+}
+
+#match .edito .commentaires #com_scroll a {
+    color: #84ad09;
+    font-weight: bolder;
+    text-decoration: underline
+}
+
+#match .edito .commentaires .mpx_elmt {
+    float: left;
+    width: 306px;
+    _width: 293px; 
+    overflow: hidden;
+    padding: 4px 0;
+    position: relative
+}
+
+#match .edito .commentaires .mpx_elmt .lien {
+    position: absolute;
+    width: 314px;
+    height: 73px;
+    left: 0px;
+    top: 0px;
+    z-index: 1
+}
+
+#match .edito .commentaires .sep {
+    clear: both;
+    width: 240px;
+    border-bottom: 1px solid #E9E9E9;
+    margin-left: 30px;
+    height: 5px;
+    font-size: 1px;
+    margin-right: 30px;
+    _width: 248px
+}
+
+#match .edito .commentaires .mpx_filtre {
+    height: 17px;
+    margin: 2px;
+    _height: 21px;
+    background-color: #E9E9E9;
+    text-align: center
+}
+
+#match .edito .commentaires .mpx_filtre a {
+    padding: 2px 1px;
+    padding-top: 1px;
+    color: #878787;
+    font-size: 11px;
+    font-weight: bold
+}
+
+#match .edito .commentaires .mpx_filtre a:hover {
+    padding: 2px 1px;
+    padding-top: 1px;
+    background-color: #e4061e;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: bold
+}
+
+#match .edito .commentaires .mpx_filtre .filtre_on {
+    color: #d60000;
+    background-color: #f4162e
+}
+
+#match .edito .commentaires .mpx_elmt .mpx_info {
+    float: left;
+    width: 90px;
+    height: 70px;
+    text-align: center;
+    padding: 0px;
+    margin: 0px
+}
+
+#match .edito .commentaires .mpx_elmt .mpx_info .cell {
+    padding: 0px;
+    margin: 0px;
+    margin-top: 5px;
+    height: 70px
+}
+
+#match .edito .commentaires .mpx_elmt .mpx_info .cell .pixe {
+    font-size: 14px !important;
+    font-weight: bolder;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    top: 18px;
+    width: 90px
+}
+
+#match .edito .commentaires .mpx_elmt .mpx_info .cell .pixe img {
+    margin-top: 5px;
+    opacity: 0.8;
+    -moz-opacity: 0.8
+}
+
+#match .edito .commentaires .mpx_elmt .mpx_cnt {
+    float: left;
+    padding: 5px;
+    width: 198px;
+    _width: 163px;
+    cursor: pointer
+}
+
+#match .edito .commentaires .mpx_elmt:hover {
+    color: #000000 !important
+}
+
+#match .edito .commentaires .mpx_elmt .mpx_cnt h3 {
+    float: left;
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px;
+    color: #000000;
+    width: 260px;
+    _width: 183px;
+    padding-bottom: 3px
+}
+
+#match .edito .commentaires .mpx_elmt .mpx_cnt h3 a {
+    color: #424242;
+    height: 62px;
+    width: 208px;
+    _width: 180px
+}
+
+#match .edito .commentaires .mpx_elmt:hover .mpx_cnt h3 a {
+    color: #000000
+}
+
+#match .edito .commentaires .mpx_elmt .mpx_cnt p {
+    color: #848081;
+    font-size: 11px;
+    padding: 0px;
+    margin: 0px
+}
+
+#match .edito .commentaires .mpx_elmt .mpx_cnt p b {
+    color: #545051
+}
+
+#match .edito .commentaires .mpx_elmt:hover .mpx_cnt p {
+    color: #000000
+}
+
+#match .edito .commentaires .mpx_elmt:hover .mpx_info .cell .pixe img {
+    opacity: 1;
+    -moz-opacity: 1
+}
+
+.commentaires_fin {
+    float: left;
+    width: 310px !important;
+    height: 18px;
+    background: #E4061E url(http://img.lequipe.fr/img_v5/icon_pack_degrad.gif) no-repeat scroll -4px -419px
+}
+
+.commentaires_fin #commentaires_suite {
+    cursor: pointer;
+    background: #e4061e url(http://img.lequipe.fr/img_v5/icon_pack.gif) no-repeat 0px -76px;
+    width: 17px;
+    height: 17px;
+    float: left;
+    margin-left: 135px;
+    _margin-left: 75px
+}
+
+.commentaires_fin #commentaires_retour {
+    cursor: pointer;
+    background: #e4061e url(http://img.lequipe.fr/img_v5/icon_pack.gif) no-repeat -27px -76px;
+    width: 17px;
+    height: 17px;
+    float: left;
+    margin-left: 5px
+}
+
+#match .bloc_live {
+    float: left;
+    background-color: #F7F7F7;
+    overflow: hidden;
+    width: 353px
+}
+
+#match .bloc_live .bloc_rescal_barre {
+    float: left;
+    width: 380px;
+    height: 4px;
+    background-color: #84AD09
+}
+
+#match .bloc_live .bloc_rescal_contour, #match .bloc_live .bloc_rescla_contour {
+    float: left;
+    width: 351px;
+    border: 1px solid #E9E9E9;
+    background-color: #F7F7F7
+}
+
+#match .bloc_live .tb_cal .score {
+    width: 45px !important;
+    background-image: none !important;
+    float: none
+}
+
+#match .bloc_live .tb_cal .heure {
+    text-align: right;
+    width: 65px
+}
+
+#match .bloc_live .tb_cal .heure a {
+    font-size: 11px
+}
+
+#match .bloc_live .tb_cal td {
+    padding: 2px;
+    height: 24px
+}
+
+#match .bloc_live .tb_cal .club1 {
+    font-size: 12px;
+    color: #525258;
+    text-align: right
+}
+
+#match .bloc_live .tb_cal .club2 {
+    font-size: 12px;
+    color: #525258;
+    text-align: left
+}
+
+#match .bloc_live .tb_cal .score {
+    font-size: 12px;
+    color: #525258;
+    text-align: center;
+    font-weight: bold
+}
+
+#match .bloc_live .tab {
+    clear: both;
+    width: 308px;
+    height: 16px;
+    padding: 4px 0px 3px 0;
+    border-bottom: 1px solid #E7E7E7
+}
+
+#match .bloc_live .tab .place {
+    float: left;
+    color: #000000;
+    width: 20px;
+    text-align: right;
+    padding-right: 5px
+}
+
+#match .bloc_live .tab .equipe {
+    float: left;
+    color: #000000;
+    width: 188px;
+    text-align: left;
+    font-weight: bolder
+}
+
+#match .bloc_live .tab .points {
+    float: left;
+    color: #000000;
+    width: 20px;
+    text-align: right;
+    font-weight: bolder
+}
+
+#match .bloc_live .tab .matchs {
+    float: left;
+    color: #000000;
+    width: 20px;
+    text-align: right
+}
+
+#match .bloc_live .tab .diff {
+    float: left;
+    color: #000000;
+    width: 30px;
+    text-align: right
+}
+
+.alterne1, .alterne1 td {
+    background-color: #F7F7F7 !important
+}
+
+.alterne2, .alterne2 td {
+    background-color: #FDFDFD !important
+}
+
+#match .classmt {
+    width: 310px !important
+}
+
+#match .bloc_live .bloc_rescla_contour {
+    width: 308px !important
+}
+
+#match .liens_bas {
+    font-weight: bolder
+}
+
+#match .edito .commentaires #com_scroll img {
+    float: none !important;
+    vertical-align: middle
+}
+
+#bloc_cal_titre {
+    background: transparent url(http://img.lequipe.fr/img_v5/icones_calres.gif) no-repeat scroll 5px 1px;
+    float: left;
+    height: 25px;
+    width: 225px;
+}
+
+#bloc_cla_titre {
+    background: transparent url(http://img.lequipe.fr/img_v5/icones_calres.gif) no-repeat scroll 5px -29px;
+    float: left;
+    height: 25px;
+    width: 225px;
+}
+
+.classmt .a {
+    height: 0px !important
+}
+
+.classmt {
+    margin-left: 7px;
+}
+
+.classement_out .classmt {
+    margin-left: 0px;
+}
+
+#note-zone {
+    height: 163px;
+    padding: 2px;
+    background: #FFF;
+    border-color: #84ad09 #DFDFDF #DFDFDF;
+    border-style: solid;
+    border-width: 8px 1px 1px;
+    width: 294px;
+    margin-top: 10px;
+}
+
+#note-sous-zone {
+    float: left;
+    height: 100%;
+    width: 100%;
+    background: #eaeaea url(http://img.lequipe.fr/Allos/img/note_match.jpg) scroll 0px 0px;
+}
+
+#note-val-zone {
+    background: #F8F8F8 url(http://img.lequipe.fr/Allos/img/note_match.jpg) no-repeat scroll -2px -210px;
+    color: #FFF;
+    float: left;
+    font-family: Century Gothic, Trebuchet MS, Arial;
+    font-size: 55px;
+    font-weight: bolder;
+    height: 91px;
+    padding: 0 14px;
+    width: 56px;
+}
+
+#note-value {
+    letter-spacing: -10px;
+    padding-left: 0;
+    padding-right: 11px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+#note-slider {
+    background: #F8F8F8 url(http://img.lequipe.fr/Allos/img/note_match.jpg) no-repeat scroll -14px -352px;
+    width: 165px;
+    margin: 15px 20px;
+    float: left;
+    _width: 125px;
+}
+
+#note-acc {
+    height: 34px;
+    background: #F8F8F8 url(http://img.lequipe.fr/Allos/img/note_match.jpg) no-repeat scroll -70px -172px;
+    color: #84AD09;
+    font-size: 18px;
+    font-weight: 900;
+    margin-top: 6px;
+    padding-left: 53px;
+    padding-top: 5px;
+    overflow: hidden
+}
+
+#note-slider-zone {
+    background: transparent url(http://img.lequipe.fr/Allos/img/note_match.jpg) no-repeat scroll 16px -364px;
+    float: left;
+    height: 11px;
+    padding-top: 16px
+}
+
+#note-valider {
+    overflow: hidden;
+    padding-top: 20px;
+    background: transparent url(http://img.lequipe.fr/Allos/img/note_match.jpg) no-repeat scroll -90px -219px;
+    clear: both;
+    display: block;
+    float: left;
+    height: 1px;
+    margin-left: 108px;
+    width: 82px;
+    cursor: pointer
+}
+
+.note-deja {
+    background-position: -90px -279px !important;
+}
+
+.note-enreg {
+    background-position: -90px -305px !important;
+}
+
+.note-encours {
+    background-position: -90px -249px !important;
+}
+
+.ui-slider .ui-slider-handle {
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+    top: -0.4em
+}
+
+
+
+.score {
+	
+    background: #F8F8F8 url(http://img.lequipe.fr/img_v5/degrade_live_v2.jpg) repeat-y;
+	background-position: 0px 100%;
+	width: 500px;
+}
+
+.sc1, .sc2 {
+    float: left;
+    width: 72px;
+    height: 93px;
+    color: #FFFFFF;
+    font-size: 55px;
+    font-weight: bolder;
+    font-family: Century Gothic, Trebuchet MS, Arial;
+    background: #F8F8F8 url(http://img.lequipe.fr/img_v5/icon_Foot_score.jpg) no-repeat; 
+	margin: 0px 30px 0px 30px;  
+}
+
+
+p.scx {
+	padding-left: 20px;
+	padding-right: 10px;
+}
+
+.logo2 {
+	float: left;
+	width: 80px !important;
+	display: inline;
+}
+
+.logo1 {
+	float: left;
+	width: 80px !important;
+	display: inline;
+}
+
+.scx {
+	float: left;
+	width: 160px !important;
+	display: inline ;
+	
+}
+*/
