@@ -201,8 +201,8 @@ function newLiveAux(items) {
 				if (lastLive) {
 					//console.log(lastLive);
 					//console.log(item);
-					console.log(lastLive.id + " " + lastLive.statut + " " + lastLive.score);
-					console.log(newLive.id + " " + newLive.statut + " " + newLive.score);
+					console.log("last:'"+lastLive.id + "' '" + lastLive.statut + "' '" + lastLive.score +"'");
+					console.log("new:'"+newLive.id + "' '" + newLive.statut + "' '" + newLive.score+"'");
 					if (lastLive.statut != newLive.statut || lastLive.score != newLive.score) {
 						notifyLive(lastLive, newLive);
 						updateLive(newLive.id, newLive.score, newLive.statut, newLive.temps, false);
@@ -363,7 +363,7 @@ function getAllLives(fct) {
 		$(doc).find("live").each(function(index, element) {
 			var e = $(this);
 			var item = {
-				id: e.attr("lien"),
+				id: e.attr("lien")+e.attr("id1")+e.attr("id2")+e.attr("date")+e.attr("heure")+e.attr("sport")+e.attr("competition"),
 				date: e.attr("date"),
 				heure: e.attr("heure"),
 				sport: e.attr("sport"),
