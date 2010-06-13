@@ -144,6 +144,77 @@ function dropTable() {
   });
 }
 
+/** LIVES **/
+function createLivesTable() {
+  db.transaction(function(tx) {
+    tx.executeSql("CREATE TABLE Lives (id VARCHAR(255) UNIQUE, date VARCHAR(255), heure VARCHAR(255), sport VARCHAR(255), competition VARCHAR(255), journee VARCHAR(255), equipe_1 VARCHAR(255), equipe_2 VARCHAR(255), id1 VARCHAR(50), id2 VARCHAR(50), score VARCHAR(255), statut VARCHAR(50), temps VARCHAR(50), lien VARCHAR(255), lieu VARCHAR(255), read BOOLEAN)", [],
+        function(tx) {  console.log("table Items created") },
+        onError);
+  });
+}
+
+// add lives with random values
+function newLive(id, date, heure, sport, competition, journee, equipe_1, equipe_2, id1, id2, score, statut, temps, lien, lieu, read, fct) {
+  db.transaction(function(tx) {
+    tx.executeSql("INSERT INTO Lives (id, date, heure, sport, competition, journee, equipe_1, equipe_2, id1, id2, score, statut, temps, lien, lieu, read) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [id, date, heure, sport, competition, journee, equipe_1, equipe_2, id1, id2, score, statut, temps, lien, lieu, read],
+        function(tx, result) {
+     		console.log("Inserted");
+     		if (fct && typeof fct == "function") {
+				fct({id: id, date: date, heure: heure, sport: sport, competition: competition, journee: journee, equipe_1: equipe_1, equipe_2: equipe_2, id1: id1, id2: id2, score: score, statut: statut, temps: temps, lien:lien , lieu: lieu, read: read});
+			}
+        }, 
+        onError);
+  });
+}
+
+function newLiveAux(items) {
+	for(var i = 0; i < items.length; i++) {
+		newLive(items[i].id, items[i].date, items[i].heure, items[i].sport, items[i].competition, items[i].journee, items[i].equipe_1, items[i].equipe_2, items[i].id1, items[i].id2, items[i].score, items[i].statut, items[i].temps, items[i].lien, items[i].lieu, items[i].read == "true" ? true : false);
+	}
+}
+
+function readLive(id, read, fct) {
+  db.transaction(function(tx) {
+    tx.executeSql("UPDATE Lives SET read = ? WHERE id = ?", [read, id], fct, onError);
+  });
+}
+
+function setReadAllLives(fct) {
+  db.transaction(function(tx) {
+	    tx.executeSql("UPDATE Lives SET read = ?", [true], fct, onError);
+  });
+}
+
+function deleteLivesRead() {
+  db.transaction(function(tx) {
+    tx.executeSql("DELETE FROM Lives WHERE read = true", [],
+        function(tx, result) {
+        	console.log("successfull delete unread lives"); 
+        }, 
+        onError);
+  });
+}
+
+function deleteLive() {
+	  db.transaction(function(tx) {
+	    tx.executeSql("DELETE FROM Lives;", [],
+	        function(tx, result) {
+	        	console.log("successfull delete lives");
+	        	count(); 
+	        }, 
+	        onError);
+	  });
+}
+
+// delete table from db
+function dropLivesTable() {
+  db.transaction(function(tx) {
+    tx.executeSql("DROP TABLE Lives", [],
+        function(tx) { }, 
+        onError);
+  });
+}
+
 function getUpdateInterval() {
 	if (localStorage["__rafraichissement"]) {
 		return localStorage["__rafraichissement"] * 1000;
@@ -185,7 +256,7 @@ function parseAllFeeds() {
 
 //date="samedi 12/06" heure="13:30" sport="FOOT" competition="Coupe du Monde" journee="Groupe B 1ère j." equipe_1="COREE DU SUD" equipe_2="GRECE" score="2-0" statut="T" temps="Term." lien="/Football/directs/Live190774.html" lieu="" id1="636" id2="155"
 
-function getAllLive(fct) {
+function getAllLives(fct) {
 	loadUrl("http://www-ref.lequipe.fr/Xml/Directs41.xml", function (req) {
 		var items = [];
 		var doc = req.responseXML;
@@ -352,7 +423,10 @@ var intervalID = 0;
 
 function init() {
 	createTable();
+	createLivesTable();
 	parseAllFeeds();
+	getAllLives(newLiveAux);
+	
 	iconImage = $('#icon')[0];
     canvasContext = $('#canvas')[0].getContext('2d');
 	showIconImage();
