@@ -153,7 +153,7 @@ function createLivesTable() {
 }
 
 // add lives with random values
-function newLive(id, date, heure, sport, competition, journee, equipe_1, equipe_2, id1, id2, score, statut, temps, lien, lieu, read, fct) {
+function insertLive(id, date, heure, sport, competition, journee, equipe_1, equipe_2, id1, id2, score, statut, temps, lien, lieu, read, fct) {
   db.transaction(function(tx) {
     tx.executeSql("INSERT INTO Lives (id, date, heure, sport, competition, journee, equipe_1, equipe_2, id1, id2, score, statut, temps, lien, lieu, read) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [id, date, heure, sport, competition, journee, equipe_1, equipe_2, id1, id2, score, statut, temps, lien, lieu, read],
         function(tx, result) {
@@ -166,12 +166,63 @@ function newLive(id, date, heure, sport, competition, journee, equipe_1, equipe_
   });
 }
 
+function updateLive(id, score, statut, temps, read, fct) {
+  db.transaction(function(tx) {
+    tx.executeSql("UPDATE Lives SET score = ?, statut = ?, temps = ?, read = ? WHERE id = ?", [score, statut, temps, read, id],
+        function(tx, result) {
+     		console.log("Updated");
+     		if (fct && typeof fct == "function") {
+				fct({id: id, score: score, statut: statut, temps: temps, read: read});
+			}
+        },
+        onError);
+  });
+}
+
+function getLive(id, fct, item) {
+	db.transaction(function(tx) {
+		tx.executeSql("SELECT * FROM Lives WHERE id = ?", [id],
+        function(tx, result) {
+			var res = result.rows.length == 1 ? result.rows.item(0) : false;
+     		if (fct && typeof fct == "function") {
+				fct(res, item);
+			}
+        }, 
+        onError);
+	});
+}
+
 function newLiveAux(items) {
 	for(var i = 0; i < items.length; i++) {
-		console.log(items[i].sport+"--"+checkLivesFilter(items[i].sport));
-		if(checkLivesFilter(items[i].sport))
-			newLive(items[i].id, items[i].date, items[i].heure, items[i].sport, items[i].competition, items[i].journee, items[i].equipe_1, items[i].equipe_2, items[i].id1, items[i].id2, items[i].score, items[i].statut, items[i].temps, items[i].lien, items[i].lieu, items[i].read == "true" ? true : false);
+		var item = items[i];
+		console.log(item.sport+"--"+checkLivesFilter(item.sport));
+		if(checkLivesFilter(item.sport)) {
+			getLive(item.id, function (lastLive, newLive) {
+				if (lastLive) {
+					//console.log(lastLive);
+					//console.log(item);
+					console.log(lastLive.id + " " + lastLive.statut + " " + lastLive.score);
+					console.log(newLive.id + " " + newLive.statut + " " + newLive.score);
+					if (lastLive.statut != newLive.statut || lastLive.score != newLive.score) {
+						notifyLive(lastLive, newLive);
+						updateLive(newLive.id, newLive.score, newLive.statut, newLive.temps, false);
+					}
+				}
+				else {
+					insertLive(newLive.id, newLive.date, newLive.heure, newLive.sport, newLive.competition, newLive.journee, newLive.equipe_1, newLive.equipe_2, newLive.id1, newLive.id2, newLive.score, newLive.statut, newLive.temps, newLive.lien, newLive.lieu, newLive.read == "true" ? true : false, false);
+				}
+			}, item);
+		}
 	}
+}
+
+function notifyLive(lastLive, newLive) {
+	var notification = webkitNotifications.createNotification(
+  	  "logo_lequipe.png",  // icon url - can be relative
+  	  newLive.sport + ": " + newLive.competition,  // notification title
+  	  newLive.equipe_1 + " " + newLive.score + " " + newLive.equipe_2 + "\n" + newLive.temps + " (" + newLive.statut + ")"  // notification body text
+  	);
+	notification.show();
 }
 
 function checkLivesFilter(sport) {
@@ -181,20 +232,20 @@ function checkLivesFilter(sport) {
 	for(var i = 0; i < feeds.length; i++) {
 		if (typeof feeds[i] == "object") {
 			feedName = feeds[i].key;
-			if(feedName == "live_tous") {
+			if (feedName == "live_tous") {
 				return true;
 			} else {
-				if(feedName == "live_foot" && sport == "FOOT") {
+				if (feedName == "live_foot" && sport == "FOOT") {
 					res = true;
-				} else if(feedName == "live_tennis" && sport == "TENNIS") {
+				} else if (feedName == "live_tennis" && sport == "TENNIS") {
 					res = true;
-				} else if(feedName == "live_auto" && (sport == "RALLYE" || sport == "AUTO" || sport == "MOTO" || sport == "F1")) {
+				} else if (feedName == "live_auto" && (sport == "RALLYE" || sport == "AUTO" || sport == "MOTO" || sport == "F1")) {
 					res = true;
-				} else if(feedName == "live_cyclisme" && sport == "FOOT") {
+				} else if (feedName == "live_cyclisme" && sport == "FOOT") {
 					res = true;
-				} else if(feedName == "live_hippisme" && sport == "HIPPISME") {
+				} else if (feedName == "live_hippisme" && sport == "HIPPISME") {
 					res = true;
-				} else if(feedName == "live_bhv" && (sport == "BASKET" || sport == "HAND" || sport == "HANDBALL" || sport == "VOLLEY")) {
+				} else if (feedName == "live_bhv" && (sport == "BASKET" || sport == "HAND" || sport == "HANDBALL" || sport == "VOLLEY")) {
 					res = true;
 				}
 			}
@@ -279,7 +330,8 @@ function getFeedsList() {
 // Parseurs
 function parseAllFeeds() {
 	var feedName, feedNotification;
-	var feeds = getFeedsList(); 
+	var feeds = getFeedsList();
+	getAllLives(newLiveAux);
 	for (var i = 0; i < feeds.length; i++) {
 	  if (typeof feeds[i] == "object" && feeds[i].value.indexOf("http://") == 0) {
 		feedName = feeds[i].key;
@@ -295,7 +347,7 @@ function parseAllFeeds() {
 //date="samedi 12/06" heure="13:30" sport="FOOT" competition="Coupe du Monde" journee="Groupe B 1ère j." equipe_1="COREE DU SUD" equipe_2="GRECE" score="2-0" statut="T" temps="Term." lien="/Football/directs/Live190774.html" lieu="" id1="636" id2="155"
 
 function getAllLives(fct) {
-	loadUrl("http://www-ref.lequipe.fr/Xml/Directs41.xml", function (req) {
+	loadUrl("http://www.lequipe.fr/Xml/Directs41.xml", function (req) {
 		var items = [];
 		var doc = req.responseXML;
 		if (!doc) {
@@ -319,7 +371,7 @@ function getAllLives(fct) {
 				score: e.attr("score"),
 				statut: e.attr("statut"),
 				temps: e.attr("temps"),
-				lien: "http://www-ref.lequipe.fr" + e.attr("lien"),
+				lien: "http://www.lequipe.fr" + e.attr("lien"),
 				lieu: e.attr("lieu")
 			};
 			items.push(item);
@@ -463,7 +515,6 @@ function init() {
 	createLivesTable();
 	initLocalStorage();
 	parseAllFeeds();
-	getAllLives(newLiveAux);
 	
 	iconImage = $('#icon')[0];
     canvasContext = $('#canvas')[0].getContext('2d');
