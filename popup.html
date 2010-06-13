@@ -111,6 +111,11 @@
                 background-color: #D60000 !important;
                 color: #FFF !important
             }
+			
+			a#GENERAL:hover, .GENERAL, a.selected#GENERAL {
+                background-color: #D60000 !important;
+                color: #FFF !important
+            }
             
             a#GENERAL:hover, .GENERAL, a.selected#GENERAL {
                 background-color: #D60000 !important;
@@ -154,6 +159,11 @@
             
             a#AUTRES:hover, .AUTRES, a.selected#AUTRES {
                 background-color: #5AB6AD !important;
+                color: #FFF !important
+            }
+			
+			a#LIVE:hover, .LIVE, a.selected#LIVE {
+                background-color: #000000 !important;
                 color: #FFF !important
             }
             
@@ -517,8 +527,12 @@ if (widthTot - widthElmt > 10)
                                             if (type == "AUTRES") {
                                                 categorie = "autre%";
                                             }
+											else
+											if (type == "LIVE") {
+                                                categorie = "live%";
+                                            }
                                             else {
-                                                type = "GENERAL";
+                                                type = "TOUS";
                                             }
                 
                 // Selection des Items :
@@ -611,6 +625,10 @@ if (widthTot - widthElmt > 10)
 							tabs["autre"] = true;
 							navTab = '<a id="AUTRES" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Autres</a>';
 						}
+						if(feedName.indexOf("live") == 0 && !tabs["live"]) {
+							tabs["live"] = true;
+							navTab = '<a id="LIVE" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Directs</a>';
+						}
 						if (navTab) {
 							$('#nav').prepend(navTab);
 						}
@@ -648,6 +666,7 @@ if (widthTot - widthElmt > 10)
                 tabFooters["BHV"] = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos Basket/Hand/Volley>>></a>";
                 tabFooters["CYCLISME"] = "<a href=\"http://www.lequipe.fr/Cyclisme/index.html\" target=\"_blank\">Plus d'infos Cyclisme>>></a>";
                 tabFooters["AUTRES"] = "<a href=\"http://www.lequipe.fr/Aussi/index.html\" target=\"_blank\">Plus d'infos Autres Sports>>></a>";
+				tabFooters["LIVE"] = "<a href=\"http://www.lequipe.fr/direct_data.html\" target=\"_blank\">Tous les directs>>></a>";
                 
 				$('#titreHeader').text(nav).parent().attr('class', nav);
 				if (lastNav) {

@@ -293,29 +293,26 @@ function afficheItem(item, directionAnim)
 
 function loadFooter(nav)
 {
-	
-	
-                        
         var tabFooters;
         switch(nav) {
-			case "video": 
+			case "general_video": 
 				 tabFooters  = "<a href=\"http://videos.lequipe.fr\" target=\"_blank\">Plus de video >>></a>";
 				break;
-			case "general": ;
-			case "tous":
+			case "general_tous":
 			     tabFooters  = "<a href=\"http://www.lequipe.fr\" target=\"_blank\">Plus d'infos >>></a>";
 				break;
-			case "foot":
+			case "foot": ;
+			case "foot_trf":
 			     tabFooters  = "<a href=\"http://www.lequipe.fr/Football/index.html\" target=\"_blank\">Plus d'infos Football >>></a>";
 				break;
 			case "auto_auto_moto": ;
-			case "moto": ;
-			case "rallye" : ;
-			case "auto":
+			case "auto_moto": ;
+			case "auto_rallye" : ;
+			case "auto_formule1":
 			     tabFooters  = "<a href=\"http://www.lequipe.fr/Formule1/index.html\" target=\"_blank\">Plus d'infos Auto/Moto>>></a>";
 				break;
 			case "tenis" : ;
-			case "golf" : ;
+			case "tennis_golf" : ;
 			case "tennis":
 			     tabFooters  = "<a href=\"http://www.lequipe.fr/Tennis/index.html\" target=\"_blank\">Plus d'infos Tennis>>></a>";
 				break;
@@ -323,8 +320,8 @@ function loadFooter(nav)
 			     tabFooters  = "<a href=\"http://www.lequipe.fr/Rugby/index.html\" target=\"_blank\">Plus d'infos Rugby>>></a>";
 				break;
 			case "bhv_basket" : ;
-			case "volley" :;
-			case "hand": ;
+			case "bhv_volley" :;
+			case "bhv_hand": ;
 			case "bhv":
 			     tabFooters  = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos Basket/Hand/Volley>>></a>";
 				break;
@@ -342,54 +339,52 @@ function loadHeader(nav){
                         
         var tabHeader;
         switch(nav) {
-			case "video": 
+			case "general_video": 
 				 tabHeader  = "Videos";
 				 classheader = "video";
 				break;
-			case "general": ;
+			case "general_tous": ;
 			case "tous":
 			     tabHeader  = "Tous";
-				  classheader = "video";
+				 classheader = "video";
 				break;
-			case "foot":
+			case "foot": ;
+			case "foot_trf":
 			     tabHeader  = "Football";
 				  classheader = "foot";
 				break;
 			case "auto_auto_moto": ;
-			case "moto": ;
-			case "rallye" : ;
-			case "auto":
-			     tabHeader  = "Auto/Moto";
-				  classheader = "auto";
+			case "auto_moto": ;
+			case "auto_formule1": ;
+			case "auto_rallye" :
+			    tabHeader  = "Auto/Moto";
+				classheader = "auto";
 				break;
 			case "tenis" : ;
-			case "golf" : ;
+			case "tennis_golf" : ;
 			case "tennis":
-			     tabHeader  = "Tennis/Golf";
-				  classheader = "tennis";
+			    tabHeader  = "Tennis/Golf";
+				classheader = "tennis";
 				break;
 			case "rugby":
-			     tabHeader  = "Rugby";
-				  classheader = "rugby";
+			    tabHeader  = "Rugby";
+				classheader = "rugby";
 				break;
-			case "bhv_basket" : ;
-			case "volley" :;
-			case "hand": ;
+			case "bhv_basket": ;
+			case "bhv_volley": ;
+			case "bhv_hand": ;
 			case "bhv":
-			     tabHeader  = "Basket/Hand/Volley";
-				  classheader = "bhv";
+			    tabHeader  = "Basket/Hand/Volley";
+				classheader = "bhv";
 				break;
 			case "cyclisme":
-			     tabHeader  = "Cyclisme";
-				  classheader = "cyclisme";
+			    tabHeader  = "Cyclisme";
+				classheader = "cyclisme";
 				break;
 			default: 
 				tabHeader = "Autres Sports";
-				 classheader = "autres";
-		}      
-        
-       
-        
+				classheader = "autres";
+		} 
         $("#entete_titre").text(tabHeader).parent().addClass(classheader);
  }
 						
@@ -414,9 +409,14 @@ function affichePrec()
 	afficheItem(item, "right");
 }
 
+function getUrlItem() {
+	var item = eval("a="+decodeURIComponent(window.location.search.substring(1)));
+	return item;
+}
+
 function init () {
 	console.log(window.location.search);
-	var item = eval("a="+decodeURIComponent(window.location.search.substring(1)));
+	var item = getUrlItem();
 	afficheItem(item, 'begin');
 	loadFooter(item.type);
 	loadHeader(item.type);
