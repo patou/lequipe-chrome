@@ -288,6 +288,7 @@ function afficheItem(item, directionAnim)
 	$('#entete_unread').text(currentUnreadItem+' alertes non lus');
 	$('.notif_pt_rouge').removeClass('notif_pt_rouge');
 	$('#notif_nav_'+currentTabId).addClass('notif_pt_rouge');
+	startClose();
 }
 
 
@@ -412,6 +413,25 @@ function affichePrec()
 function getUrlItem() {
 	var item = eval("a="+decodeURIComponent(window.location.search.substring(1)));
 	return item;
+}
+
+var intervalID = 0;
+
+function getCloseInterval() {
+	if (localStorage["__fermeture_notification"]) {
+		return localStorage["__fermeture_notification"] * 1000;
+	}
+	return 10000;
+}
+
+function startClose() {
+	if (intervalID != 0) {
+		clearInterval(intervalID);
+	}
+	var closeInterval = getCloseInterval();
+	if (closeInterval > 0) {
+		intervalID = setTimeout("window.close();", getCloseInterval());
+	}
 }
 
 function init () {

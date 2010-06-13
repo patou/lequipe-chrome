@@ -116,6 +116,21 @@ function restore_options() {
 	localStorage["__rafraichissement"] = option.value;
 	chrome.extension.getBackgroundPage().init();
   }
+  var fermeture_notification = localStorage["__fermeture_notification"];
+  if (!fermeture_notification) {
+	fermeture_notification = 10;
+  }
+  var select_fermeture_notification = document.getElementById("fermeture_notification");
+  for (var i = 0; i < select_fermeture_notification.options.length; i++) {
+	var option = select_fermeture_notification.options[i];
+	if (option.value == fermeture_notification) {
+		option.selected = true;
+	}
+  }
+  select_fermeture_notification.onchange = function(e) {
+	var option = e.target[e.target.selectedIndex];
+	localStorage["__fermeture_notification"] = option.value;
+  }
   $("input#__notification").click(function(){
 		var checked = $(this).attr("checked");
 		console.log(checked);
@@ -137,7 +152,9 @@ function restore_options() {
 }
 
 function deleteDb() {
-	chrome.extension.getBackgroundPage().deleteRecord();
+	if (confirm("Attention, tous les items que vous avez déjà lu vous seront de nouveau notifié")) {
+		chrome.extension.getBackgroundPage().deleteRecord();
+	}
 }
 </script>
 </head>
@@ -306,7 +323,7 @@ function deleteDb() {
 />Live <b>Hippisme</b> <input type="checkbox" name="_live_hippisme_notification" id="_live_hippisme_notification" value="true" class="flux_notification"/></label>
 </fieldset>
 <br />
-<label>Taux de raffraichissement (en secondes) : <select
+<label>Taux de raffraichissement : <select
 	name="rafraichissement" id="rafraichissement"
 >
 	<option value="5">5 secondes</option>
@@ -316,10 +333,21 @@ function deleteDb() {
 	<option value="600">10 minutes</option>
 	<option value="1800">30 minutes</option>
 	<option value="3600">1 heure</option>
+</select></label>
+<br />
+<label>Fermeture automatique des notification : <select
+	name="fermeture_notification" id="fermeture_notification"
+>
+	<option value="0">Jamais</option>
+	<option value="2">2 secondes</option>
+	<option value="5">5 secondes</option>
+	<option value="10">10 secondes</option>
+	<option value="15">15 secondes</option>
 </select></label><br />
 <label><input type="checkbox" name="__notification" id="__notification" value="true" />
 Me notifier à chaque nouvelle information <br />
 (popup de notification en bas à droite de l'écran) </label>
+<br />
 <input type="button" value="Nettoyer la base de donnée" onclick="deleteDb();" />
 </div>
 </body>
