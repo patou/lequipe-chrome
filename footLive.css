@@ -1017,6 +1017,9 @@ p.scx {
 	float: left;
 	width: 80px !important;
 	display: inline;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .logo1 {
@@ -1030,5 +1033,11 @@ p.scx {
 	width: 160px !important;
 	display: inline ;
 	
+}
+
+.eq1, .eq2 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 */

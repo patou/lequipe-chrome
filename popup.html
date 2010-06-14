@@ -554,6 +554,12 @@
 			.logo1 img, .logo2 img {
 				width: 55px !important;
 			}
+			
+			.eq1, .eq2 {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
         </style>
         <script type="text/javascript">
             var db;
@@ -605,7 +611,7 @@
 			{
 				$('#DIV_CONTENT').text("");
 				
-				var req = "SELECT * FROM Lives WHERE read = ?  AND date LIKE ?"; //
+				var req = "SELECT * FROM Lives WHERE read = ?  AND date LIKE ? ORDER BY heure DESC"; //
 				
 				today = new Date();
 				
@@ -664,10 +670,10 @@
 					    return 'Terminé.';
 						break;
 					case "DM":
-					    return '1er Mi-temps';
+					    return '1e Mi-temps';
 						break;
 					case "RM":
-					    return '2ieme Mi-temps';
+					    return '2e Mi-temps';
 						break;
 					case "M":
 					    return 'Mi-temps';
@@ -679,7 +685,7 @@
 					    return 'En cours';
 						break;
 					default: 
-						return statut;
+						return '';
 				}
 			}
 			
@@ -779,9 +785,9 @@
 				//  <div class="sc1">                    0                    </div>
 				html += '<div class="statutTennis">';
 				
-					html += item['temps']+'</div>';
+				html += item['temps']+'</div>';
 					
-					if (item['score']!= '')
+					if (item['score'] && item['score']!= '-')
 					{
 						var score = item['score'].split(' ');
 						html += '<table class="tennis_table">';
@@ -1051,7 +1057,6 @@
                 <div id="next" onclick="scroll('DIV_CONTENT', '+')">
                 </div>
                 <a id="readAll" href="#" onclick="chrome.extension.getBackgroundPage().setReadAllItems();">Tout marquer comme lu</a>
-                </input>
             </div>
             <div class="clear">
             </div>
