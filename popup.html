@@ -569,7 +569,7 @@
             
                 var hauteur = parseInt($("#" + cible).parent().css('height'));
                 var top = parseInt($("#" + cible).css('top'));
-                if (sens == '+' && top < 0) {
+                if (sens == '+' && top <= 0) {
                     $("#" + cible).animate({
                         'top': '+=' + hauteur + 'px'
                     }, 'slow');
@@ -837,10 +837,9 @@
             
             function init(){
                 db = openDatabase("Equipe.fr", "1.0", "Items database", 200000);
-                function onError(tx, error){
+                function onError(tx, error) {
                     console.log(error.message);
                 }
-                
                 
                 loadNavTab();
                 loadDiv();
@@ -897,122 +896,5 @@
             <div class="clear">
             </div>
         </div>
-		<!--
-        <div class='liveHead FOOT'>
-            Live football 
-        </div>
-        <div class="clear">
-        </div>
-        <div id="match" class="score">
-            <div class="board">
-                <div class="logo1">
-                    <img src="http://img.lequipe.fr/Football/logos/FootballLogo948_s60.gif" />
-					<br/><a href="http://www.lequipe.fr/Football/FootballFicheClub948.html" target="_blank" class="eq1">ALGERIE</a>
-                </div>
-                <div class="scx">
-                    <div class="sc1">
-                        0
-                    </div>
-                    <div class="statut">
-                        2e période
-                    </div>
-                    <div class="sc2">
-                        0
-                    </div>
-                </div>
-                <div class="logo2">
-                <img src="http://img.lequipe.fr/Football/logos/FootballLogo156_s60.gif" />
-				<br/><a href="http://www.lequipe.fr/Football/FootballFicheClub156.html" target="_blank" class="eq2">SLOVENIE</a>
-                
-            </div>
-        </div>
-        </div>
-        <div class='liveHead TENNIS'>
-            Live Tennis 
-        </div>
-        <div class="clear">
-        </div>
-        <div id="match" class="score">
-            <div class="board">
-                <div class="logo1">
-                    <img src="http://img.lequipe.fr/Tennis/photos/TennisImage841.jpg" width="60"/>
-					<br/><a href="http://www.lequipe.fr/Tennis/TFJM_841.html" target="_blank" class="eq1">LLEYTON HEWITT</a>
-                </div>
-                <div class="scx">
-                    <div class="statut">
-                        En cours
-						<br/>
-						Score : 6-4-2 4-3-2
-                    </div>
-                </div>
-                <div class="logo2">
-                <img src="http://img.lequipe.fr/Tennis/photos/TennisImage676.jpg" width="60" />
-				<br/><a href="http://www.lequipe.fr/Tennis/TFJM_676.html" target="_blank" class="eq2">ROGER FEDERER</a>
-               
-            </div>
-        </div>
-    </div>
-	 <div class="clear">
-        </div>
-	<div class='liveHead BHV'>
-            Live Basket 
-        </div>
-        <div class="clear">
-        </div>
-        <div id="match" class="score">
-            <div class="board">
-                <div class="logo1">
-                    <img src="http://www.lequipe.fr/Basket/logos/BasketLogo12_s60.gif" /><br/>Limoge
-                </div>
-                <div class="scx">
-                    <div class="sc1">
-                        50
-                    </div>
-                    <div class="statut">
-                        2e période
-                    </div>
-                    <div class="sc2">
-                        43
-                    </div>
-                </div>
-                <div class="logo2">
-                <img src="http://www.lequipe.fr/Basket/logos/BasketLogo9_s60.gif" /><br/>Pau
-               
-            </div>
-        </div>
-      </div>
-		 <div class="clear">
-        </div>
-		
-		<div class='liveHead BHV'>
-            Live Basket : 
-        </div>
-        <div class="clear">
-        </div>
-        <div id="match" class="score">
-            <div class="board">
-                <div class="logo1">
-                    <img src="http://www.lequipe.fr/Basket/logos/BasketLogo12_s60.gif" /><br/>Limoge
-                </div>
-                <div class="scx">
-                    <div class="sc1">
-                        50
-                    </div>
-                    <div class="statut">
-                        2e période
-                    </div>
-                    <div class="sc2">
-                        43
-                    </div>
-                </div>
-                <div class="logo2">
-                <img src="http://www.lequipe.fr/Basket/logos/BasketLogo9_s60.gif" /><br/>Pau
-               
-            </div>
-        </div>
-      </div>
-		 <div class="clear">
-        </div>
-		-->
     </body>
 </html>
