@@ -63,7 +63,7 @@ ul {
                 color: #000 !important
             }
             
-            .foot {
+            .foot, .cm2010 {
                 background-color: #78A130 !important;
                 color: #FFF !important
             }
@@ -307,6 +307,9 @@ function loadFooter(nav)
 			case "foot_trf":
 			     tabFooters  = "<a href=\"http://www.lequipe.fr/Football/index.html\" target=\"_blank\">Plus d'infos Football >>></a>";
 				break;
+			case "allo_foot":
+			    tabFooters  = "<a href=\"http://www.lequipe.fr/Allos/cm2010/ALLO_CDM.html\" target=\"_blank\">Direct Coupe du Monde >>></a>";
+				break;
 			case "auto_auto_moto": ;
 			case "auto_moto": ;
 			case "auto_rallye" : ;
@@ -353,6 +356,10 @@ function loadHeader(nav){
 			case "foot": ;
 			case "foot_trf":
 			     tabHeader  = "Football";
+				  classheader = "foot";
+				break;
+			case "allo_foot":
+			     tabHeader  = "Coupe du Monde 2010 en direct : ";
 				  classheader = "foot";
 				break;
 			case "auto_auto_moto": ;
