@@ -5,7 +5,7 @@
 				}
 				html += '</a></div>';
 			//function displayDirect(item) {
-				//html = '<div><div class="liveHead '+item['sport']+'">Live '+item['sport']+': '+item['competition']+' '+item['journee']+'<br/> le '+item['date']+' ‡ '+item['heure']+'</a></div>'
+				//html = '<div><div class="liveHead '+item['sport']+'">Live '+item['sport']+': '+item['competition']+' '+item['journee']+'<br/> le '+item['date']+' √† '+item['heure']+'</a></div>'
 				html += '<div id="match" class="score"><div class="board">';
 				switch(item['sport']) {
 					case "FOOT":									
@@ -33,14 +33,14 @@
 			}
 			
 			function displayDateTime(item) {
-				return 'le '+item['date']+' ‡ '+item['heure'];
+				return 'le '+item['date']+' √† '+item['heure'];
 			}
 			
 			function afficheStatut (statut)
 			{
 				switch(statut) {
 					case "T":
-					    return 'Termin&eacutes;.';
+					    return 'Termin√©.';
 						break;
 					case "DM":
 					    return '1e Mi-temps';
