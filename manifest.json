@@ -1,6 +1,6 @@
 {
   "name": "L'Equipe.fr",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "Affiche les résultats sportifs des informations venant du site l'Equipe.fr",
   "icons": {
 	"16" : "favicon.png",
