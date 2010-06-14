@@ -711,6 +711,14 @@
 							
 							$('#DIV_CONTENT').prepend(html);
 						}
+						$('img[src*=Medias]').each(function (){
+							var img = $(this);
+							var src = img.attr("src");
+							if (src.indexOf("http://") != 0) {
+								img.attr("src", "http://img.lequipe.fr" + (src.charAt(0) == "/"?"":"/") + src);
+							}
+							img.attr('height', 60).attr('width', 60);
+						});
 					});
 				});
 				

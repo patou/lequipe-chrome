@@ -113,7 +113,7 @@ function restore_options() {
   //Rafraichissement
   var rafraichissement = localStorage["__rafraichissement"];
   if (!rafraichissement) {
-	rafraichissement = 10;
+	rafraichissement = 600;
   }
   var select = document.getElementById("rafraichissement");
   for (var i = 0; i < select.options.length; i++) {
@@ -129,7 +129,7 @@ function restore_options() {
   }
   var fermeture_notification = localStorage["__fermeture_notification"];
   if (!fermeture_notification) {
-	fermeture_notification = 10;
+	fermeture_notification = 30;
   }
   var select_fermeture_notification = document.getElementById("fermeture_notification");
   for (var i = 0; i < select_fermeture_notification.options.length; i++) {
@@ -345,7 +345,6 @@ function deleteDb() {
 <label>Taux de raffraichissement : <select
 	name="rafraichissement" id="rafraichissement"
 >
-	<option value="5">5 secondes</option>
 	<option value="30">30 secondes</option>
 	<option value="60">1 minute</option>
 	<option value="300">5 minutes</option>
@@ -354,14 +353,15 @@ function deleteDb() {
 	<option value="3600">1 heure</option>
 </select></label>
 <br />
-<label>Fermeture automatique des notification : <select
+<label>Fermeture automatique des notifications : <select
 	name="fermeture_notification" id="fermeture_notification"
 >
 	<option value="0">Jamais</option>
-	<option value="2">2 secondes</option>
-	<option value="5">5 secondes</option>
 	<option value="10">10 secondes</option>
 	<option value="15">15 secondes</option>
+	<option value="30">30 secondes</option>
+	<option value="60">1 minute</option>
+	<option value="120">2 minutes</option>
 </select></label><br />
 <label><input type="checkbox" name="__notification" id="__notification" value="true" />
 Me notifier à chaque nouvelle information <br />
