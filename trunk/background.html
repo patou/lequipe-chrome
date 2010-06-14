@@ -509,9 +509,12 @@ function setReadItem(id) {
 	});
 }
 
-function setReadAllItems() {
+function setReadAllItems(fct) {
 	setReadAllRecord(function () {
 		countUnread(function(n){chrome.browserAction.setBadgeText({text :n.toString()});});
+		if (fct && typeof fct == "function") {
+			fct();
+		}
 	});
 }
 
