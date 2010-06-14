@@ -164,7 +164,7 @@ function restore_options() {
 
 function deleteDb() {
 	if (confirm("Attention, tous les items que vous avez déjà lu vous seront de nouveau notifié")) {
-		chrome.extension.getBackgroundPage().deleteRecord();
+		chrome.extension.getBackgroundPage().deleteAll();
 	}
 }
 </script>
