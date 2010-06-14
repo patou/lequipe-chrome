@@ -727,9 +727,9 @@
             }
             
             function correctImg(html){
-                var i = html.indexOf("/Medias/");
+                var i = html.indexOf("\"/Medias/");
                 if (i != -1) {
-                    html = html.substr(0, i) + 'http://img.lequipe.fr' + html.substr(i);
+                    html = html.substr(0, i + 1) + 'http://img.lequipe.fr' + html.substr(i + 1);
                 }
                 return html;
             }
@@ -828,6 +828,12 @@
                 lastNav = nav;
                 $("#footer, #header").html(tabFooters[nav]);
             }
+			
+			function markAllRead() {
+				chrome.extension.getBackgroundPage().setReadAllItems(function () {
+					$('#DIV_CONTENT').empty();
+				});
+			}
             
             function init(){
                 db = openDatabase("Equipe.fr", "1.0", "Items database", 200000);
@@ -886,7 +892,7 @@
                 </div>
                 <div id="next" onclick="scroll('DIV_CONTENT', '+')">
                 </div>
-                <a id="readAll" href="#" onclick="chrome.extension.getBackgroundPage().setReadAllItems();">Tout marquer comme lu</a>
+                <a id="readAll" href="#" onclick="markAllRead();">Tout marquer comme lu</a>
             </div>
             <div class="clear">
             </div>
