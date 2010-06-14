@@ -2,7 +2,11 @@
   "name": "L'Equipe.fr",
   "version": "1.0",
   "description": "Affiche les résultats sportifs des informations venant du site l'Equipe.fr",
-  "icons": {"16" : "favicon.png"},
+  "icons": {
+	"16" : "favicon.png",
+	"32" : "32x32.png",
+	"64" : "64x64.png",
+  },
   "browser_action": {
     "default_title": "L'Equipe.fr",
     "default_icon": "equipe.png",
