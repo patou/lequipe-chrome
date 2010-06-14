@@ -1,9 +1,11 @@
 			function displayDirect(item, popupDisplay) {
-				html = '<div><div class="liveHead '+item['sport']+'">Live '+item['sport']+': '+item['competition']+' '+item['journee'];
+				html = '<div><div class="liveHead '+item['sport']+'"> <a href="'+item['lien']+'" target=_blank" > Live '+item['sport']+': '+item['competition']+' '+item['journee'];
 				if (popupDisplay) {
 					html += '<br/> '+ displayDateTime(item);
 				}
-				html += '</div>';
+				html += '</a></div>';
+			//function displayDirect(item) {
+				//html = '<div><div class="liveHead '+item['sport']+'">Live '+item['sport']+': '+item['competition']+' '+item['journee']+'<br/> le '+item['date']+' à '+item['heure']+'</a></div>'
 				html += '<div id="match" class="score"><div class="board">';
 				switch(item['sport']) {
 					case "FOOT":									

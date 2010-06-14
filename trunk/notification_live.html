@@ -6,7 +6,7 @@
 <script type="text/javascript" src="jquery-1.4.2.js"></script>
 <script type="text/javascript" src="directLive.js"></script>
 <meta http-equiv=Content-Type content="text/html; charset=utf-8">
-<style type="text/css">
+<style type="text/css" >
 a {
 	text-decoration: none;
 }
@@ -208,6 +208,10 @@ width: 98%;
 .logo1 img, .logo2 img {
 	width: 35px !important;
 }
+.logo1, .logo2 {
+	width: 30px !important;
+	font-size: 9px !important; 
+}
 
 .eq1, .eq2 {
 	overflow: hidden;
@@ -218,6 +222,38 @@ width: 98%;
 .liveHead {
 	font-size: 11px !important;
 	height: 18px !important;
+}
+
+#match {
+	border-top: none !important;
+	margin: 0px !important;
+	overflow: hidden;
+	width: 300px !important;
+}
+
+.score {
+	background-position-x : -260px;
+}
+
+.statut {
+	position: absolute !important;
+	top: 60px !important;
+	z-index: 50 !important;
+	font-size: 12px !important;
+}
+
+.logo1, .logo2, .scx, sc1, .sc2 {
+	margin: 0px !important;
+	padding: 0px !important;
+	height: 80px !important;
+	background: none;
+}
+
+.scx {
+	width: 210px !important;
+	height: 90px !important;
+	overflow: hidden;
+	
 }
 </style>
 <script type="text/javascript">
@@ -266,6 +302,7 @@ function init () {
 <div class='notification' id="DIV_CONTENT">
 <div class="content" id="content"></div>
 </div>
+
 
 <div id="notif_nav">
 	<div id="plusInfo" ><a href="http://www.lequipe.fr/direct_data.html" target="_blank">Tous les directs >>></a></div>
