@@ -126,8 +126,8 @@
                 color: #FFF !important
             }
             
-            a#GENERAL:hover, .GENERAL, a.selected#GENERAL {
-                background-color: #D60000 !important;
+            a#CM2010:hover, .CM2010, a.selected#CM2010 {
+                background-color: #84AD09 !important;
                 color: #FFF !important
             }
             
@@ -648,11 +648,7 @@
             
 			if (type == 'LIVE') {
 				loadDirect();
-			}
-			else {
-			
-			
-			
+			} else {
 				$('#DIV_CONTENT').text("");
 				
 				var req = "SELECT * FROM Items WHERE read = ? AND type LIKE ?";
@@ -661,42 +657,27 @@
 				
 				if (type == "GENERAL") {
 					categorie = "general%";
-				}
-				else 
-				if (type == "FOOT") {
+				} else if (type == "FOOT") {
 					categorie = "foot%";
-				}
-				else 
-					if (type == "AUTO") {
+				} else if (type == "AUTO") {
 					categorie = "auto%";
+				} else if (type == "TENNIS") {
+					categorie = "tennis%";
+				} else if (type == "RUGBY") {
+					categorie = "rugby%";
+				} else if (type == "BHV") {
+					categorie = "bhv%";
+				} else if (type == "CYCLISME") {
+					categorie = "cyclisme%";
+				} else if (type == "AUTRES") {
+					categorie = "autre%";
+				} else if (type == "LIVE") {
+					categorie = "live%";
+				} else if (type == "CM2010") {
+					categorie = "allo%";
+				} else {
+					type = "TOUS";
 				}
-					else 
-						if (type == "TENNIS") {
-							categorie = "tennis%";
-						}
-						else 
-							if (type == "RUGBY") {
-								categorie = "rugby%";
-							}
-							else 
-								if (type == "BHV") {
-									categorie = "bhv%";
-								}
-								else 
-									if (type == "CYCLISME") {
-										categorie = "cyclisme%";
-									}
-									else 
-										if (type == "AUTRES") {
-											categorie = "autre%";
-										}
-										else 
-											if (type == "LIVE") {
-												categorie = "live%";
-											}
-											else {
-												type = "TOUS";
-											}
 				
 				// Selection des Items :
 				db.transaction(function(tx){
@@ -727,7 +708,7 @@
             }
             
             function correctImg(html){
-                var i = html.indexOf("\"/Medias/");
+                var i = html.indexOf('\"/Medias/');
                 if (i != -1) {
                     html = html.substr(0, i + 1) + 'http://img.lequipe.fr' + html.substr(i + 1);
                 }
@@ -737,55 +718,64 @@
             function loadNavTab(){
                 var feeds = chrome.extension.getBackgroundPage().getFeedsList();
                 var feedName;
-                var navTab;
                 var tabs = {};
                 $('#nav').empty();
+
                 for (var i = 0; i < feeds.length; i++) {
                     if (typeof feeds[i] == "object") {
                         feedName = feeds[i].key;
-                        navTab = false;
                         if (feedName.indexOf("general") == 0 && !tabs["general"]) {
                             tabs["general"] = true;
-                            navTab = '<a id="GENERAL" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Général</a>';
                         }
                         if (feedName.indexOf("foot") == 0 && !tabs["foot"]) {
                             tabs["foot"] = true;
-                            navTab = '<a id="FOOT" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Football</a>';
                         }
                         if (feedName.indexOf("auto") == 0 && !tabs["auto"]) {
                             tabs["auto"] = true;
-                            navTab = '<a id="AUTO" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Auto</a>';
                         }
                         if (feedName.indexOf("tennis") == 0 && !tabs["tennis"]) {
                             tabs["tennis"] = true;
-                            navTab = '<a id="TENNIS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tennis</a>';
                         }
                         if (feedName.indexOf("rugby") == 0 && !tabs["rugby"]) {
                             tabs["rugby"] = true;
-                            navTab = '<a id="RUGBY" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Rugby</a>';
                         }
                         if (feedName.indexOf("bhv") == 0 && !tabs["bhv"]) {
                             tabs["bhv"] = true;
-                            navTab = '<a id="BHV" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Basket/Hand/Volley</a>';
                         }
                         if (feedName.indexOf("cyclisme") == 0 && !tabs["cyclisme"]) {
                             tabs["cyclisme"] = true;
-                            navTab = '<a id="CYCLISME" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Cyclisme</a>';
                         }
                         if (feedName.indexOf("autre") == 0 && !tabs["autre"]) {
                             tabs["autre"] = true;
-                            navTab = '<a id="AUTRES" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Autres</a>';
                         }
                         if (feedName.indexOf("live") == 0 && !tabs["live"]) {
                             tabs["live"] = true;
-                            navTab = '<a id="LIVE" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Directs</a>';
-                        }
-                        if (navTab) {
-                            $('#nav').prepend(navTab);
                         }
                     }
                 }
-                if (feeds.length > 0) {
+				
+				// permet d'ordonner les onglets
+				if(tabs["autre"])
+					$('#nav').prepend('<a id="AUTRES" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Autres</a>');
+				if(tabs["cyclisme"])
+					$('#nav').prepend('<a id="CYCLISME" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Cyclisme</a>');
+				if(tabs["bhv"])
+					$('#nav').prepend('<a id="BHV" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Basket/Hand/Volley</a>');
+				if(tabs["rugby"])
+					$('#nav').prepend('<a id="RUGBY" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Rugby</a>');
+				if(tabs["tennis"])
+					$('#nav').prepend('<a id="TENNIS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tennis</a>');
+				if(tabs["auto"])
+					$('#nav').prepend('<a id="AUTO" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Auto</a>');
+				if(tabs["foot"])
+					$('#nav').prepend('<a id="FOOT" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Football</a>');
+				if(tabs["general"])
+					$('#nav').prepend('<a id="GENERAL" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Général</a>');
+				if(tabs["live"])
+					$('#nav').prepend('<a id="LIVE" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Directs</a>');
+				// ALLO
+				$('#nav').prepend('<a id="CM2010" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">CM 2010</a>');
+				if (feeds.length > 0) {
                     $('#nav').prepend('<a id="TOUS" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Tous</a>');
                 }
             }
