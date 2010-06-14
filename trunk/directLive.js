@@ -1,5 +1,9 @@
-			function displayDirect(item) {
-				html = '<div><div class="liveHead '+item['sport']+'">Live '+item['sport']+': '+item['competition']+' '+item['journee']+'<br/> le '+item['date']+' à '+item['heure']+'</div>'
+			function displayDirect(item, displayDateTime) {
+				html = '<div><div class="liveHead '+item['sport']+'">Live '+item['sport']+': '+item['competition']+' '+item['journee'];
+				if (displayDateTime) {
+					html += '<br/> '+ displayDateTime(item);
+				}
+				html += '</div>';
 				html += '<div id="match" class="score"><div class="board">';
 				switch(item['sport']) {
 					case "FOOT":									
@@ -24,6 +28,10 @@
 				html += '</div> </div>';
 				html += '<div class="clear"></div></div>';
 				return html;
+			}
+			
+			function displayDateTime(item) {
+				return 'le '+item['date']+' à '+item['heure'];
 			}
 			
 			function afficheStatut (statut)
