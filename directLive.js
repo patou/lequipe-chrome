@@ -40,7 +40,7 @@
 			{
 				switch(statut) {
 					case "T":
-					    return 'Terminé.';
+					    return 'Termin&eacutes;.';
 						break;
 					case "DM":
 					    return '1e Mi-temps';
