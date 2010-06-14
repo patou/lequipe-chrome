@@ -342,7 +342,7 @@
                 margin-top: -1px
             }
 
-
+/*
 .megaban {
     width: 975px;
     float: left;
@@ -1371,7 +1371,7 @@ p.scx {
 	width: 80px !important;
 	display: inline;
 }
-
+*/
 .scx {
 	float: left;
 	width: 160px !important;
@@ -1408,24 +1408,24 @@ p.scx {
             
             .score {
                 background: #F8F8F8 url(http://img.lequipe.fr/img_v5/degrade_live_v2.jpg) repeat-y;
-                background-position-x: -180px;
+                background-position-x: -250px;
                 width: 500px;
             }
             
             .board {
-                height: 110px;
+                height: 90px;
             }
             
             .sc1, .sc2 {
                 float: left;
                 width: 55px;
-                 height: 75px;
+                height: 75px;
                 color: #FFFFFF;
                 font-size: 45px;
                 font-weight: bolder;
                 font-family: Century Gothic, Trebuchet MS, Arial;
                 background: #F8F8F8 url(http://img.lequipe.fr/img_v5/icon_Foot_score.jpg) no-repeat;
-                margin: 0px 10px 0px 10px;
+                margin: 0px 1px 0px 1px;
                 padding: 15px 0px 0px 15px;
 				text-align: center;
 				
@@ -1448,32 +1448,32 @@ p.scx {
             .scx {
                 padding-left: 0px;
                 padding-right: 0px;
-				 height: 110px;
+				height: 110px;
 				text-align: center;
                 margin: 0px 0px 0px 20px;
             }
             
             .logo2 {
                 float: left;
-                width: 80px !important;
+                width: 40px !important;
 				text-align: center;
-				font-size: 13px;
+				font-size: 11px;
             }
             
             .statut {
                 float: left;
                 display: block;
-                 height: 110px;
+                height: 110px;
                 margin: 20px 5px 0px 5px;
 				text-align: center;
-				width: 120px;
-				font-size: 18px;
+				width: 20px;
+				font-size: 10px;
 				font-weight: bold;
             }
 			.statutTennis {
                display: block;
 				float: left;
-				font-size: 16px;
+				font-size: 12px;
 				font-weight: bold;
 				text-align: center;
 				width: 100%;
@@ -1481,9 +1481,9 @@ p.scx {
             
             .logo1 {
                 float: left;
-                width: 80px !important;
+                width: 40px !important;
 				text-align: center;
-				font-size: 13px;
+				font-size: 11px;
             }
             
             .scx {
@@ -1492,8 +1492,8 @@ p.scx {
             }
             
             .liveHead {
-                font-size: 16px;
-				height: 40px;
+                font-size: 12px;
+				height: 20px;
 				text-align: center;
 				width: 100%;
             }
@@ -1504,6 +1504,6 @@ p.scx {
 			}
 			
 			.tennis_table td {
-				width: 50px;
+				width: 25px;
 				
 			}
