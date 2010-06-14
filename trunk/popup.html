@@ -330,7 +330,8 @@
                 position: absolute;
                 top: 0;
                 left: 0;
-                height: 400px
+                height: 400px;
+				width: 100%;
             }
             
             .allo_home .nave {
@@ -726,7 +727,7 @@
             }
             
             function correctImg(html){
-                var i = html.indexOf('\"/Medias/');
+                var i = html.indexOf("\"/Medias/");
                 if (i != -1) {
                     html = html.substr(0, i + 1) + 'http://img.lequipe.fr' + html.substr(i + 1);
                 }
