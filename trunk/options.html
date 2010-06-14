@@ -60,6 +60,17 @@ label.flux_label {
 </style>
 <script type="text/javascript" src="jquery-1.4.2.js"></script>
 <script>
+var deferedInitTimeOut = 0;
+
+function deferedInit() {
+	if (deferedInitTimeOut) {
+		clearInterval(deferedInitTimeOut);
+	}
+	deferedInitTimeOut = setTimeOut(function () {
+		chrome.extension.getBackgroundPage().init();
+	}, 5000);
+}
+
 function save_flux(e) {
 	var checkbox = e.target;
 	var data = localStorage[checkbox.name];
@@ -80,7 +91,7 @@ function save_flux(e) {
 		}
 		
 	}
-	chrome.extension.getBackgroundPage().init();
+	deferedInit();
 }
 
 function restore_options() {
@@ -114,7 +125,7 @@ function restore_options() {
   select.onchange = function(e) {
 	var option = e.target[e.target.selectedIndex];
 	localStorage["__rafraichissement"] = option.value;
-	chrome.extension.getBackgroundPage().init();
+	deferedInit();
   }
   var fermeture_notification = localStorage["__fermeture_notification"];
   if (!fermeture_notification) {
@@ -161,7 +172,60 @@ function deleteDb() {
 <body onload="restore_options();">
 <div class="settings"><img src="logo_lequipe.png" />
 <p>Sélectionnez l'actualité des sports qui vous passionne. Si vous voulez suivre tous les sports, cocher le flux Général (qui reprend une grande partie des autres flux), sinon choisissez les sports un à un.</p>
-<fieldset><legend>Flux</legend> 
+<fieldset><legend>Directs Live</legend> 
+<div style="text-align:right; margin-right: 30px;">Activer la notification ↘</div>
+<div style="clear:both"></div>
+<label class="flux_label live"
+	style="background-color: #7AB114;"
+><input type="checkbox" name="allo_foot"  id="allo_foot"
+	value="http://www-ref.lequipe.fr/Allos/cm2010/rss/alloCM2010.xml"
+/>Direct <b>Coupe du Monde 2010</b> <input type="checkbox" name="_allo_foot_notification"  id="_allo_foot_notification" value="true" class="flux_notification"/>
+</label>
+<div class="section">
+<label class="flux_label live"
+	style="background-color: #D60000;"
+><input type="checkbox" name="live_tous"  id="live_tous"
+	value="TOUS"
+/>Live <b>Tous les sports</b> <input type="checkbox" name="_live_tous_notification"  id="_live_tous_notification" value="true" class="flux_notification"/>
+</label> <label class="flux_label live"
+	style="background-color: #7AB114;"
+><input type="checkbox" name="live_foot"  id="live_foot"
+	value="FOOT"
+/>Live <b>Football</b> <input type="checkbox" name="_live_foot_notification"  id="_live_foot_notification" value="true" class="flux_notification"/>
+</label>
+ 
+<label class="flux_label live"
+	style="background-color: #C65121;"
+><input type="checkbox" name="live_tennis"  id="live_tennis"
+	value="TENNIS"
+/>Live <b>Tennis</b> <input type="checkbox" name="_live_tennis_notification"  id="_live_tennis_notification" value="true" class="flux_notification"/>
+</label>
+<label class="flux_label live"
+	style="background-color: #5a7984;"
+><input type="checkbox" name="live_auto"  id="live_auto"
+	value="F1"
+/>Live <b>Auto-Moto</b> <input type="checkbox" name="_live_auto_notification"  id="_live_auto_notification" value="true" class="flux_notification"/>
+</label>
+<label class="flux_label live"
+	style="background-color: #BDB600;"
+><input type="checkbox" name="live_cyclisme"  id="live_cyclisme"
+	value="CYCLISME"
+/>Live <b>Cyclisme</b> <input type="checkbox" name="_live_cyclisme_notification" id="_live_cyclisme_notification" value="true" class="flux_notification"/></label>
+<label class="flux_label live"
+	style="background-color: #000084;"
+><input type="checkbox" name="live_bhv"  id="live_bhv"
+	value="CYCLISME"
+/>Live <b>Basket, Hand, Volley</b> <input type="checkbox" name="_live_bhv_notification" id="_live_bhv_notification" value="true" class="flux_notification"/></label>
+<label class="flux_label live"
+	style="background-color: #03ACAC;"
+><input type="checkbox" name="live_hippisme" id="live_hippisme"
+	value="HIPPISME"
+/>Live <b>Hippisme</b> <input type="checkbox" name="_live_hippisme_notification" id="_live_hippisme_notification" value="true" class="flux_notification"/></label>
+</div>
+</fieldset>
+<br />
+
+<fieldset><legend>News</legend> 
 <div style="text-align:right; margin-right: 30px;">Activer la notification ↘</div>
 <div style="clear:both"></div>
 <label class="flux_label rss"
@@ -276,51 +340,6 @@ function deleteDb() {
 	value="http://www-ref.lequipe.fr/Xml/Aussi/Titres/actu_rss_Natation.xml"
 />Flux Rss <b>Escrime</b> <input type="checkbox" name="_autre_escrime_notification"  id="_autre_escrime_notification" value="true" class="flux_notification"/>
 </label> </div>
-</fieldset>
-<fieldset><legend>Flux live</legend> <label class="flux_label live"
-	style="background-color: #D60000;"
-><input type="checkbox" name="live_tous"  id="live_tous"
-	value="TOUS"
-/>Live <b>Tous les sports</b> <input type="checkbox" name="_live_tous_notification"  id="_live_tous_notification" value="true" class="flux_notification"/>
-</label> <label class="flux_label live"
-	style="background-color: #7AB114;"
-><input type="checkbox" name="live_foot"  id="live_foot"
-	value="FOOT"
-/>Live <b>Football</b> <input type="checkbox" name="_live_foot_notification"  id="_live_foot_notification" value="true" class="flux_notification"/>
-</label>
- <label class="flux_label live"
-	style="background-color: #7AB114;"
-><input type="checkbox" name="allo_foot"  id="allo_foot"
-	value="http://www-ref.lequipe.fr/Allos/cm2010/rss/alloCM2010.xml"
-/>Direct <b>Coupe du Monde 2010</b> <input type="checkbox" name="_allo_foot_notification"  id="_allo_foot_notification" value="true" class="flux_notification"/>
-</label>
-<label class="flux_label live"
-	style="background-color: #C65121;"
-><input type="checkbox" name="live_tennis"  id="live_tennis"
-	value="TENNIS"
-/>Live <b>Tennis</b> <input type="checkbox" name="_live_tennis_notification"  id="_live_tennis_notification" value="true" class="flux_notification"/>
-</label>
-<label class="flux_label live"
-	style="background-color: #5a7984;"
-><input type="checkbox" name="live_auto"  id="live_auto"
-	value="F1"
-/>Live <b>Auto-Moto</b> <input type="checkbox" name="_live_auto_notification"  id="_live_auto_notification" value="true" class="flux_notification"/>
-</label>
-<label class="flux_label live"
-	style="background-color: #BDB600;"
-><input type="checkbox" name="live_cyclisme"  id="live_cyclisme"
-	value="CYCLISME"
-/>Live <b>Cyclisme</b> <input type="checkbox" name="_live_cyclisme_notification" id="_live_cyclisme_notification" value="true" class="flux_notification"/></label>
-<label class="flux_label live"
-	style="background-color: #000084;"
-><input type="checkbox" name="live_bhv"  id="live_bhv"
-	value="CYCLISME"
-/>Live <b>Basket, Hand, Volley</b> <input type="checkbox" name="_live_bhv_notification" id="_live_bhv_notification" value="true" class="flux_notification"/></label>
-<label class="flux_label live"
-	style="background-color: #03ACAC;"
-><input type="checkbox" name="live_hippisme" id="live_hippisme"
-	value="HIPPISME"
-/>Live <b>Hippisme</b> <input type="checkbox" name="_live_hippisme_notification" id="_live_hippisme_notification" value="true" class="flux_notification"/></label>
 </fieldset>
 <br />
 <label>Taux de raffraichissement : <select
