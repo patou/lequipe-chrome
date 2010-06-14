@@ -94,7 +94,8 @@
 					html += afficheStatut (item['statut']);
 					if (item['statut'] == 'DM' ||  item['statut'] == 'RM' )
 					{
-						html += ' <br/>'+item['temps']+' minutes';
+						if (popupDisplay) html += '</br>'
+						html += item['temps']+' minutes';
 					}
 					html += '</div>'; 
 				//}
