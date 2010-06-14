@@ -156,7 +156,7 @@
                 color: #FFF !important
             }
             
-            a#BHV:hover, .BHV, a.selected#BHV, .BASKET {
+            a#Basket-Hand-Volley:hover, .Basket-Hand-Volley, a.selected#Basket-Hand-Volley, .BASKET {
                 background-color: #000084 !important;
                 color: #FFF !important
             }
@@ -665,7 +665,7 @@
 					categorie = "tennis%";
 				} else if (type == "RUGBY") {
 					categorie = "rugby%";
-				} else if (type == "BHV") {
+				} else if (type == "Basket-Hand-Volley") {
 					categorie = "bhv%";
 				} else if (type == "CYCLISME") {
 					categorie = "cyclisme%";
@@ -760,7 +760,7 @@
 				if(tabs["cyclisme"])
 					$('#nav').prepend('<a id="CYCLISME" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Cyclisme</a>');
 				if(tabs["bhv"])
-					$('#nav').prepend('<a id="BHV" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Basket/Hand/Volley</a>');
+					$('#nav').prepend('<a id="Basket-Hand-Volley" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">BHV</a>');
 				if(tabs["rugby"])
 					$('#nav').prepend('<a id="RUGBY" href="#javascript" class="lienNav" onclick="loadDiv(this.id)">Rugby</a>');
 				if(tabs["tennis"])
@@ -805,7 +805,7 @@
                 tabFooters["AUTO"] = "<a href=\"http://www.lequipe.fr/Formule1/index.html\" target=\"_blank\">Plus d'infos Auto/Moto >>></a>";
                 tabFooters["TENNIS"] = "<a href=\"http://www.lequipe.fr/Tennis/index.html\" target=\"_blank\">Plus d'infos Tennis >>></a>";
                 tabFooters["RUGBY"] = "<a href=\"http://www.lequipe.fr/Rugby/index.html\" target=\"_blank\">Plus d'infos Rugby >>></a>";
-                tabFooters["BHV"] = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos Basket/Hand/Volley >>></a>";
+                tabFooters["Basket-Hand-Volley"] = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos Basket-Hand-Volley >>></a>";
                 tabFooters["CYCLISME"] = "<a href=\"http://www.lequipe.fr/Cyclisme/index.html\" target=\"_blank\">Plus d'infos Cyclisme >>></a>";
                 tabFooters["AUTRES"] = "<a href=\"http://www.lequipe.fr/Aussi/index.html\" target=\"_blank\">Plus d'infos Autres Sports >>></a>";
                 tabFooters["LIVE"] = "<a href=\"http://www.lequipe.fr/direct_data.html\" target=\"_blank\">Tous les directs >>></a>";
