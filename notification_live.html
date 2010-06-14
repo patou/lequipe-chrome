@@ -130,7 +130,7 @@ span.lower {
 #DIV_CONTENT {
 	height:84px; 
 	overflow:hidden;  
-	margin:2px 4px 2px 4px
+	margin: 0px;
 }
 
 .content 
@@ -205,6 +205,11 @@ width: 98%;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.liveHead {
+	font-size: 12px !important;
+	height: 28px !important;
+}
 </style>
 <script type="text/javascript">
 
@@ -243,10 +248,10 @@ function init () {
 </script>
 </head>
 <body onload="init();">
-<div class="entete tous" >
+<!--div class="entete tous" >
 	<span id="entete_titre">Directs </span>
 	<span id="entete_unread"></span>
-</div>
+</div-->
 
 <div class='notification' id="DIV_CONTENT">
 <div class="content" id="content"></div>
