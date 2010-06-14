@@ -163,7 +163,7 @@ function restore_options() {
 }
 
 function deleteDb() {
-	if (confirm("Attention, tous les items que vous avez déjà lu vous seront de nouveau notifié")) {
+	if (confirm("Attention !!! \nToutes les informations, déjà lues, vous seront de nouveau notifiées.\nNettoyer quand même ?")) {
 		chrome.extension.getBackgroundPage().deleteAll();
 	}
 }
