@@ -40,7 +40,7 @@
 			{
 				switch(statut) {
 					case "T":
-					    return 'TerminÃ©.';
+					    return 'Terminé.';
 						break;
 					case "DM":
 					    return '1e Mi-temps';
@@ -53,6 +53,9 @@
 						break;
 					case "V":
 					    return 'A venir';
+						break;
+					case "I":
+					    return 'Interrompu';
 						break;
 					case "E":
 					    return 'En cours';
@@ -86,11 +89,15 @@
 				{
 					html += '<div class="sc1">'+score[0]+'</div>';
 				}
-				if (popupDisplay) {
+				//if (popupDisplay) {
 					html += '<div class="statut">';
 					html += afficheStatut (item['statut']);
+					if (item['statut'] == 'DM' ||  item['statut'] == 'RM' )
+					{
+						html += ' <br/>'+item['temps']+' minutes';
+					}
 					html += '</div>'; 
-				}
+				//}
 				if (score != null)
 				{
 					html += '<div class="sc2">'+score[1]+'</div>';
