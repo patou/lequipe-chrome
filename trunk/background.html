@@ -225,7 +225,7 @@ function notifyLive(lastLive, newLive) {
 	notification.ondisplay = function () {
 		setTimeout(function() { 
 			notification.cancel();
-		}, 2000);
+		}, 5000);
 	};
 	notification.show();
 }
