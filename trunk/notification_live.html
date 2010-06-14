@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+<head>
+<title>L'Equipe.fr Directs</title>
+<link href="footLive.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="jquery-1.4.2.js"></script>
+<script type="text/javascript" src="directLive.js"></script>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<style type="text/css">
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#entete_titre {
+	padding-left : 5px;
+	
+}
+
+#entete_unread {
+	padding-right : 5px;
+	text-align: right;
+	float: right;
+}
+
+body {
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+	margin: 0px; 
+	height : 90px; 
+	overflow: hidden;
+}
+
+h1 {
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: center;
+	text-transform: capitalize
+}
+
+h2 {
+	font-style: italic
+}
+
+ul {
+	list-style-type: circle
+}
+
+ a#TOUS:hover, .tous {
+                background-color: #D60000 !important;
+                color: #FFF !important
+            }
+            
+            .general {
+                background-color: #D60000 !important;
+                color: #FFF !important
+            }
+			
+			 .video {
+                background-color: #EBEBEB !important;
+                color: #000 !important
+            }
+            
+            .foot {
+                background-color: #78A130 !important;
+                color: #FFF !important
+            }
+            
+            .auto {
+                background-color: #5A7984 !important;
+                color: #FFF !important
+            }
+            
+            .tennis {
+                background-color: #DB7141 !important;
+                color: #FFF !important
+            }
+            
+            .rugby {
+                background-color: #004C30 !important;
+                color: #FFF !important
+            }
+            
+                       
+            .bhv {
+                background-color: #000084 !important;
+                color: #FFF !important
+            }
+            
+            .cyclisme {
+                background-color: #BDB600 !important;
+                color: #FFF !important
+            }
+            
+            .autres {
+                background-color: #5AB6AD !important;
+                color: #FFF !important
+            }
+			
+			
+
+/* b { font-family: Arial, sans-serif; font-size: .9em }
+span.nagios { font-family: Arial, sans-serif; font-size: .9em } */
+b {
+	font-size: .9em
+}
+
+span.nagios {
+	font-size: .9em
+}
+
+span.lower {
+	text-transform: lowercase
+}
+
+.footer {
+	font-family: Arial, sans-serif;
+	font-style: italic;
+	font-size: .7em;
+	text-align: right
+}
+
+#DIV_CONTENT img {
+				
+				margin : 5px;
+			}
+#DIV_CONTENT {
+	height:84px; 
+	overflow:hidden;  
+	margin:2px 4px 2px 4px
+}
+
+.content 
+{
+	width : 297px;
+	height: 70px;
+}
+
+.titre {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	height: 1.1em; 
+	overflow: hidden;
+	font-weight: bold;
+	color: #2244BB;
+	text-decoration: none;
+}
+
+#notif_nav {
+	background-image: 	url(http://img.lequipe.fr/img_v5/icones_png.png?20100527);
+background-position: 0px -623px;
+background-repeat: no-repeat;
+height: 15px;
+padding-left: 10px;
+padding-top: 1px;
+margin-botom: 0px;
+width: 98%;
+
+}
+
+#notif_nav a {
+	color: #565151;
+	float: left;
+	font-size: 11px;
+	font-weight: 700;
+	margin-right: 24px;
+}
+#notif_retour {
+	background-position: -166px -148px;
+	cursor: pointer;
+}
+
+#notif_retour, #notif_suite, .notif_pt_rouge, .notif_pt_gris {
+	background-image: url(http://www-ref.lequipe.fr/img_v5/icones_png.png?20100527);
+	float: left;
+	height: 15px;
+	width: 15px;
+}
+
+.notif_pt_gris {
+	background-position: -125px -148px;
+	cursor: hand;
+}
+
+.notif_pt_rouge, .notif_pt_gris:hover {
+	background-position: -145px -148px;
+	cursor: hand;
+}
+
+#notif_suite {
+	background-position: -188px -148px;
+	cursor: pointer;
+}
+
+.logo1 img, .logo2 img {
+	width: 25px !important;
+}
+
+.eq1, .eq2 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+</style>
+<script type="text/javascript">
+
+function getUrlItem() {
+	var item = eval("a="+decodeURIComponent(window.location.search.substring(1)));
+	return item;
+}
+
+var intervalID = 0;
+
+function getCloseInterval() {
+	if (localStorage["__fermeture_notification"]) {
+		return localStorage["__fermeture_notification"] * 1000;
+	}
+	return 10000;
+}
+
+function startClose() {
+	if (intervalID != 0) {
+		clearInterval(intervalID);
+	}
+	var closeInterval = getCloseInterval();
+	if (closeInterval > 0) {
+		intervalID = setTimeout("window.close();", getCloseInterval());
+	}
+}
+
+function init () {
+	console.log(window.location.search);
+	var item = getUrlItem();
+	var html = displayDirect(item);
+	$("#DIV_CONTENT").prepend(html);
+	startClose();
+}
+
+</script>
+</head>
+<body onload="init();">
+<div class="entete tous" >
+	<span id="entete_titre">Directs </span>
+	<span id="entete_unread"></span>
+</div>
+
+<div class='notification' id="DIV_CONTENT">
+<div class="content" id="content"></div>
+</div>
+
+<div id="notif_nav">  
+	<div id="plusInfo" ><a href="http://www.lequipe.fr/direct_data.html" target="_blank">Tous les directs >>></a></div>
+	<div id="navigation" >  
+			
+	</div>
+</div>
+
+</body>
+</html>

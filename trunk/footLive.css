@@ -1,4 +1,348 @@
-/*
+            .nav {
+                font-size: 11px;
+                border-bottom: solid 1px black;
+                height: 20px
+            }
+            
+            .onglets {
+                background-image: url(http://img.lequipe.fr/medias/commun/navigation_fond_tr.gif)
+            }
+            
+            .lienNav, .lienNavActif {
+                background-position: left top;
+                background-position: 0px 0px;
+                background-repeat: no-repeat;
+                border-right: 1px solid #FFFFFF;
+                color: #000000;
+                height: 20px;
+                line-height: 20px;
+                padding-left: 7px;
+                padding-right: 8px;
+                padding-top: 4px;
+                padding-bottom: 0px;
+                margin: 0px;
+                text-align: left;
+                background-image: url(http://img.lequipe.fr/medias/commun/navigation_fond_th.gif)
+            }
+            
+            .lienNavActif {
+                background-color: #D60000;
+                color: #FFFFFF !important;
+                font-weight: bold
+            }
+            
+            a#TOUS:hover, .TOUS, a.selected#TOUS {
+                background-color: #D60000 !important;
+                color: #FFF !important
+            }
+            
+            a#GENERAL:hover, .GENERAL, a.selected#GENERAL {
+                background-color: #D60000 !important;
+                color: #FFF !important
+            }
+            
+            a#GENERAL:hover, .GENERAL, a.selected#GENERAL {
+                background-color: #D60000 !important;
+                color: #FFF !important
+            }
+            
+            a#FOOT:hover, .FOOT, a.selected#FOOT {
+                background-color: #78A130 !important;
+                color: #FFF !important
+            }
+            
+            a#AUTO:hover, .AUTO, a.selected#AUTO, .F1 {
+                background-color: #5A7984 !important;
+                color: #FFF !important
+            }
+            
+            a#TENNIS:hover, .TENNIS, a.selected#TENNIS {
+                background-color: #DB7141 !important;
+                color: #FFF !important
+            }
+            
+            a#RUGBY:hover, .RUGBY, a.selected#RUGBY {
+                background-color: #004C30 !important;
+                color: #FFF !important
+            }
+            
+            a#NEXT:hover, a#PREVIOUS:hover {
+                background-color: #CCC !important;
+                color: #FFF !important
+            }
+            
+            a#BHV:hover, .BHV, a.selected#BHV, .BASKET {
+                background-color: #000084 !important;
+                color: #FFF !important
+            }
+            
+            a#CYCLISME:hover, .CYCLISME, a.selected#CYCLISME {
+                background-color: #BDB600 !important;
+                color: #FFF !important
+            }
+            
+            a#AUTRES:hover, .AUTRES, a.selected#AUTRES, .HIPPISME {
+                background-color: #5AB6AD !important;
+                color: #FFF !important
+            }
+            
+            a#LIVE:hover, .LIVE, a.selected#LIVE {
+                background-color: #000000 !important;
+                color: #FFF !important
+            }
+            
+            .nav2 {
+                background-color: #F5F5F5;
+                border-bottom: 1px solid #EBEBEB;
+                font-size: 11px;
+                margin-bottom: 6px;
+                padding: 2px 4px
+            }
+            
+            .lienNav2 {
+            }
+            
+            .lienNav2Actif {
+                text-decoration: none;
+                cursor: text;
+                color: black !important;
+                font-weight: bold
+            }
+            
+            .content {
+                font-size: 11px;
+                background-color: white;
+                margin-top: 20px;
+            }
+            
+            .footer {
+                font-size: 10px;
+                margin-top: 10px;
+                text-align: right
+            }
+            
+            tbody {
+                font-size: 10px
+            }
+            
+            img {
+                border: 0
+            }
+            
+            .combo {
+                margin-bottom: 4px
+            }
+            
+            #RESULTAT, #CLASSEMENT {
+                border-collapse: collapse;
+                width: 100%
+            }
+            
+            #RESULTAT th, #RESULTAT td, #CLASSEMENT th, #CLASSEMENT td {
+                font-size: 11px;
+                border-bottom: 1px solid #CCC
+            }
+            
+            #RESULTAT th, #CLASSEMENT th {
+                text-align: left
+            }
+            
+            .domicile {
+                text-align: right
+            }
+            
+            .score {
+                padding: 0 6px 0 6px
+            }
+            
+            .alternate2 {
+                background-color: #F5F5F5
+            }
+            
+            .separateur {
+                font-size: 0px !important;
+                height: 2px;
+                overflow: hidden
+            }
+            
+            .DIV_RUBRIQUE {
+                float: left;
+                width: 100%;
+                margin: 0px;
+                overflow: hidden;
+                padding-op: 5px;
+                background-color: white;
+            }
+            
+            .ENTETE {
+                font-size: 12px;
+                padding: 3px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                background-image: url(http://img.lequipe.fr/medias/commun/navigation_fond_th.gif) no-repeat;
+            }
+            
+            #DIV_CONTENT {
+            	padding-bottom : 30px;
+				height: auto;
+            }
+            
+            #DIV_CONTENT img {
+                width: 80px;
+                margin: 5px;
+            }
+            
+            .title {
+                font-size: 140%;
+                font-weight: bold;
+                color: #2244BB;
+                padding-right: 16px;
+                text-overflow: ellipse;
+                background-position: 100% 0%;
+                background-repeat: no-repeat;
+                background-image: url(fleche.png);
+            }
+            
+            .link-to-go {
+                background: url(link.png);
+            }
+            
+            .allo_home {
+                font-size: 11px;
+                font-family: Arial;
+                color: #333;
+                margin-top: 0px;
+            }
+            
+            #allo_tt {
+                /*background-image: url(http://img.lequipe.fr/Football/CM2010/img/allo_home_tt.gif);*/
+                
+				font-size: 16px;
+				height: 30px;
+            }
+            
+            #header {
+                text-align: right;
+                margin-top: 6px;
+                padding-right: 2px;
+                float: right;
+            }
+			
+			#header a {
+				color: #FFF !important;
+			}
+            
+            .allo_home_content {
+                border: 1px solid #d7d7d7;
+                border-top: 0;
+                border-bottom: 0;
+                height: 300px;
+                position: relative;
+                overflow: hidden
+            }
+            
+            .allo_home_scroll {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 400px
+            }
+            
+            .allo_home .nave {
+                background-color: #D7D7D7;
+                background-image: url("http://img.lequipe.fr/img_v5/icones_png.png?20100527");
+                background-position: 0 -446px;
+                background-repeat: no-repeat;
+                float: left;
+                height: 17px;
+                padding-left: 120px;
+                width: 100%;
+            }
+            
+            .allo_home .nave div {
+                background-image: url("http://img.lequipe.fr/img_v5/icones_png.png?20100520-1");
+                cursor: pointer;
+                float: left;
+                height: 17px;
+                margin-right: 4px;
+                width: 17px
+            }
+            
+            .allo_home .nave #back {
+                background-position: 0 -523px !important
+            }
+            
+            .allo_home .nave #next {
+                background-position: -26px -523px !important
+            }
+            
+            .allo_home .nave #back:hover {
+                background-position: 0 -506px !important
+            }
+            
+            .allo_home .nave #next:hover {
+                background-position: -26px -506px !important
+            }
+            
+            .allo_home .blok {
+                cursor: pointer;
+                border-bottom: 1px solid #D60000;
+                margin-bottom: 1px;
+                padding-bottom: 2px;
+                padding-top: 2px;
+                margin-left: 4px;;
+                -moz-opacity: 0.8;
+                filter: alpha(opacity = 80);
+                opacity: 0.8
+            }
+            
+            .blok .hour {
+                float: left;
+                font-weight: bold;
+                text-align: center;
+                width: 34px;
+                padding: 2px 4px 0 4px;
+            }
+            
+            .blok .icon {
+                float: left;
+                min-height: 18px;
+                text-align: center;
+                width: 40px;
+                padding: 0 2px;
+                padding-bottom: 0;
+                background: url("http://img.lequipe.fr/Allos/fond_gris.gif");
+                margin-right: 4px
+            }
+            
+            .blok .icon img {
+                width: 30px;
+                margin-left: 4px;
+                vertical-align: middle
+            }
+            
+            .blok .content {
+                float: left;
+                width: 200px;
+            }
+            
+            .blok .content h2 {
+                font-size: 11px;
+                margin: 0;
+                padding: 2px 0 0 0
+            }
+            
+            .allo_home .blok:hover {
+                -moz-opacity: 1;
+                filter: alpha(opacity = 100);
+                opacity: 1
+            }
+            
+            .allo_home .nave {
+                margin-top: -1px
+            }
+
+
 .megaban {
     width: 975px;
     float: left;
@@ -1040,4 +1384,126 @@ p.scx {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-*/
+
+            .titreHeader {
+                margin-top: 4px;
+                float: left;
+                padding-left: 2px;
+            }
+            
+            .item {
+                margin: 0px;
+                padding-bottom: 10px;
+                border: 2px solid #FFFFFF;
+                -webkit-border-radius: 3px;
+                border-radius: 3px;
+            }
+            
+            .item:hover {
+                border: 2px solid #5590D2;
+                -webkit-border-radius: 3px;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+            
+            .score {
+                background: #F8F8F8 url(http://img.lequipe.fr/img_v5/degrade_live_v2.jpg) repeat-y;
+                background-position-x: -180px;
+                width: 500px;
+            }
+            
+            .board {
+                height: 110px;
+            }
+            
+            .sc1, .sc2 {
+                float: left;
+                width: 55px;
+                 height: 75px;
+                color: #FFFFFF;
+                font-size: 45px;
+                font-weight: bolder;
+                font-family: Century Gothic, Trebuchet MS, Arial;
+                background: #F8F8F8 url(http://img.lequipe.fr/img_v5/icon_Foot_score.jpg) no-repeat;
+                margin: 0px 10px 0px 10px;
+                padding: 15px 0px 0px 15px;
+				text-align: center;
+				
+            }
+			
+			
+            
+            .sc2 {
+                background-position: -89px 0px;
+                float: left;
+            }
+            
+            .sc1 {
+                background-position: -2px 0px;
+                float: left;
+                margin-left: 0px;
+				padding-left: 10px;
+            }
+            
+            .scx {
+                padding-left: 0px;
+                padding-right: 0px;
+				 height: 110px;
+				text-align: center;
+                margin: 0px 0px 0px 20px;
+            }
+            
+            .logo2 {
+                float: left;
+                width: 80px !important;
+				text-align: center;
+				font-size: 13px;
+            }
+            
+            .statut {
+                float: left;
+                display: block;
+                 height: 110px;
+                margin: 20px 5px 0px 5px;
+				text-align: center;
+				width: 120px;
+				font-size: 18px;
+				font-weight: bold;
+            }
+			.statutTennis {
+               display: block;
+				float: left;
+				font-size: 16px;
+				font-weight: bold;
+				text-align: center;
+				width: 100%;
+            }
+            
+            .logo1 {
+                float: left;
+                width: 80px !important;
+				text-align: center;
+				font-size: 13px;
+            }
+            
+            .scx {
+                float: left;
+				width: 300px;
+            }
+            
+            .liveHead {
+                font-size: 16px;
+				height: 40px;
+				text-align: center;
+				width: 100%;
+            }
+			
+			.tennis_table {
+				width: 90%;
+				
+			}
+			
+			.tennis_table td {
+				width: 50px;
+				
+			}
