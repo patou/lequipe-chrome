@@ -205,8 +205,8 @@ function newLiveAux(items) {
 					console.log("new:'"+newLive.id + "' '" + newLive.statut + "' '" + newLive.score+"'");
 					if (lastLive.statut != newLive.statut || lastLive.score != newLive.score) {
 						notifyLive(lastLive, newLive);
-						updateLive(newLive.id, newLive.score, newLive.statut, newLive.temps, false);
 					}
+					updateLive(newLive.id, newLive.score, newLive.statut, newLive.temps, false);
 				}
 				else {
 					insertLive(newLive.id, newLive.date, newLive.heure, newLive.sport, newLive.competition, newLive.journee, newLive.equipe_1, newLive.equipe_2, newLive.id1, newLive.id2, newLive.score, newLive.statut, newLive.temps, newLive.lien, newLive.lieu, newLive.read == "true" ? true : false, false);
@@ -288,11 +288,11 @@ function deleteLive() {
 	    tx.executeSql("DELETE FROM Lives;", [],
 	        function(tx, result) {
 	        	console.log("successfull delete lives");
-	        	count(); 
 	        }, 
 	        onError);
 	  });
 }
+
 
 // delete table from db
 function dropLivesTable() {
@@ -302,6 +302,11 @@ function dropLivesTable() {
         onError);
   });
 }
+
+function deleteAll() {
+	deleteLive();
+	deleteRecord();
+};
 
 function getUpdateInterval() {
 	if (localStorage["__rafraichissement"]) {
