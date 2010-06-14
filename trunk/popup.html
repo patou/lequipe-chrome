@@ -625,7 +625,13 @@
 						for (var i = 0, item = null; i < result.rows.length; i++) {
 							item = result.rows.item(i);
 							console.log(item['id']);
-							$('#DIV_CONTENT').prepend(displayDirect(item, true));
+							var html = displayDirect(item, true);
+							if (item["statut"] != "T") {
+								$('#DIV_CONTENT').prepend(html);
+							}
+							else {
+								$('#DIV_CONTENT').append(html);
+							}
 						}
 					});
 				});
