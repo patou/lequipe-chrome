@@ -5,7 +5,7 @@
 				}
 				html += '</a></div>';
 			//function displayDirect(item) {
-				//html = '<div><div class="liveHead '+item['sport']+'">Live '+item['sport']+': '+item['competition']+' '+item['journee']+'<br/> le '+item['date']+' Ã  '+item['heure']+'</a></div>'
+				//html = '<div><div class="liveHead '+item['sport']+'">Live '+item['sport']+': '+item['competition']+' '+item['journee']+'<br/> le '+item['date']+' à '+item['heure']+'</a></div>'
 				html += '<div id="match" class="score"><div class="board">';
 				switch(item['sport']) {
 					case "FOOT":									
@@ -33,7 +33,7 @@
 			}
 			
 			function displayDateTime(item) {
-				return 'le '+item['date']+' Ã  '+item['heure'];
+				return 'le '+item['date']+' à '+item['heure'];
 			}
 			
 			function afficheStatut (statut)

@@ -280,8 +280,14 @@ function afficheItem(item, directionAnim)
 	
 	
 	// Correction des images 
-	$('img[src*=Medias]').attr('src', 'http://img.lequipe.fr' + $('img[src*=Medias]').attr('src') ).attr('height', 60).attr('width', 60);
-	
+	$('img[src*=Medias]').each(function (){
+							var img = $(this);
+							var src = img.attr("src");
+							if (src && src.indexOf("http://") != 0) {
+								img.attr("src", "http://img.lequipe.fr" + (src.charAt(0) == "/"?"":"/") + src);
+							}
+							img.attr('height', 60).attr('width', 60);
+						});
 	
 	// lecture de l'item 
 	chrome.extension.getBackgroundPage().setReadItem(item['id']);
@@ -328,7 +334,7 @@ function loadFooter(nav)
 			case "bhv_volley" :;
 			case "bhv_hand": ;
 			case "bhv":
-			     tabFooters  = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos Basket/Hand/Volley>>></a>";
+			     tabFooters  = "<a href=\"http://www.lequipe.fr/Basket/index.html\" target=\"_blank\">Plus d'infos BHV>>></a>";
 				break;
 			case "cyclisme":
 			     tabFooters  = "<a href=\"http://www.lequipe.fr/Cyclisme/index.html\" target=\"_blank\">Plus d'infos Cyclisme>>></a>";
@@ -429,7 +435,7 @@ function getCloseInterval() {
 	if (localStorage["__fermeture_notification"]) {
 		return localStorage["__fermeture_notification"] * 1000;
 	}
-	return 10000;
+	return 600000;
 }
 
 function startClose() {
