@@ -1506,3 +1506,11 @@ p.scx {
 			.tennis_table td {
 				width: 15px;
 			}
+			
+			.test {
+				position: absolute;
+				top: 60px;
+				z-index: 50;
+				overflow: hidden;
+				
+			}
