@@ -217,16 +217,18 @@ function newLiveAux(items) {
 }
 
 function notifyLive(lastLive, newLive) {
-	var notification = webkitNotifications.createNotification(
+	/*var notification = webkitNotifications.createNotification(
   	  "logo_lequipe.png",  // icon url - can be relative
   	  newLive.sport + ": " + newLive.competition,  // notification title
   	  newLive.equipe_1 + " " + newLive.score + " " + newLive.equipe_2 + "\n" + newLive.temps + " (" + newLive.statut + ")"  // notification body text
-  	);
-	notification.ondisplay = function () {
+  	);*/
+	var htmlUrl = "notification_live.html?" + encodeURIComponent(JSON.stringify(newLive));
+	var notification = webkitNotifications.createHTMLNotification(htmlUrl);
+	/*notification.ondisplay = function () {
 		setTimeout(function() { 
 			notification.cancel();
 		}, 5000);
-	};
+	};*/
 	notification.show();
 }
 
