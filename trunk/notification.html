@@ -260,8 +260,10 @@ function afficheItem(item, directionAnim)
 		$('#DIV_CONTENT').hide("slide", { direction: 'left' }, 300);
 	
 	
-	
-	html = '<div class="Notification"><a href="'+item['url']+'" target="_blank" class="titre">'+item['title']+' </a>';
+	var url = item['url'];
+	if (!url)
+		url = "#";
+	html = '<div class="Notification"><a href="'+url+'" target="_blank" class="titre">'+item['title']+' </a>';
 	html += '<div class="content">' + item['text'] + '</div>';
 	html += ' </div>';
 	
