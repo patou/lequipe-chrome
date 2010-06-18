@@ -262,7 +262,7 @@ function afficheItem(item, directionAnim)
 	
 	var url = item['url'];
 	if (!url)
-		url = "#";
+		url = "";
 	html = '<div class="Notification"><a href="'+url+'" target="_blank" class="titre">'+item['title']+' </a>';
 	html += '<div class="content">' + item['text'] + '</div>';
 	html += ' </div>';

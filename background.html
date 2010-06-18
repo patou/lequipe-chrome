@@ -82,7 +82,7 @@ function newRecord(id, title, url, type, text, read, fct) {
         function(tx, result) {
      		console.log("Inserted");
      		if (fct && typeof fct == "function") {
-				fct({id: id, title: title, type: type, text: text});
+				fct({id: id, title: title, type: type, text: text, url: url});
 			}
         }, 
         onError);
